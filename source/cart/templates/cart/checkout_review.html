@@ -1,0 +1,119 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load cart_tags %}
+
+{% block title %}Review & Payment{% endblock %}
+
+{% block content %}
+
+<body id="pages">
+
+<div class="body">
+	<div class="top-wrap">
+		<div class="overlay-bg"></div>
+		{% include 'base/navbar.html' %}
+	</div>
+
+	<div class="space30"></div>
+
+	<!-- Main content -->
+	<div class="page-wrap container shop-form-wrap">
+
+		<!-- Shop Content -->
+		<div role="main" class="main shop checkout-wrap">
+			<div class="row">
+				<div class="col-md-12">
+				    <div id="first">
+						<h3>Review & Payment</h3>
+						<div class="racc">
+							<div class="toggle-content">
+								<table class="shop_table cart">
+									<thead>
+										<tr>
+											<th class="product-thumbnail">&nbsp;
+												
+											</th>
+											<th class="product-name">
+												Product
+											</th>
+											<th class="">
+												Price
+											</th>
+										</tr>
+									</thead>
+									<tbody class="cart-body">
+										{% for account in cart.accounts.all %}
+										<tr class="cart_table_item">
+											<td class="product-thumbnail">
+												{% if account.img_sml %}
+													<img width="100" height="100" alt="img" src="{{ account.img_sml.url }}">
+												{% else %}
+													<img width="100" height="100" alt="img" class="img-responsive" src=" http://placehold.it/100x100">
+												{% endif %}
+											</td>
+											<td class="product-name">
+												<p>{{ account.title }}</a>
+											</td>
+											<td class="product-price ajax-cart-account-price">
+												{% get_price account conversion_rate as price %}
+												{% include 'snippets/price.html' with currency=currency price=price %}
+											</td>
+										</tr>
+										{% endfor %}
+									</tbody>
+								</table>
+								<hr class="tall">
+								<h4>Cart Totals</h4>
+								<table class="cart-totals">
+									<tbody>
+										{% get_cart_total cart conversion_rate as total %}
+										<tr class="cart-subtotal">
+											<th>
+												<strong>Cart Total</strong>
+											</th>
+											<td>
+												<strong>{% include 'snippets/price.html' with currency=currency price=total %}</strong>
+											</td>
+										</tr>
+										<tr class="total">
+											<th>
+												<strong>Order Total</strong>
+											</th>
+											<td>
+												<strong>{% include 'snippets/price.html' with currency=currency price=total %}</strong>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+
+								<hr class="tall">
+
+								<div class="col-md-6">
+									<h3>Billing Address</h3>
+									<h4>{{ billing_address.billing_first_name }} {{ billing_address.billing_last_name }}</h4>
+									<p>{{ billing_address.billing_address }}</p>
+									<p>{{ billing_address.billing_city }}, {{ billing_address.billing_country }}</p>
+								</div>
+								
+								<div class="col-md-6">
+									<h3>Payment</h3>
+									{% include 'billing/snippets/card.html' with card=billing_card %}
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- end of first -->
+			<div class="space40"></div>
+			<div class="actions-continue">
+				<form method="POST" action="{% url 'cart:checkout_payment' %}">
+					{% csrf_token %}
+					<button type="submit" class="btn btn-primary btn-orange uppercase pull-right">Pay and Receive Account</button>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+</body>
+{% endblock %}

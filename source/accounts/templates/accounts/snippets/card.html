@@ -1,0 +1,47 @@
+{% load account_tags %}
+
+<li class="col-md-3 product">
+	<span class="thumb-info">
+		<form class="form-account-ajax" method='POST' action="{% url 'cart:update' %}" data-endpoint='{% url "cart:update" %}' class="form">
+			{% csrf_token %}
+			<input type="hidden" name="account_id" value="{{ account.id }}">
+			{% if instance in cart.accounts.all %}
+				<button class="add-to-cart-product" type="submit" style="border:none;">
+					<span class="add-to-cart-button">In Cart, Remove?</span>
+				</button>
+			{% else %}
+				<button class="add-to-cart-product" style="border:none;" type="submit">
+					<span class="add-to-cart-button">Add to Cart</span>
+				</button>
+			{% endif %}
+		</form>
+		<a href="{{ instance.get_absolute_url }}">
+			<span class="thumb-info-image">
+			<span class="thumb-info-act">
+			<span class="thumb-info-act-left"><em>View</em></span>
+			<span class="thumb-info-act-right"><em><i class="fa fa-plus"></i> Details</em></span>
+			</span>
+			{% if instance.img_med %}
+				<img alt="img" width="600" height="600" class="img-responsive" src="{{ instance.img_med.url }}">
+			{% else %}
+				<img alt="img" width="600" height="600" class="img-responsive" src="http://placehold.it/600x600">
+			{% endif %}
+			</span>
+		</a>
+		<span class="thumb-info-content">
+			<a href="{{ instance.get_absolute_url }}">
+				<h4>{{ instance.get_arena_readable }} level {{ instance.king_tower }} {{ instance.device }} account</h4>
+				<br>
+				<ul class="list">
+					<li><i class="icon-trophy"></i> {{ instance.trophies }} trophies</li>
+                    <li><i class="icon-coin"></i> {{ instance.gold }} gold</li>
+                    <li><i class="icon-diamonds"></i> {{ instance.gems }} gems</li>
+                 </ul>
+				<span class="price ajax-price">
+					{% get_price instance conversion_rate as price %}
+					{% include 'snippets/price.html' with currency=currency price=price %}
+				</span>
+			</a>
+		</span>
+	</span>
+</li>

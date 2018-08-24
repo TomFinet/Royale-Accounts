@@ -1,0 +1,36 @@
+{% if messages %}
+<ul class="messages">
+	{% for message in messages %}
+	<li class="alert alert-{{ message.tags }}">{{ message }}</li>
+	{% endfor %}
+</ul>
+{% endif %}
+<div class="space20"></div>
+<form method="POST" action="{% if action_url %}{{ action_url }}{% else %}{% url 'users:login' %}{% endif %}">
+	{% if next_url %}
+		<input type="hidden" name="next" value="{{ next_url }}">
+	{% endif %}
+	{% csrf_token %}
+	<div class="row">
+		<div class="form-group">
+			<div class="col-md-12">
+				{{ login_form.email.errors }}
+				<label for="{{ login_form.email.id_for_label }}">E-mail Address</label>
+				{{ login_form.email }}
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+			<a class="pull-right" href="#">(Lost Password?)</a>
+			{{ login_form.password.errors }}
+			<label for="{{ login_form.password.id_for_label }}">Password</label>
+			{{ login_form.password }}
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+			<button type='submit' class='btn btn-primary btn-orange uppercase pull-right'>Login</button>
+		</div>
+	</div>
+</form>

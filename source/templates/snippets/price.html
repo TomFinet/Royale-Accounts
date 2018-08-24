@@ -1,0 +1,7 @@
+{% if currency == "USD" %}
+<span class="amount">&dollar;{{ price }}</span>
+{% elif currency == "GBP" %}
+<span class="amount">&pound;{{ price }}</span>
+{% elif currency == "EUR" %}
+<span class="amount">&euro;{{ price }}</span>
+{% endif %}

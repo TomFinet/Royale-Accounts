@@ -1,0 +1,30 @@
+{% load static %}
+<!DOCTYPE html>
+<!--[if IE 8]>      <html class="ie ie8"> <![endif]-->
+<!--[if IE 9]>      <html class="ie ie9"> <![endif]-->
+<!--[if gt IE 9]><!-->  <html> <!--<![endif]-->
+<head>
+
+  <!-- Meta -->
+  <meta charset="utf-8">
+  <meta name="description" content="Royale Accounts - Cheap clash royale accounts for sale">
+  <meta name="author" content="Tom Finet">
+
+  <title>{% block title %}{% endblock %}</title>
+
+  <!-- Mobile Meta -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  {% include 'base/css.html' %}
+  {% block head %}{% endblock %}
+
+</head>
+
+  {% block content %}{% endblock %}
+
+  {% include 'base/footer.html' %}
+
+  {% include 'base/js.html' %}
+  {% block js %}{% endblock %}
+
+</html>

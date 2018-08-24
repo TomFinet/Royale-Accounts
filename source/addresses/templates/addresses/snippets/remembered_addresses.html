@@ -1,0 +1,12 @@
+<form method="POST" action="{% if action_url %}{{ action_url }}{% else %}{% url 'addresses:checkout_address_reuse' %}{% endif %}">
+	{% csrf_token %}
+	{% if next_url %}
+		<input type="hidden" name="next" value="{{ next_url }}">
+	{% endif %}
+	
+	<label for="address-{{ address.id }}">
+		<input id="address-{{ address.id }}" type="hidden" name="billing_address_id" value="{{ address.id }}"/>
+	</label><br/>
+	
+	<button type="submit" class="btn btn-primary btn-sm btn-green uppercase cart-button">Use</button>
+</form>

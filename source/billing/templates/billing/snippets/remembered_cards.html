@@ -1,0 +1,12 @@
+<form method="POST" action="{% if action_url %}{{ action_url }}{% else %}{% url 'billing:payment_method_reuse' %}{% endif %}">
+	{% csrf_token %}
+	{% if next_url %}
+		<input type="hidden" name="next" value="{{ next_url }}">
+	{% endif %}
+	
+	<label for="card-{{ card.stripe }}">
+		<input id="card-{{ card.stripe_id }}" type="hidden" name="billing_card_id" value="{{ card.stripe_id }}"/>
+	</label><br/>
+	
+	<button type="submit" class="btn btn-primary btn-sm btn-green uppercase cart-button">Use</button>
+</form>

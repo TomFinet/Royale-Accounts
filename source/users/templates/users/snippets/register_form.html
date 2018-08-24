@@ -1,0 +1,40 @@
+{% if messages %}
+<ul class="messages">
+	{% for message in messages %}
+	<li class="alert alert-{{ message.tags }}">{{ message }}</li>
+	{% endfor %}
+</ul>
+{% endif %}
+<div class="space20"></div>
+<form method="POST" action="{% url 'users:register' %}">
+	{% csrf_token %}
+	<div class="row">
+		<div class="form-group">
+			<div class="col-md-12">
+				{{ register_form.email.errors }}
+				<label for="{{ register_form.email.id_for_label }}">E-mail Address</label>
+				{{ register_form.email }}
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="form-group">
+			<div class="col-md-6">
+				{{ register_form.password1.errors }}
+				<label for="{{ register_form.password1.id_for_label }}">Password</label>
+				{{ register_form.password1 }}
+			</div>
+			<div class="col-md-6">
+				{{ register_form.password2.errors }}
+				<label for="{{ register_form.password2.id_for_label }}">Re-enter Password</label>
+				{{ register_form.password2 }}
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+			<div class="space20"></div>
+			<button type='submit' class='btn btn-primary btn-orange uppercase pull-right'>Register</button>
+		</div>
+	</div>
+</form>

@@ -1,0 +1,144 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Royale Accounts{% endblock %}
+
+{% block content %}
+<body id="home">
+
+  <div class="body">
+    <div class="top-wrap">
+      <div class="overlay-bg"></div>
+
+   {% include 'base/navbar.html' %}
+
+    <!-- Slider1 -->
+    <div class="slider-content container">
+      <div id="carousel">
+        <a href="#"><img src="http://placehold.it/252x357" id="item-1" alt="img" /></a>
+        <a href="#"><img src="http://placehold.it/252x357" id="item-2" alt="img" /></a>
+        <a href="#"><img src="http://placehold.it/252x357" id="item-3" alt="img" /></a>
+        <a href="#"><img src="http://placehold.it/252x357" id="item-4" alt="img" /></a>
+        <a href="#"><img src="http://placehold.it/252x357" id="item-5" alt="img" /></a>
+        <a href="#"><img src="http://placehold.it/252x357" id="item-6" alt="img" /></a>
+        <a href="#"><img src="http://placehold.it/252x357" id="item-7" alt="img" /></a>
+      </div>
+      <div class="scroll-btns">
+        <a href="#" id="s-prev">Prev</a> | <a href="#" id="s-next">Next</a>
+      </div>
+    </div>
+    <!-- Slider1 -->
+
+    <div class="space40"></div>
+
+    <!-- Welcome Content -->
+    <div class="container welcome">
+      <h2>Welcome to <span>Royale Accounts</span>, grab your account now !</h2>
+      <div class="space50"></div>
+      <div class="btn-wrap">
+        <a href="{% url 'accounts:list' %}" class="btn btn-primary btn-lg btn-orange uppercase">Buy an Account!</a>
+        <span><img src="{% static 'images/or.png' %}" alt="img"></span>
+        <a href="{% url 'faq' %}" class="btn btn-primary btn-lg btn-white uppercase">Learn more</a>
+      </div>
+      <div class="space60"></div>
+    </div>
+    <!-- Welcome Content -->
+  </div>
+
+  <!-- Services -->
+  <div class="container services">
+    <div class="col-md-3 service-content">
+      <div class="icon-surround-1"><span>1</span><i class="icon-search"></i></div>
+      <h4>Find the perfect account</h4>
+      <p>There are many variations of passages of Lorem Ipsum available.</p>
+    </div>
+    <div class="col-md-3 service-content">
+      <div class="icon-surround-1"><span>2</span><i class="fa fa-money"></i></div>
+      <h4>Buy it</h4>
+      <p>But the majority have suffered alteration in some form, by injected humour.</p>
+    </div>
+    <div class="col-md-3 service-content">
+      <div class="icon-surround-1"><span>3</span><i class="icon-mail3"></i></div>
+      <h4>Receive Account Details</h4>
+      <p>A bunch of randomised words which don't look even slightly believable.</p>
+    </div>
+    <div class="col-md-3 service-content">
+      <div class="icon-surround-1"><span>4</span><i class="icon-gun"></i></div>
+      <h4>Battle!</h4>
+      <p>If you are going to use a passage of Lorem Ipsum,  you need to be sure.</p>
+    </div>
+  </div>
+  <!-- Services -->
+
+  <div class="divider"></div>
+
+  <div class="main-wrap">
+
+      <!-- Testimonials -->
+      <h3 class="head-title">Testimonials</h3>
+      <div class="home-quotes">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="flexslider" id="home-quotes">
+              <ul class="slides">
+                <li>
+                  <p class="quote">As soon as I saw this theme it was love at first site, I knew I had to somehow get it to notice me, so I did what any good man would do... I used money to buy its affections!</p>
+                </li>
+                <li>
+                  <p class="quote">Thanks for the amazing theme! Using Chemistry to build my new portofolio site was the best idea I've had in years, there are so many flexible options and creative styles!</p>
+                </li>
+                <li>
+                  <p class="quote">Chemistry is such an amazing theme! You can't beat the colors, the options, and the store pages are perfect to setup my online shop, now my website will pay for itself.. thanks again!</p>
+                </li>
+                <li>
+                  <p class="quote">As soon as I saw this theme it was love at first site, I knew I had to somehow get it to notice me, so I did what any good man would do... I used money to buy its affections!</p>
+                </li>
+                <li>
+                  <p class="quote">Thanks for the amazing theme! Using Chemistry to build my new portofolio site was the best idea I've had in years, there are so many flexible options and creative styles!</p>
+                </li>
+                <li>
+                  <p class="quote">Chemistry is such an amazing theme! You can't beat the colors, the options, and the store pages are perfect to setup my online shop, now my website will pay for itself.. thanks again!</p>
+                </li>
+              </ul>
+            </div>
+            <ul class="quote-paging">
+              <li>
+                <img src="http://placehold.it/100x105" alt="img">
+                <h4>Markus Graham</h4>
+              </li>
+              <li>
+                <img src="http://placehold.it/100x105" alt="img">
+                <h4>Anthony Clark</h4>
+                <h6>Vice President</h6>
+              </li>
+              <li>
+                <img src="http://placehold.it/100x105" alt="img">
+                <h4>Kayman Tang</h4>
+                <h6>Manager of Awesome Inc</h6>
+              </li>
+              <li>
+                <img src="http://placehold.it/100x105" alt="img">
+                <h4>Kelly James</h4>
+                <h6>Inventer of the Wheel</h6>
+              </li>
+              <li>
+                <img src="http://placehold.it/100x105" alt="img">
+                <h4>Tiffany Rose</h4>
+                <h6>Manager of Lorem Ipsum</h6>
+              </li>
+              <li>
+                <img src="http://placehold.it/100x105" alt="img">
+                <h4>Kobe Yamson</h4>
+                <h6>CEO of Terraforming</h6>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+
+{% endblock %}

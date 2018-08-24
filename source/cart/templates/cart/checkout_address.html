@@ -1,0 +1,119 @@
+{% extends 'base.html' %}.
+{% load static %}
+
+{% url 'billing:payment_method_view' as payment_method_url %}
+
+{% block content %}
+
+<body id="pages">
+
+<div class="body">
+	<div class="top-wrap">
+		<div class="overlay-bg"></div>
+		{% include 'base/navbar.html' %}
+	</div>
+
+	<div class="space30"></div>
+
+	<!-- Main content -->
+    <div class="page-wrap container shop-form-wrap">
+        <!-- Shop Content -->
+        <div role="main" class="main shop">
+			<div class="row">
+				<div class="col-md-12">
+				    <div id="first">
+				        <h3>Billing Address</h3>
+				        <div class="racc">
+				            <div class="toggle-content">
+				                <form method="POST" action="{% url 'addresses:checkout_address_create' %}">
+				                	{% csrf_token %}
+	
+				                	<div class="row">
+										<div class="form-group">
+											<div class="col-md-6">
+												{{ billing_address_form.billing_first_name.errors }}
+				                                <label for="{{ billing_address_form.billing_first_name.id_for_label }}">First Name</label>
+				                                {{ billing_address_form.billing_first_name }}
+											</div>
+											<div class="col-md-6">
+												{{ billing_address_form.billing_last_name.errors }}
+				                                <label for="{{ billing_address_form.billing_last_name.id_for_label }}">Last Name</label>
+				                                {{ billing_address_form.billing_last_name }}
+											</div>
+										</div>
+									</div>
+				                    <div class="row">
+				                        <div class="form-group">
+				                            <div class="col-md-12">
+				                            	{{ billing_address_form.billing_country.errors }}
+				                                <label for="{{ billing_address_form.billing_country.id_for_label }}">Country</label>
+				                                {{ billing_address_form.billing_country }}
+				                            </div>
+				                        </div>
+				                    </div>
+				                    <div class="row">
+				                        <div class="form-group">
+				                            <div class="col-md-12">
+				                            	{{ billing_address_form.billing_address.errors }}
+				                                <label for="{{ billing_address_form.billing_address.id_for_label }}">Address</label>
+				                                {{ billing_address_form.billing_address }}
+				                            </div>
+				                        </div>
+				                    </div>
+				                    <div class="row">
+				                        <div class="form-group">
+				                            <div class="col-md-12">
+				                            	{{ billing_address_form.billing_city.errors }}
+				                                <label for="{{ billing_address_form.billing_city.id_for_label }}">City</label>
+				                                {{ billing_address_form.billing_city }}
+				                            </div>
+				                        </div>
+				                    </div>
+				                    <div class="row">
+										<div class="col-md-12">
+											<button type="submit" class="btn btn-primary btn-orange uppercase pull-right">Continue to Payment Method</button>
+										</div>
+									</div>
+				                </form>
+				            </div>
+				        </div>
+				    </div>
+				</div>
+			</div>
+			
+			{% if address_qs.exists %}
+
+			<div class="divider"></div>
+			<div class="space30"></div>
+
+			<!-- Main content -->
+			<div class="page-wrap container" style="margin-bottom:0; padding-bottom:0">
+
+				<h3>Previously Used Addresses</h3>
+					
+		    </div>
+
+   			<div class="main-wrap">
+    
+		    	<!-- Services -->
+				<div class="container">
+					<div class="row">
+						{% for address in address_qs %}
+						<div class="col-md-4">
+							<h4>{{ address.billing_first_name }} {{ address.billing_last_name }}</h4>
+							<p>{{ address.billing_address }}</p>
+							<p>{{ address.billing_city }}, {{ address.billing_country }}</p>
+							{% include 'addresses/snippets/remembered_addresses.html' with next_url=payment_method_url address=address %}
+						</div>
+						{% endfor %}
+					</div>
+				</div>
+				<!-- Services -->
+        	</div>
+        	{% endif %}
+		</div>
+	</div>
+</div>
+</body>
+
+{% endblock %}

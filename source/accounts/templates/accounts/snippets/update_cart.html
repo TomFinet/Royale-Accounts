@@ -1,0 +1,14 @@
+<form class="form-account-ajax" method='POST' action="{% url 'cart:update' %}" data-endpoint='{% url "cart:update" %}' class="form">
+	{% csrf_token %}
+	<input type="hidden" name="account_id" value="{{ account.id }}">
+
+	<span class="submit-span">
+	{% if account in cart.accounts.all %}
+		In cart <button type='submit' class='btn btn-link'>Remove?</button>
+	{% else %}
+		<div class="action">
+			<button class="btn btn-primary btn-sm btn-green uppercase cart-button" type="submit">add to cart</button>
+		</div>
+	{% endif %}
+	</span>
+</form>

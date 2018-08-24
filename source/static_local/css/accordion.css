@@ -1,0 +1,31 @@
+
+.rlAccordion > h3 {
+	-moz-transition: all .15s ease-out;
+	-o-transition: all .15s ease-out;
+	-webkit-transition: all .15s ease-out;
+	background: #FFF;
+	color: #CCC;
+	display: block;
+	font-size: 1.1em;
+	min-height: 20px;
+	padding: 12px 20px;
+	position: relative;
+	cursor: pointer;
+	font-weight: 400;
+	-moz-border-radius: 6px 6px 0 0;
+	-webkit-border-radius: 6px 6px 0 0;
+border-radius: 6px 6px 0 0;
+	transition: all .15s ease-out;
+    background-color: #e96546 !important;
+    border-color: #e96546 !important;
+    color: #fff !important;
+
+}
+.rlAccordion > h3 > span {
+  float: right;
+  font-family: arial, serif, sans-serif;
+}
+.rlAccordion > h3 + div {
+  display: none;
+  padding: 2% 5%;
+}

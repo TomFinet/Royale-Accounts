@@ -1,0 +1,52 @@
+{% url 'accounts:list' as accounts_url %}
+{% url 'faq' as faq_url %}
+{% url 'cart:home' as cart_url %}
+{% url 'users:login' as login_url %}
+{% url 'users:register' as register_url %}
+
+<!-- Footer -->
+<footer>
+	<div class="container">
+		<div class="col-md-2 footer-widget">
+			<h6>Currency</h6>
+			{% include 'snippets/currency_form.html' with currency_form=currency_form next_url=request.build.uri %}
+		</div>
+		<div class="col-md-2 footer-widget">
+			<h6>Quick Links</h6>
+			<ul class="link-list">
+				<li><a href="{{ accounts_url }}">&rarr; Accounts</a></li>
+				<li><a href="{{ login_url }}">&rarr; Login</a></li>
+				<li><a href="{{ register_url }}">&rarr; Register</a></li>
+				<li><a href="{{ cart_url }}">&rarr; Cart</a></li>
+			</ul>
+		</div>
+		<div class="col-md-2 footer-widget">
+			<h6>Blogroll</h6>
+			<ul class="link-list">
+				<li><a href="{{ faq_url }}">&rarr; FAQ</a></li>
+				<li><a href="{{ terms_url }}">&rarr; Terms of Use</a></li>
+			</ul>
+		</div>
+		<div class="col-md-2 footer-widget">
+			<h6>Contact</h6>
+			<p>Design Headquarters<br>456 W57th Street<br>NYC, New York 06415</p>
+		</div>
+		<div class="col-md-4 footer-widget">
+			<h6>Be Sociable</h6>
+			<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
+			<ul class="social">
+				<li><a href="https://www.facebook.com/Royale-Accounts-297489107681781/"><i class="fa fa-facebook"></i></a></li>
+				<li><a href="#"><i class="fa fa-twitter"></i></a></li>
+				<li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+			</ul>
+		</div>
+	</div>
+</footer>
+<div class="footer-copy">
+	<div class="container">
+		<div class="col-md-12">
+			<p>&copy; Copyright 2018 Royale Accounts.</p>
+		</div>
+	</div>
+</div>
+<!-- Footer -->

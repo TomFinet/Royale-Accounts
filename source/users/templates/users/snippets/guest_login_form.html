@@ -1,0 +1,18 @@
+<form id="contactForm" method='POST' action="{% url 'users:guest_register' %}"> 
+	{% if next_url %}
+		<input type="hidden" name="next" value="{{ next_url }}">
+	{% endif %}
+	{% csrf_token %}
+	<div class="row">
+		<div class="col-md-12">
+			{{ guest_form.guest_email.errors }}
+			<label for="{{ guest_form.guest_email.id_for_label }}">E-mail Address</label>
+			{{ guest_form.guest_email }}
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+			<button type='submit' class='btn btn-primary btn-orange uppercase pull-right'>Continue as Guest</button>
+		</div>
+	</div>
+</form>

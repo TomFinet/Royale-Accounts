@@ -1,0 +1,7 @@
+<form class="currency-ajax-form" method="POST" action="{% url 'currency_convert_view' %}" data-endpoint="{% url 'currency_convert_view' %}">
+	{% csrf_token %}
+	{% if account %}
+		<input type="hidden" name="account_id" value="{{ account.id }}">
+	{% endif %}
+	{{ currency_form }}
+</form>

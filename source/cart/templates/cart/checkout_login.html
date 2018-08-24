@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+
+<body id="pages">
+
+<div class="body">
+	<div class="top-wrap">
+		<div class="overlay-bg"></div>
+		{% include 'base/navbar.html' %}
+	</div>
+
+	<div class="space30"></div>
+
+	<!-- Main content -->
+    <div class="page-wrap container shop-form-wrap">
+        
+        <!-- Shop Content -->
+        <div role="main" class="main shop">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="row featured-boxes">
+                        <div class="col-md-6">
+                            <div class="featured-box default">
+                                <div class="box-content">
+                                    <h4 class="review-head">Login to Continue</h4>
+                                    <div class="space20"></div>
+                                    {% url 'cart:checkout_address' as checkout_address_url %}
+                                    {% include 'users/snippets/login_form.html' with login_form=login_form next_url=checkout_address_url %}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="featured-box default">
+                                <div class="box-content">
+                                    <h4 class="review-head">Continue as Guest</h4>
+                                    <div class="space20"></div>
+                                    {% if messages %}
+                                    <ul class="messages">
+                                        {% for message in messages %}
+                                        <li class="alert alert-{{ message.tags }}">{{ message }}</li>
+                                        {% endfor %}
+                                    </ul>
+                                    {% endif %}
+                                    <div class="space20"></div>
+                                    {% include 'users/snippets/guest_login_form.html' with guest_form=guest_form %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+
+{% endblock %}

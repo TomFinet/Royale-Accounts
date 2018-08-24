@@ -1,0 +1,6 @@
+<form class="form form-account-ajax" method='POST' action='{% url "cart:update" %}' data-endpoint='{% url "cart:update" %}'>
+	{% csrf_token %}
+	<input class="cart-item-account-id" type="hidden" name="account_id" value="{{ account_id }}">
+	
+	<button title="Remove this item" type='submit' class='remove' style='border:none;'><i class="icon-cart-remove2"></i></button>
+</form>
