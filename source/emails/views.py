@@ -19,16 +19,27 @@ def order_confirmation_email_view(request):
 	if to_email and order_id and accounts:
 
 		sg = sendgrid.SendGridAPIClient(apikey=getattr(settings, 'SENDGRID_API_KEY'))
-		from_email = Email("royaleaccounts@gmail.com")
-		to_email = Email("tom.finet@learning.ecolint.ch")
-		subject = "Royale Accounts Order Confirmation"
-		content = Content("text/plain", "and easy to do anywhere, even with Python")
-		mail = Mail(from_email, subject, to_email, content)
-		response = sg.client.mail.send.post(request_body=mail.get())
+
+		personalization = Personalization()
+		personalization.add_to(Email(to_email))
+		personalization.add_substitution(Substitution("-order_id-", order_id))
+		personalization.add_substitution(Substitution("-city-", "Denver"))
+
+		mail = Mail()
+		mail.from_email = Email("royaleaccounts@gmail.com")
+		mail.subject = "Royale Accounts Order Confirmation"
+		mail.add_personalization(personalization)
+		mail.template_id = "d-5327c993cb174d08b0aaa7e23d81f3d3"
+		
+		sg.client.mail.send.post(request_body=mail.get())
+		
 		print(response.status_code)
 		print(response.body)
 		print(response.headers)
 
+		# handle errors
+
 		return redirect("cart:success")
 
 	return redirect("cart:home")
+

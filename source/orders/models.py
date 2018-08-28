@@ -58,7 +58,15 @@ class Order(models.Model):
 
 		if billing_profile and billing_address and total > 0:
 			return True
-		return False 
+		return False
+
+	# Checks that the accounts ordered have not already been purchased.
+	def is_valid(self):
+		order_accounts = self.cart.accounts.all()
+		for account in order_accounts:
+			if account.sold == True:
+				return False
+		return True
 
 	def mark_paid(self):
 		self.status = "P"

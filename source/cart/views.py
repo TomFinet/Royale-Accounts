@@ -3,6 +3,7 @@ from __future__ import unicode_literals
 
 from django.shortcuts import render, redirect
 from django.http import JsonResponse
+from django.contrib import messages
 
 from users.models import GuestEmail
 from accounts.models import Account
@@ -132,12 +133,6 @@ def checkout_review(request):
 	if billing_profile:
 		order_obj, order_obj_created = Order.objects.new_or_get(billing_profile, cart_obj)
 
-		for account in order_obj.cart.accounts.all():
-			if account.sold == True:
-				order_obj.remove()
-				cart_obj.remove()
-				return redirect("To an order fail page since some items in cart have already been sold.")
-
 		billing_address = order_obj.billing_address
 
 		if billing_address is None:
@@ -173,50 +168,59 @@ def checkout_payment(request):
 		order_obj, order_obj_created = Order.objects.new_or_get(billing_profile, cart_obj)
 	
 		if request.method == "POST":
-			is_complete = order_obj.is_complete()
-			if is_complete:
+			if order_obj.is_complete():
+				if order_obj.is_valid():
 
-				stripe_id = request.session.get('billing_card_id', None)
-				billing_card = billing_profile.payment_card(stripe_id)
-				currency = request.session.get("currency", "USD")
+					stripe_id = request.session.get('billing_card_id', None)
+					billing_card = billing_profile.payment_card(stripe_id)
+					currency = request.session.get("currency", "USD")
 
-				did_charge, charge_msg = billing_profile.charge(
-					order_obj, billing_card, currency
-				)
+					did_charge, charge_msg = billing_profile.charge(
+						order_obj, billing_card, currency
+					)
 
-				if did_charge:
-					order_obj.mark_paid()
+					if did_charge:
+						order_obj.mark_paid()
 
-					qs = order_obj.cart.accounts.all()
-					conversion_rate = request.session.get("rate", 1)
-					accounts = serialize_accounts(qs, conversion_rate)
-					print(accounts)
+						qs = order_obj.cart.accounts.all()
+						conversion_rate = request.session.get("rate", 1)
+						accounts = serialize_accounts(qs, conversion_rate)
 
-					for account in qs:
-						account.sold = True
-						account.save()
+						for account in qs:
+							account.sold = True
+							account.save()
+							
+						del request.session["billing_card_id"]
+						if not request.user.is_authenticated():
+							del request.session["cart_id"]
+						del request.session["cart_items_count"]
+
+						# send confirmation email
+						request.session["to_email"] = billing_profile.email
+						request.session["order_id"] = order_obj.order_id
+						request.session["accounts"] = accounts
+
+						cart_obj.active = False
+
+						return redirect("email:order_confirmation")
 						
-					del request.session["billing_card_id"]
-					if not request.user.is_authenticated():
-						del request.session["cart_id"]
-					del request.session["cart_items_count"]
-
-					# send confirmation email
-					request.session["to_email"] = billing_profile.email
-					request.session["order_id"] = order_obj.order_id
-					request.session["accounts"] = accounts
-
-					cart_obj.accounts.clear()
-
-					return redirect("email:order_confirmation")
-
+					else:
+						print(charge_msg)
+						return redirect("cart:checkout_login")
 				else:
-					print(charge_msg)
-					return redirect("cart:checkout_login")
+					# Remove all items from cart since some items have already been purchased.
+					cart_obj.accounts.clear()
+					# redirect to error page
+					request.session['from_payment'] = True
+					return redirect("cart:error")
 
 	return redirect("cart:checkout_login")
 
-
+def checkout_error_view(request):
+	if request.session.get('from_payment', False):
+		del request.session['from_payment']
+		return render(request, "cart/error.html", {})
+	return redirect("cart:home")
 
 def checkout_complete_view(request):
 	return render(request, "cart/checkout_done.html", {})
@@ -237,8 +241,8 @@ def serialize_accounts(accounts_qs, conversion_rate):
 			"id": a.id,
 			"url": a.get_absolute_url(),
 			"title": a.title, 
-			#"price": (Decimal(a.usd_price) * Decimal(conversion_rate)
-			#).quantize(Decimal('.01'), rounding=ROUND_UP),
+			"price": (Decimal(a.usd_price) * Decimal(conversion_rate)
+				).quantize(Decimal('.01'), rounding=ROUND_UP),
 			"img_sml_url": img_sml_url,
 		})
 

@@ -194,6 +194,10 @@ class Account(models.Model):
 	img_med = models.ImageField(upload_to=main_image_upload_path, null=True, blank=True)
 	img_sml = models.ImageField(upload_to=main_image_upload_path, null=True, blank=True)
 
+	# account access info
+	supercell_account_email = models.EmailField(max_length=255)
+	supercell_email_password = models.CharField(max_length=255)
+
 	# account stats
 	name = models.CharField(max_length=50)
 	name_change = models.BooleanField(default=True)

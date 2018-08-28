@@ -44,7 +44,7 @@ class CartManager(models.Manager):
 		return self.model.objects.create(user=user_obj)
 
 class Cart(models.Model):
-	user = models.OneToOneField(User, null=True, blank=True, on_delete=models.CASCADE)
+	user = models.ForeignKey(User, null=True, blank=True)
 	accounts = models.ManyToManyField(Account, blank=True)
 	total = models.DecimalField(default=0.00, max_digits=20, decimal_places=2)
 	timestamp = models.DateTimeField(auto_now_add=True)

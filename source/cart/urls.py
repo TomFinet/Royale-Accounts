@@ -1,13 +1,14 @@
 from django.conf.urls import url
 from .views import (
 	cart_api_view,
-	cart_home, 
+	cart_home,
 	cart_update, 
 	checkout_login,
 	checkout_address,
 	checkout_review,
 	checkout_payment,
 	checkout_complete_view,
+	checkout_error_view,
 )
 
 urlpatterns = [
@@ -19,4 +20,5 @@ urlpatterns = [
 	url(r'^checkout/review/$', checkout_review, name="checkout_review"),
 	url(r'^checkout/payment/$', checkout_payment, name="checkout_payment"),
 	url(r'^checkout/success/$', checkout_complete_view, name="success"),
+	url(r'^checkout/error/$', checkout_error_view, name="error"),
 ]

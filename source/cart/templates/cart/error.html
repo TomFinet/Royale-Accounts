@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
+{% load static %}
 
-{% block title %}Server Error{% endblock %}
+{% block title %}Order Error{% endblock %}
 
 {% block content %}
 
@@ -15,16 +16,15 @@
 
 	<!-- Main content -->
 	<div class="page-wrap container wrap-404">
-		<h3>500</h3>
+		<h3>Order Error</h3>
 		<div class="space30"></div>
 		<div class="col-md-12 no-padding columns mb0">
 	    	<i class="icon-confused icon-404"></i>
 	        
-			<h1>Woops, looks like something went wrong our end. We are looking into it. In the meantime:</h1>
-			
+			<h1>Some accounts in your cart have been purchased by other shoppers between when they were added to your cart and now. Your cart has been cleared. Sorry for the inconvenience.</h1>
+
 	        <div class="space30"></div>
-	        	<button class="btn btn-primary btn-lg btn-green uppercase" type="button">Contact Us</button>
-	        	<button class="btn btn-primary btn-lg btn-green uppercase" type="button">See Our Work</button>
+	        	<a href="{% url 'accounts:list' %}" class="btn btn-primary btn-lg btn-green uppercase">Accounts</a>
 	        <div class="space30"></div>
 		</div>	
 
