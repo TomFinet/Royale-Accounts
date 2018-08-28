@@ -80,7 +80,7 @@ jQuery(document).ready(function ($) {
 
 						var image = value.img_sml_url
 						if (image == null){
-							image = "http://placehold.it/100x100"
+							image = "//placehold.it/100x100"
 						}
 
 						cartBody.prepend("<tr><td class='product-thumbnail'><a href='" + value.url + "'>" + 
