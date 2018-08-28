@@ -3,7 +3,7 @@
 
 
 <h4><img width="30" height="30" src="{% static 'images/visa.png' %}"> {{ card.brand }}</h4>
-<p>**** **** **** {{ card.last4 }}</p>
+<p>Ending in {{ card.last4 }}</p>
 {% if card.exp_month > 9 %}
 	<p>Expires {{ card.exp_month }}/{{ card.exp_year }}</p>
 {% else %}

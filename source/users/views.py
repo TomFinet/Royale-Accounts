@@ -76,7 +76,7 @@ def register_page(request):
 
 	if register_form.is_valid():
 		register_form.save()
-		return redirect("/")
+		return redirect("users:login")
 
 	return render(request, "users/register.html", context)
 
