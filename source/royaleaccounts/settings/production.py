@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__fil
 # See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '^zl3z67%=+4r57m-s*nps8c%@_j%7xj7j7^w@fr(&$ru7*t1gu'
+SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -57,13 +57,13 @@ AUTH_USER_MODEL = 'users.User'
 FORCE_SESSION_TO_ONE = False
 FORCE_INACTIVE_USER_ENDSESSION = False
 
-CURRENCY_ACCESS_KEY = "9MvSGngNstdDRAUfXktD9vTnGRgQkb"
+CURRENCY_ACCESS_KEY = os.environ.get('CURRENCY_ACCESS_KEY')
 CURRENCY_BASE_URL = "https://www.amdoren.com/api/currency.php"
 
-STRIPE_SECRET_KEY = "sk_test_xKhIL4YXAa84BK0cIGrSLR9G"
+STRIPE_SECRET_KEY = os.environ.get('STRIPE_SECRET_KEY')
 STRIPE_PUB_KEY = "pk_test_BTw6TKSRbgvSOdQzBtLzh4Qh"
 
-SENDGRID_API_KEY = "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"
+SENDGRID_API_KEY = os.environ.get('SENDGRID_API_KEY')
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

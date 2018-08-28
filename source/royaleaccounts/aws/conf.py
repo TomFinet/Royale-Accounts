@@ -1,11 +1,13 @@
 import datetime
+import os
 
 
 AWS_USERNAME = "royaleaccounts-user"
 AWS_GROUP_NAME = "royaleaccounts-group"
 
-AWS_ACCESS_KEY_ID = "AKIAIKIZWUMUYAILK5LA"
-AWS_SECRET_ACCESS_KEY = "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"
+AWS_ACCESS_KEY_ID = os.environ.get("AWS_ACCESS_KEY_ID")
+AWS_SECRET_ACCESS_KEY = os.environ.get("AWS_SECRET_ACCESS_KEY")
+
 AWS_FILE_EXPIRE = 200
 AWS_PRELOAD_METADATA = True
 AWS_QUERYSTRING_AUTH = False
