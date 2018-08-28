@@ -190,6 +190,9 @@ def checkout_payment(request):
 							account.sold = True
 							account.save()
 							
+						cart_obj.active = False
+						cart_obj.save()
+
 						del request.session["billing_card_id"]
 						if not request.user.is_authenticated():
 							del request.session["cart_id"]
@@ -199,8 +202,6 @@ def checkout_payment(request):
 						request.session["to_email"] = billing_profile.email
 						request.session["order_id"] = order_obj.order_id
 						request.session["accounts"] = accounts
-
-						cart_obj.active = False
 
 						return redirect("email:order_confirmation")
 						

@@ -15,9 +15,44 @@ STATUS_CHOICES = (
 	("R", "Refunded"),
 )
 
+
+class OrderManagerQuerySet(models.query.QuerySet):
+	def recent(self):
+		return self.order_by("-updated", "-timestamp")
+
+	def totals_data(self):
+	    return self.aggregate(Sum("total"), Avg("total"))
+
+	def cart_data(self):
+	    return self.aggregate(
+	                    Sum("cart__accounts__price"), 
+	                    Avg("cart__accounts__price"), 
+	                    Count("cart__accounts")
+	                                )
+
+	def by_status(self, status="P"):
+	    return self.filter(status=status)
+
+	def not_refunded(self):
+	    return self.exclude(status='R')
+
+	def by_request(self, request):
+	    billing_profile, created = BillingProfile.objects.new_or_get(request)
+	    return self.filter(billing_profile=billing_profile)
+
+	def not_created(self):
+	    return self.exclude(status='C')
+
+
 class OrderManager(models.Manager):
 
-	def new_or_get(self, billing_profile, cart_obj):
+    def get_queryset(self):
+        return OrderManagerQuerySet(self.model, using=self._db)
+
+    def by_request(self, request):
+        return self.get_queryset().by_request(request)
+
+    def new_or_get(self, billing_profile, cart_obj):
 		created = False
 		qs = self.get_queryset().filter(
 			billing_profile=billing_profile, 
@@ -33,6 +68,7 @@ class OrderManager(models.Manager):
 			created = True
 		return obj, created
 
+
 class Order(models.Model):
 	order_id = models.CharField(max_length=120, blank=True)
 	billing_profile = models.ForeignKey(BillingProfile, null=True, blank=True)
@@ -41,8 +77,18 @@ class Order(models.Model):
 	status = models.CharField(max_length=120, default="C", choices=STATUS_CHOICES)
 	total = models.DecimalField(decimal_places=2, max_digits=20, default=0.00)
 	active = models.BooleanField(default=True)
+	timestamp = models.DateTimeField(auto_now_add=True)
+	updated = models.DateTimeField(auto_now=True)
+	# currency =
+	# conversion_rate = 
 
 	objects = OrderManager()
+
+	class Meta:
+	   ordering = ['-timestamp', '-updated']
+
+	def get_absolute_url(self):
+	    return reverse("orders:detail", kwargs={'order_id': self.order_id})
 
 	def __str__(self):
 		return self.order_id
@@ -70,6 +116,7 @@ class Order(models.Model):
 
 	def mark_paid(self):
 		self.status = "P"
+		self.active = False
 		self.save()
 		return self.status
 
@@ -103,3 +150,12 @@ def post_save_order(sender, instance, created, *args, **kwargs):
 		instance.update_total()
 
 post_save.connect(post_save_order, sender=Order)
+
+
+
+
+
+
+
+
+
