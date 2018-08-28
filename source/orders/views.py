@@ -14,6 +14,6 @@ from .models import Order
 class OrderListView(LoginRequiredMixin, ListView):
 	template_name = 'orders/order_list.html'
 
-    def get_queryset(self):
-        return Order.objects.by_request(self.request).not_created()
+	def get_queryset(self):
+		return Order.objects.by_request(self.request).not_created()
 
