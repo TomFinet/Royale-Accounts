@@ -95,7 +95,7 @@ def email_form_page(request):
 		if user:
 			status_code = send_password_reset_email(user)
 			if status_code == 202:
-				return render("users/password_reset.html", {"email_sent": True, "user_id": user.id})
+				return render(request, "users/password_reset.html", {"email_sent": True, "user_id": user.id})
 			messages.add_message(request, messages.ERROR, 'Failed to send email. Please try again', fail_silently=True)
 			# handle errors
 		else:
