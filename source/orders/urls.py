@@ -1,8 +1,8 @@
 from django.conf.urls import url
-from .views import (
+'''from .views import (
     OrderListView
-)
+)'''
 
-urlpatterns = [
+'''urlpatterns = [
     url(r'^list/$', OrderListView.as_view(), name="list"),
-]
+]'''

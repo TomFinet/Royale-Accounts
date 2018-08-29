@@ -49,6 +49,12 @@ class RegisterForm(forms.ModelForm):
             user.save()
         return user
 
+
+class EmailForm(forms.Form):
+    email = forms.EmailField(label="E-mail Address", 
+        widget= forms.EmailInput(attrs={'class': 'form-control'}))
+
+
 class UserAdminCreationForm(forms.ModelForm):
     """A form for creating new users. Includes all the required
     fields, plus a repeated password."""

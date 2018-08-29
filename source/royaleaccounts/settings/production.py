@@ -65,6 +65,8 @@ STRIPE_PUB_KEY = "pk_test_BTw6TKSRbgvSOdQzBtLzh4Qh"
 
 SENDGRID_API_KEY = os.environ.get('SENDGRID_API_KEY')
 
+WEBSITE_URL = "//royale-accounts/"
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',

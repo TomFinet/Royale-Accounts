@@ -6,6 +6,8 @@ from django.contrib.auth.models import (
 	AbstractBaseUser, BaseUserManager
 )
 
+from uuid import uuid4
+
 class UserManager(BaseUserManager):
 	def create_user(self, email, password=None, 
 		is_active=True, is_staff=False, is_admin=False):
@@ -80,6 +82,44 @@ class GuestEmail(models.Model):
 
 	def __str__(self):
 		return self.email
+
+
+class AccessTokenManager(models.Manager):
+
+	def new_or_get(self, user):
+		token = None
+		created = False
+		qs = self.get_queryset().filter(user=user)
+		if qs.count() == 1:
+			token = token.first()
+		else:
+			token = self.model.objects.create(user=user)
+			created = True
+
+		return token, created
+
+# Used to store tokens for one time links for password reset and account validation
+class AccessToken(models.Model):
+	user = models.ForeignKey(User)
+	token = models.CharField(max_length=255)
+	timestamp = models.DateTimeField(auto_now=True)
+
+	objects = AccessTokenManager()
+
+	def __str__(self):
+		return self.token
+
+	def save(self, *args, **kwargs):
+		if not self.token:
+			self.token = str(uuid4())
+		return super(AccessToken, self).save(*args, **kwargs)
+
+	def is_valid(self):
+		pass
+
+
+
+
 
 
 

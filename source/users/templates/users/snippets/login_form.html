@@ -22,7 +22,7 @@
 	</div>
 	<div class="row">
 		<div class="col-md-12">
-			<a class="pull-right" href="#">(Lost Password?)</a>
+			<a class="pull-right" href="{% url 'users:password_reset_email' %}">(Lost Password?)</a>
 			{{ login_form.password.errors }}
 			<label for="{{ login_form.password.id_for_label }}">Password</label>
 			{{ login_form.password }}

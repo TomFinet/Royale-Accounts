@@ -11,9 +11,10 @@ from django.shortcuts import render
 from billing.models import BillingProfile
 from .models import Order
 
-class OrderListView(LoginRequiredMixin, ListView):
+'''class OrderListView(ListView):
 	template_name = 'orders/order_list.html'
+	context_object_name = 'order_list'
 
 	def get_queryset(self):
-		return Order.objects.by_request(self.request).not_created()
+		return Order.objects.by_request(self.request).not_created()'''
 

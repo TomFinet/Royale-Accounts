@@ -22,6 +22,7 @@
 				<h3>Past Orders</h3>
 			</div>
 		</div>
+
 		<!-- Shop Content -->
 		<div role="main" class="main shop">
 			{% if order_list %}
@@ -31,7 +32,27 @@
 					<div class="row">
 						<ul class="products thumb-info-list">
     						{% for order in order_list %}
-            					{% include 'orders/snippets/card.html' with order=order %}
+            					<div class="pricing">
+									<div class="row">
+										<a href="#">
+											<div class="col-md-2">
+												<div class="plan-subtitle">Ordered 27/09/18</div>
+											</div>
+											<div class="col-md-3">
+												<div class="plan-subtitle">ID: 21312jwe2x3</div>
+											</div>
+											<div class="col-md-2">
+												<div class="plan-subtitle">2 accounts</div>
+											</div>
+											<div class="col-md-3">
+												<div class="plan-subtitle">$10.00 <span>total</span></div>
+											</div>
+											<div class="col-md-2">
+												<div class="plan-subtitle">Paid</div>
+											</div>
+										</a>
+									</div>
+								</div>
     						{% endfor %}
     					</ul>
 					</div>
