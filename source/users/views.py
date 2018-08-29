@@ -129,7 +129,7 @@ def email_resend_view(request):
 
 #---------- Helper Functions -----------#
 
-def send_password_reset_email(user, email=None):
+def send_password_reset_email(user):
 	token, created = AccessToken.objects.new_or_get(user)
 	reset_link = getattr(settings, 'WEBSITE_URL') + "user/" + token.token
 
@@ -137,11 +137,7 @@ def send_password_reset_email(user, email=None):
 	mail = Mail()
 	personalization = Personalization()
 
-	if email:
-		personalization.add_to(Email(email))
-	else:
-		personalization.add_to(Email(user.email))
-
+	personalization.add_to(Email(user.email))
 	personalization.add_substitution(Substitution("-reset_link-", reset_link))
 	mail.add_personalization(personalization)
 	mail.from_email = Email("royaleaccounts@gmail.com")
