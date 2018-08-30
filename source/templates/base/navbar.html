@@ -29,8 +29,8 @@
             <li class='has-sub'>
               <a href='#'><span>Profile</span></a>
               <ul>
-                <li><a href='#'><span>Orders</span></a></li>
-                <li><a href="#"><span>Change Password</span></a></li>
+                <li><a href="{% url 'orders:list' %}"><span>Orders</span></a></li>
+                <li><a href="{% url 'users:change_password' %}"><span>Change Password</span></a></li>
               </ul>
             </li>
             <li><a href='{{ logout_url }}'><span>Logout</span></a></li>

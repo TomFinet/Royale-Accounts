@@ -48,7 +48,9 @@ INSTALLED_APPS = [
     'accounts',
     'billing',
     'cart',
-    'orders'
+    'orders',
+    'emails',
+    'tags',
 ]
 
 AUTH_USER_MODEL = 'users.User'
@@ -63,6 +65,14 @@ STRIPE_SECRET_KEY = "sk_test_xKhIL4YXAa84BK0cIGrSLR9G"
 STRIPE_PUB_KEY = "pk_test_BTw6TKSRbgvSOdQzBtLzh4Qh"
 
 SENDGRID_API_KEY = "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"
+
+WEBSITE_URL = "127.0.0.1:8000/"
+
+CURRENCY_CHOICES = (
+    ("USD", "USD"),
+    ("GBP", "GBP"),
+    ("EUR", "EUR"),
+)
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

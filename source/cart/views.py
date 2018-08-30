@@ -4,6 +4,7 @@ from __future__ import unicode_literals
 from django.shortcuts import render, redirect
 from django.http import JsonResponse
 from django.contrib import messages
+from django.utils import timezone
 
 from users.models import GuestEmail
 from accounts.models import Account
@@ -17,6 +18,7 @@ from users.forms import LoginForm, GuestForm
 from royaleaccounts.forms import CurrencyForm
 
 from decimal import *
+
 
 def cart_api_view(request):
 	if request.is_ajax():
@@ -185,6 +187,10 @@ def checkout_payment(request):
 						qs = order_obj.cart.accounts.all()
 						conversion_rate = request.session.get("rate", 1)
 						accounts = serialize_accounts(qs, conversion_rate)
+
+						order_obj.conversion_rate = conversion_rate
+						order_obj.updated = timezone.now()
+						order_obj.save()
 
 						for account in qs:
 							account.sold = True

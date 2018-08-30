@@ -34,60 +34,36 @@
     						{% for order in order_list %}
             					<div class="pricing">
 									<div class="row">
-										<a href="#">
-											<div class="col-md-2">
-												<div class="plan-subtitle">Ordered 27/09/18</div>
+										<a href="{{ order.get_absolute_url }}">
+											<div class="col-md-3">
+												<div class="plan-subtitle">{{ order.updated }}</div>
 											</div>
 											<div class="col-md-3">
-												<div class="plan-subtitle">ID: 21312jwe2x3</div>
+												<div class="plan-subtitle">{{ order.order_id }}</div>
 											</div>
 											<div class="col-md-2">
-												<div class="plan-subtitle">2 accounts</div>
-											</div>
-											<div class="col-md-3">
-												<div class="plan-subtitle">$10.00 <span>total</span></div>
+												<div class="plan-subtitle">{{ order.cart.accounts.count }} accounts</div>
 											</div>
 											<div class="col-md-2">
-												<div class="plan-subtitle">Paid</div>
+												<div class="plan-subtitle">{{ order.currency }}{{ order.total }} <span>total</span></div>
+											</div>
+											<div class="col-md-2">
+												<div class="plan-subtitle">{{ order.status }}</div>
 											</div>
 										</a>
 									</div>
 								</div>
+								<div class="space20"></div>
     						{% endfor %}
     					</ul>
 					</div>
-					{% if is_paginated %}
-						<div class="row page-nav">
-							<div class="col-md-12 no-padding">
-								<div class="col-md-6">
-									<ul>
-									{% if page_obj.has_previous %}
-										<li><a href="?page=1">1</a></li>
-										<li><a href="?page={{ page_obj.previous_page_number }}"><i class="fa fa-chevron-left"></i></a></li>
-                					{% endif %}
-
-									<li class="active"><a href="#">{{ page_obj.number }}</a></li>
-
-                					{% if page_obj.has_next %}
-                    					<li><a href="?page={{ page_obj.next_page_number }}"><i class="fa fa-chevron-right"></i></a></li>
-                					{% endif %}
-										
-									</ul>
-								</div>
-
-								<div class="col-md-6">
-									<p>Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</p>
-								</div>
-							</div>
-						</div>
-					{% endif %}
 				</div>
 			</div>
 			{% else %}
 			<div class="row">
 				<div class="col-md-12">
 					<div class="space20"></div>
-					<h4>Shop is Empty</h4>
+					<h4>No orders.</h4>
 				</div>
 			</div>
 			{% endif %}

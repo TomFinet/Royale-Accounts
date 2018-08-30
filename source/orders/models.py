@@ -3,6 +3,8 @@ from __future__ import unicode_literals
 
 from django.db import models
 from django.db.models.signals import pre_save, post_save
+from django.conf import settings
+from django.urls import reverse
 
 from addresses.models import Address
 from cart.models import Cart
@@ -79,8 +81,8 @@ class Order(models.Model):
 	active = models.BooleanField(default=True)
 	timestamp = models.DateTimeField(auto_now_add=True)
 	updated = models.DateTimeField(auto_now=True)
-	# currency =
-	# conversion_rate = 
+	currency = models.CharField(choices=getattr(settings, "CURRENCY_CHOICES"), max_length=5)
+	conversion_rate = models.DecimalField(decimal_places=2, max_digits=20, default=1.00)
 
 	objects = OrderManager()
 

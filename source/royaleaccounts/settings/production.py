@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     'cart',
     'orders',
     'emails',
+    'tags',
 ]
 
 AUTH_USER_MODEL = 'users.User'
@@ -67,6 +68,12 @@ STRIPE_PUB_KEY = "pk_test_BTw6TKSRbgvSOdQzBtLzh4Qh"
 SENDGRID_API_KEY = os.environ.get('SENDGRID_API_KEY')
 
 WEBSITE_URL = "//royale-accounts/"
+
+CURRENCY_CHOICES = (
+    ("USD", "USD"),
+    ("GBP", "GBP"),
+    ("EUR", "EUR"),
+)
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -117,9 +124,10 @@ DATABASES = {
     }
 }
 
-db_from_env = dj_database_url.config()
-DATABASES['default'].update(db_from_env)
-DATABASES['default']['CONN_MAX_AGE'] = 500
+#db_from_env = dj_database_url.config()
+#DATABASES['default'].update(db_from_env)
+#DATABASES['default']['CONN_MAX_AGE'] = 500
+DATABASES['default'] = dj_database_url.config(conn_max_age=600, ssl_require=True)
 
 CACHES = {
     'default': {

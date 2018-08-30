@@ -5,8 +5,8 @@ from django.db import models
 from django.contrib.auth.models import (
 	AbstractBaseUser, BaseUserManager
 )
-
 from uuid import uuid4
+from datetime import datetime, timedelta
 
 class UserManager(BaseUserManager):
 	def create_user(self, email, password=None, 
@@ -92,15 +92,18 @@ class AccessTokenManager(models.Manager):
 		qs = self.get_queryset().filter(user=user)
 		if qs.count() == 1:
 			token = token.first()
+			if not token.is_valid():
+				token.update()
 		else:
 			token = self.model.objects.create(user=user)
 			created = True
 
 		return token, created
 
+
 # Used to store tokens for one time links for password reset and account validation
 class AccessToken(models.Model):
-	user = models.ForeignKey(User)
+	user = models.OneToOneField(User)
 	token = models.CharField(max_length=255)
 	timestamp = models.DateTimeField(auto_now_add=True)
 
@@ -114,8 +117,15 @@ class AccessToken(models.Model):
 			self.token = str(uuid4())
 		return super(AccessToken, self).save(*args, **kwargs)
 
+	def update(self):
+		self.token = str(uuid4())
+		self.timestamp = datetime.now()
+		self.save()
+
 	def is_valid(self):
-		pass
+		if (datetime.now() - timedelta(hours=1)) > self.timestamp.now(): 
+			return True
+		return False
 
 
 
