@@ -242,8 +242,8 @@ def serialize_accounts(accounts_qs, conversion_rate):
 			"id": a.id,
 			"url": a.get_absolute_url(),
 			"title": a.title, 
-			"price": Decimal(Decimal(a.usd_price) * Decimal(conversion_rate)
-				).quantize(Decimal('.01'), rounding=ROUND_UP),
+			"price": float(Decimal(Decimal(a.usd_price) * Decimal(conversion_rate)
+				).quantize(Decimal('.01'), rounding=ROUND_UP)),
 			"img_sml_url": img_sml_url,
 		})
 
