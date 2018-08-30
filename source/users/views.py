@@ -186,16 +186,16 @@ def send_password_reset_email(user):
 
 def send_verification_email(user):
 	token, created = AccessToken.objects.new_or_get(user)
-	reset_link = getattr(settings, 'WEBSITE_URL') + "user/" + token.token
+	verification_link = getattr(settings, 'WEBSITE_URL') + "user/v/" + token.token
 
 	mail = Mail()
 	mail.from_email = Email('royaleaccounts@gmail.com')
-	mail.subject = "Royale Accounts Password Reset"
+	mail.subject = "Verify your account with Royale Accounts"
 	mail.template_id = 'd-ca2e73e4409d4c94822bc282ec3fd29b'
 	p = Personalization()
 	p.add_to(Email(user.email))
 	p.dynamic_template_data = {
-		'reset_link': reset_link,
+		'verification_link': verification_link,
 	}
 	mail.add_personalization(p)
 
@@ -207,7 +207,6 @@ def send_verification_email(user):
 	print(response.headers)
 
 	return response.status_code
-
 
 
 

@@ -106,6 +106,7 @@ class AccessToken(models.Model):
 	user = models.OneToOneField(User)
 	token = models.CharField(max_length=255)
 	timestamp = models.DateTimeField(auto_now_add=True)
+	used = models.BooleanField(default=False)
 
 	objects = AccessTokenManager()
 
@@ -120,14 +121,17 @@ class AccessToken(models.Model):
 	def update(self):
 		self.token = str(uuid4())
 		self.timestamp = datetime.now()
+		self.used = False
 		self.save()
 
 	def is_valid(self):
-		if (datetime.now() - timedelta(hours=1)) > self.timestamp.now(): 
+		if (datetime.now() - timedelta(hours=1)) > self.timestamp.now() and not used: 
 			return True
 		return False
 
-
+	def mark_used(self):
+		self.used = True
+		self.save()
 
 
 

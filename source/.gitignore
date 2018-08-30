@@ -9,7 +9,7 @@ fasttracktojquery/
 # Django related 
 
 static-cdn/  # any collected static files
-source/db.sqlite3/
+db.sqlite3/
 
 
 # Byte-compiled / optimized / DLL files
