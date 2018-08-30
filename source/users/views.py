@@ -11,9 +11,9 @@ from django.conf import settings
 from .forms import LoginForm, RegisterForm, GuestForm, EmailForm
 from .models import GuestEmail, AccessToken
 from cart.models import Cart
-from sendgrid.helpers.mail import *
 
-import sendgrid
+from sendgrid import SendGridAPIClient
+from sendgrid.helpers.mail import *
 
 
 def guest_register_view(request):
@@ -130,18 +130,21 @@ def send_password_reset_email(user):
 	token, created = AccessToken.objects.new_or_get(user)
 	reset_link = getattr(settings, 'WEBSITE_URL') + "user/" + token.token
 
-	sg = sendgrid.SendGridAPIClient(apikey=getattr(settings, 'SENDGRID_API_KEY'))
 	mail = Mail()
-	personalization = Personalization()
+    mail.from_email = Email('royaleaccounts@gmail.com')
+    mail.subject = "Royale Accounts Password Reset"
+    mail.template_id = 'd-ca2e73e4409d4c94822bc282ec3fd29b'
+    p = Personalization()
+    p.add_to(Email(user.email))
+    p.dynamic_template_data = {
+        'reset_link': reset_link,
+    }
+    mail.add_personalization(p)
 
-	personalization.add_to(Email(user.email))
-	personalization.add_substitution(Substitution("-reset_link-", reset_link))
-	mail.add_personalization(personalization)
-	mail.from_email = Email("royaleaccounts@gmail.com")
-	mail.subject = "Royale Accounts Password Reset"
-	mail.template_id = "d-ca2e73e4409d4c94822bc282ec3fd29b"
+    sg = SendGridAPIClient(apikey=getattr(settings, 'SENDGRID_API_KEY'))
+    response = sg.client.mail.send.post(request_body=mail.get())
 
-	sg.client.mail.send.post(request_body=mail.get())
+	sg.client.mail.send.post(request_body=data)
 
 	print(response.status_code)
 	print(response.body)
