@@ -20,10 +20,9 @@ def home_view(request):
 	request.session["cart_items_count"] = cart_obj.accounts.count()
 
 	# get account images
-	account_qs = Account.objects.filter(sold=False)
-	featured_images = [{"image": account.image}]
+	featured_qs = Account.objects.filter(sold=False)
 
-	return render(request, 'index.html', {})
+	return render(request, 'index.html', {"featured_qs": featured_qs})
 
 
 class FaqView(TemplateView):

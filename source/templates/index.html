@@ -19,13 +19,19 @@
     <!-- Slider1 -->
     <div class="slider-content container">
       <div id="carousel">
-        <a href="#"><img src="//placehold.it/252x357" id="item-1" alt="img" /></a>
-        <a href="#"><img src="//placehold.it/252x357" id="item-2" alt="img" /></a>
-        <a href="#"><img src="//placehold.it/252x357" id="item-3" alt="img" /></a>
-        <a href="#"><img src="//placehold.it/252x357" id="item-4" alt="img" /></a>
-        <a href="#"><img src="//placehold.it/252x357" id="item-5" alt="img" /></a>
-        <a href="#"><img src="//placehold.it/252x357" id="item-6" alt="img" /></a>
-        <a href="#"><img src="//placehold.it/252x357" id="item-7" alt="img" /></a>
+        {% if featured_qs %}
+          {% for account in featured_qs %}
+            <a href="{{ account.get_absolute_url }}"><img src="{{ account.img_feature.url }}" id="item-{{ forloop.counter }}" alt="img"/></a>
+          {% endfor %}
+        {% else %}
+          <a href="#"><img src="//placehold.it/252x357" id="item-1" alt="img" /></a>
+          <a href="#"><img src="//placehold.it/252x357" id="item-2" alt="img" /></a>
+          <a href="#"><img src="//placehold.it/252x357" id="item-3" alt="img" /></a>
+          <a href="#"><img src="//placehold.it/252x357" id="item-4" alt="img" /></a>
+          <a href="#"><img src="//placehold.it/252x357" id="item-5" alt="img" /></a>
+          <a href="#"><img src="//placehold.it/252x357" id="item-6" alt="img" /></a>
+          <a href="#"><img src="//placehold.it/252x357" id="item-7" alt="img" /></a>
+        {% endif %}
       </div>
       <div class="scroll-btns">
         <a href="#" id="s-prev">Prev</a> | <a href="#" id="s-next">Next</a>
