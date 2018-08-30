@@ -102,7 +102,7 @@ class AccessTokenManager(models.Manager):
 class AccessToken(models.Model):
 	user = models.ForeignKey(User)
 	token = models.CharField(max_length=255)
-	timestamp = models.DateTimeField(auto_now=True)
+	timestamp = models.DateTimeField(auto_now_add=True)
 
 	objects = AccessTokenManager()
 
