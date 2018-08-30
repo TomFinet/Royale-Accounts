@@ -131,18 +131,18 @@ def send_password_reset_email(user):
 	reset_link = getattr(settings, 'WEBSITE_URL') + "user/" + token.token
 
 	mail = Mail()
-    mail.from_email = Email('royaleaccounts@gmail.com')
-    mail.subject = "Royale Accounts Password Reset"
-    mail.template_id = 'd-ca2e73e4409d4c94822bc282ec3fd29b'
-    p = Personalization()
-    p.add_to(Email(user.email))
-    p.dynamic_template_data = {
-        'reset_link': reset_link,
-    }
-    mail.add_personalization(p)
+	mail.from_email = Email('royaleaccounts@gmail.com')
+	mail.subject = "Royale Accounts Password Reset"
+	mail.template_id = 'd-ca2e73e4409d4c94822bc282ec3fd29b'
+	p = Personalization()
+	p.add_to(Email(user.email))
+	p.dynamic_template_data = {
+		'reset_link': reset_link,
+	}
+	mail.add_personalization(p)
 
-    sg = SendGridAPIClient(apikey=getattr(settings, 'SENDGRID_API_KEY'))
-    response = sg.client.mail.send.post(request_body=mail.get())
+	sg = SendGridAPIClient(apikey=getattr(settings, 'SENDGRID_API_KEY'))
+	response = sg.client.mail.send.post(request_body=mail.get())
 
 	print(response.status_code)
 	print(response.body)
