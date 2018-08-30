@@ -194,6 +194,7 @@ class Account(models.Model):
 	description = models.CharField(max_length=300)
 	img_med = models.ImageField(upload_to=main_image_upload_path, null=True, blank=True)
 	img_sml = models.ImageField(upload_to=main_image_upload_path, null=True, blank=True)
+	img_feature = models.ImageField(upload_to=main_image_upload_path, null=True, blank=True)
 
 	# account access info
 	supercell_account_email = models.EmailField(max_length=255)
@@ -283,6 +284,10 @@ class Account(models.Model):
 				image = Image.open(self.img_med.path)
 				image = image.resize((600, 600), Image.ANTIALIAS)
 				image.save(self.img_med.path)
+			if self.img_feature and self.img_feature != previous.img_feature:
+				image = Image.open(self.img_feature.path)
+				image = image.resize((252, 357), Image.ANTIALIAS)
+				image.save(self.img_feature.path)
 
                 
 	@property

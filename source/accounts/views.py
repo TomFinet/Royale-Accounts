@@ -60,5 +60,3 @@ class AccountsDetailView(DetailView):
 
 
 
-
-

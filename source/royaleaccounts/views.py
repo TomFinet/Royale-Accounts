@@ -18,6 +18,11 @@ CURRENCY_ACCESS_KEY = getattr(settings, "CURRENCY_ACCESS_KEY", None)
 def home_view(request):
 	cart_obj, new_obj = Cart.objects.new_or_get(request)
 	request.session["cart_items_count"] = cart_obj.accounts.count()
+
+	# get account images
+	account_qs = Account.objects.filter(sold=False)
+	featured_images = [{"image": account.image}]
+
 	return render(request, 'index.html', {})
 
 
