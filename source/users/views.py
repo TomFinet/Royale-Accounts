@@ -144,8 +144,6 @@ def send_password_reset_email(user):
     sg = SendGridAPIClient(apikey=getattr(settings, 'SENDGRID_API_KEY'))
     response = sg.client.mail.send.post(request_body=mail.get())
 
-	sg.client.mail.send.post(request_body=data)
-
 	print(response.status_code)
 	print(response.body)
 	print(response.headers)
