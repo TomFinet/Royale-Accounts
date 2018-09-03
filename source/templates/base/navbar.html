@@ -35,7 +35,6 @@
             <li><a href='{{ logout_url }}'><span>Logout</span></a></li>
           {% else %}
             <li><a href='{{ login_url }}'><span>Login</span></a></li>
-            <li><a href='{{ register_url }}'><span>Register</span></a></li>
           {% endif %}
           <li class="last"><a href='{{ cart_url }}'><span class="navbar-cart-count">{{ request.session.cart_items_count }}</span> <i class="fa fa-shopping-cart" aria-hidden="true"></i></a></li>
         </ul>
