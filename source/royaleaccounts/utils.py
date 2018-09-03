@@ -14,7 +14,7 @@ def unique_order_id_generator(instance, new_slug=None):
 		return unique_order_id_generator(instance)
 	return new_order_id
 
-def unique_slug_generator(instance, new_slug=None, _from=-1):
+def unique_slug_generator(instance, _from=-1, new_slug=None):
     if new_slug is not None:
         slug = new_slug
     else:
