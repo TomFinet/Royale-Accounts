@@ -8,6 +8,7 @@ from django.urls import reverse
 from royaleaccounts.utils import unique_slug_generator
 
 import os
+import PIL
 from PIL import Image
 
 def get_filename_extension(filepath):
@@ -54,9 +55,9 @@ class Post(models.Model):
 		if self.id is not None:
 			previous = Post.objects.get(id=self.id)
 			if self.title_img and self.title_img != previous.title_img:
-				image = Image.open(self.img_sml.path)
+				image = Image.open(self.title_img.path)
 				image = image.resize((690, 310), Image.ANTIALIAS)
-				image.save(self.img_sml.path)
+				image.save(self.title_img.path)
 		super(Post, self).save(force_insert, force_update)
 
 # Assigns a slug to a Post object, if its slug field is emtpy, before saving.

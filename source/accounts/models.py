@@ -10,6 +10,7 @@ from royaleaccounts.utils import unique_slug_generator
 from tags.models import Tag
 
 import os
+import PIL
 from PIL import Image
 from decimal import *
 

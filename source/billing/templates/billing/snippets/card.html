@@ -1,8 +1,8 @@
 {% load static %}
 {% url 'cart:checkout_review' as checkout_review_url %}
 
+{% include 'billing/snippets/card_brand.html' with brand=card.brand %}
 
-<h4><img width="30" height="30" src="{% static 'images/visa.png' %}"> {{ card.brand }}</h4>
 <p>Ending in {{ card.last4 }}</p>
 {% if card.exp_month > 9 %}
 	<p>Expires {{ card.exp_month }}/{{ card.exp_year }}</p>

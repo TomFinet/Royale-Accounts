@@ -1,0 +1,9 @@
+{% if brand == "Visa" %}
+	<h4><img width="30" height="30" src="{% static 'images/visa.png' %}"> {{ brand }}</h4>
+{% elif brand == "Mastercard" %}
+	<h4><img width="30" height="30" src="{% static 'images/mastercard.png' %}"> {{ brand }}</h4>
+{% elif brand == "American Express" %}
+	<h4><img width="30" height="30" src="{% static 'images/american-express.png' %}"> {{ brand }}</h4>
+{% else %}
+	<h4>{{ brand }}</h4>
+{% endif %}

@@ -197,8 +197,7 @@ def checkout_payment(request):
 							account.sold = True
 							account.save()
 							
-						cart_obj.active = False
-						cart_obj.save()
+						cart_obj.inactive()
 
 						del request.session["billing_card_id"]
 						if not request.user.is_authenticated():

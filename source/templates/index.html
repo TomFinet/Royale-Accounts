@@ -21,7 +21,7 @@
       <div id="carousel">
         {% if featured_qs %}
           {% for account in featured_qs %}
-            <a width="252" height="357" href="{{ account.get_absolute_url }}"><img src="{{ account.img_feature.url }}" id="item-{{ forloop.counter }}" alt="img"/></a>
+            <a href="{{ account.get_absolute_url }}"><img width="252" height="357" src="{{ account.img_feature.url }}" id="item-{{ forloop.counter }}" alt="img"/></a>
           {% endfor %}
         {% else %}
           <a href="#"><img src="//placehold.it/252x357" id="item-1" alt="img" /></a>
@@ -65,7 +65,7 @@
     <div class="col-md-3 service-content">
       <div class="icon-surround-1"><span>2</span><i class="fa fa-money"></i></div>
       <h4>Buy it</h4>
-      <p>Using our fully encrypted secure payment method.</p>
+      <p>Using our 256-bit SSL encrypted secure payment gateway.</p>
     </div>
     <div class="col-md-3 service-content">
       <div class="icon-surround-1"><span>3</span><i class="icon-mail3"></i></div>

@@ -60,6 +60,10 @@ class Cart(models.Model):
 		return Decimal(Decimal(self.total) * Decimal(conversion_rate)
 			).quantize(Decimal('.01'), rounding=ROUND_UP)
 
+	def inactive(self):
+		self.active = False
+		self.save()
+
 def m2m_changed_cart_receiver(sender, instance, action, *args, **kwargs):
 	if action == 'post_add' or action == 'post_remove' or action == 'post_clear':
 		accounts = instance.accounts.all()
