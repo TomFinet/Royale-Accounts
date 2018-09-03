@@ -7,7 +7,7 @@ from django.contrib.auth.models import Group
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 
 from .forms import UserAdminCreationForm, UserAdminChangeForm
-from .models import GuestEmail
+from .models import GuestEmail, AccessToken
 
 
 User = get_user_model()
@@ -50,3 +50,17 @@ class GuestEmailAdmin(admin.ModelAdmin):
 		model = GuestEmail
 
 admin.site.register(GuestEmail, GuestEmailAdmin)
+
+
+class AccessTokenAdmin(admin.ModelAdmin):
+    class Meta:
+        model = AccessToken
+
+admin.site.register(AccessToken, AccessTokenAdmin)
+
+
+
+
+
+
+
