@@ -12,6 +12,7 @@ from .models import Cart
 from billing.models import BillingProfile, Card
 from orders.models import Order
 from addresses.models import Address
+from emails.utils import send_order_confirmation_email
 
 from addresses.forms import AddressForm
 from users.forms import LoginForm, GuestForm
@@ -204,12 +205,16 @@ def checkout_payment(request):
 							del request.session["cart_id"]
 						del request.session["cart_items_count"]
 
-						# send confirmation email
-						request.session["to_email"] = billing_profile.email
-						request.session["order_id"] = order_obj.order_id
-						request.session["accounts"] = accounts
+						status_code = send_order_confirmation_email(
+							billing_profile.email, 
+							order_obj.order_id, 
+							accounts
+						)
 
-						return redirect("email:order_confirmation")
+						if status_code != 202:
+							# add error message to display about email failing in cart success page.
+							pass
+						return redirect("cart:success")
 						
 					else:
 						print(charge_msg)

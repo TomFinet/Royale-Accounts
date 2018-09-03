@@ -13,6 +13,8 @@ from .forms import LoginForm, RegisterForm, GuestForm, EmailForm, PasswordChange
 from .models import GuestEmail, AccessToken
 from cart.models import Cart
 
+from emails.utils import send_password_reset_email, send_verification_email
+
 from sendgrid import SendGridAPIClient
 from sendgrid.helpers.mail import *
 
@@ -148,58 +150,6 @@ def change_password_view(request):
 	return change_password_helper(request, user)
 
 #---------- Helper Functions -----------#
-
-def send_password_reset_email(user):
-	token, created = AccessToken.objects.new_or_get(user)
-	if not token.is_valid():
-		token.update()
-
-	reset_link = getattr(settings, 'WEBSITE_URL') + "user/password-reset/" + token.token
-
-	mail = Mail()
-	mail.from_email = Email('royaleaccounts@gmail.com')
-	mail.subject = "Royale Accounts Password Reset"
-	mail.template_id = 'd-ca2e73e4409d4c94822bc282ec3fd29b'
-	p = Personalization()
-	p.add_to(Email(user.email))
-	p.dynamic_template_data = {
-		'reset_link': reset_link,
-	}
-	mail.add_personalization(p)
-
-	sg = SendGridAPIClient(apikey=getattr(settings, 'SENDGRID_API_KEY'))
-	response = sg.client.mail.send.post(request_body=mail.get())
-
-	print(response.status_code)
-	print(response.body)
-	print(response.headers)
-
-	return response.status_code
-
-def send_verification_email(user):
-	token, created = AccessToken.objects.new_or_get(user)
-	verification_link = getattr(settings, 'WEBSITE_URL') + "user/v/" + token.token
-
-	mail = Mail()
-	mail.from_email = Email('royaleaccounts@gmail.com')
-	mail.subject = "Verify your account with Royale Accounts"
-	mail.template_id = 'd-ca2e73e4409d4c94822bc282ec3fd29b'
-	p = Personalization()
-	p.add_to(Email(user.email))
-	p.dynamic_template_data = {
-		'verification_link': verification_link,
-	}
-	mail.add_personalization(p)
-
-	sg = SendGridAPIClient(apikey=getattr(settings, 'SENDGRID_API_KEY'))
-	response = sg.client.mail.send.post(request_body=mail.get())
-
-	print(response.status_code)
-	print(response.body)
-	print(response.headers)
-
-	return response.status_code
-
 
 def change_password_helper(req, user):
 	change_password_form = PasswordChangeForm(req.POST or None)
