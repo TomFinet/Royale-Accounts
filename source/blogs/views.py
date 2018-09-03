@@ -19,9 +19,9 @@ class BlogPostView(DetailView):
 		slug = self.kwargs.get('slug')
 		try:
 			instance = Post.objects.get(slug=slug)
-		except Account.DoesNotExist:
+		except Post.DoesNotExist:
 			raise Http404("Post not found.")
-		except Account.MultipleObjectsReturned:
+		except Post.MultipleObjectsReturned:
 			qs = Post.objects.filter(slug=slug)
 			instance = qs.first()
 		except:
