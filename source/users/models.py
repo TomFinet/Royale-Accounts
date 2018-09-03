@@ -91,15 +91,20 @@ class AccessTokenManager(models.Manager):
 		created = False
 		qs = self.get_queryset().filter(user=user)
 		if qs.count() == 1:
-			token = token.first()
-			if not token.is_valid():
-				token.update()
+			token = qs.first()
 		else:
 			token = self.model.objects.create(user=user)
 			created = True
 
 		return token, created
 
+
+	def get_from_token(self, token):
+		access_token = None
+		qs = self.get_queryset().filter(token=token)
+		if qs.count() == 1:
+			access_token = qs.first()
+		return token
 
 # Used to store tokens for one time links for password reset and account validation
 class AccessToken(models.Model):

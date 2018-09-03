@@ -18,28 +18,31 @@ def order_confirmation_email_view(request):
 
 	if to_email and order_id and accounts:
 
-		sg = sendgrid.SendGridAPIClient(apikey=getattr(settings, 'SENDGRID_API_KEY'))
-
-		personalization = Personalization()
-		personalization.add_to(Email(to_email))
-		personalization.add_substitution(Substitution("-order_id-", order_id))
-		personalization.add_substitution(Substitution("-city-", "Denver"))
+		reset_link = getattr(settings, 'WEBSITE_URL') + "user/password-reset/" + token.token
 
 		mail = Mail()
-		mail.from_email = Email("royaleaccounts@gmail.com")
+		mail.from_email = Email('royaleaccounts@gmail.com')
 		mail.subject = "Royale Accounts Order Confirmation"
-		mail.add_personalization(personalization)
-		mail.template_id = "d-5327c993cb174d08b0aaa7e23d81f3d3"
-		
-		sg.client.mail.send.post(request_body=mail.get())
-		
-		print(response.status_code)
-		print(response.body)
-		print(response.headers)
+		mail.template_id = 'd-5327c993cb174d08b0aaa7e23d81f3d3'
+		p = Personalization()
+		p.add_to(Email(to_email))
+		p.dynamic_template_data = {
+			'order_id': order_id,
+			'accounts': accounts,
+		}
+		mail.add_personalization(p)
+
+		sg = SendGridAPIClient(apikey=getattr(settings, 'SENDGRID_API_KEY'))
+		response = sg.client.mail.send.post(request_body=mail.get())
+
+		if response.status_code == 202:
+			return redirect("cart:success")
+
+		# notify user that the confirmation email failed to send.
+
+	return redirect("cart:home")
 
 		# handle errors
 
-		return redirect("cart:success")
-
-	return redirect("cart:home")
+		
 

@@ -102,7 +102,6 @@ def email_form_page(request):
 			if status_code == 202:
 				return render(request, "users/password_reset.html", {"email_sent": True, "user_id": user.id})
 			messages.error(request, 'Failed to send email. Please try again.', fail_silently=True)
-			# handle errors
 		else:
 			messages.error(request, 'User with that email does not exist.', fail_silently=True)
 
@@ -129,40 +128,33 @@ def email_resend_view(request):
 	}		
 	return render(request, "users/password_reset.html", context)
 
+def reset_password_view(request, token):
+	user = None
+	if token:
+		access_token = AccessToken.objects.get_from_token(token)
+		if access_token:
+			if access_token.is_valid():
+				user = access_token.user
+				access_token.mark_used()
+
+	if not user:
+		return render(request, "users/invalid_token.html", {})
+	return change_password_helper(request, user)
+		
 
 @login_required
 def change_password_view(request):
-	change_password_form = PasswordChangeForm(request.POST or None)
-
-	if request.method == "POST":
-		if change_password_form.is_valid():
-			user = request.user
-			old_password = change_password_form.cleaned_data.get('old_password')
-			if user.check_password(old_password):
-				new_password = change_password_form.cleaned_data.get('new_password1')
-				if new_password != old_password:
-					user.set_password(new_password)
-					user.save() 
-					update_session_auth_hash(request, user)
-					messages.success(request, "Password changed successfully.", fail_silently=True)
-				else:
-					messages.error(request, "New password is the same as the old password.", fail_silently=True)
-			else:
-				messages.error(request, "Old password is incorrect.", fail_silently=True)
-
-	context = {
-		"change_password_form": change_password_form,
-	}
-
-	return render(request, "users/change_password.html", context)
-
-
+	user = request.user
+	return change_password_helper(request, user)
 
 #---------- Helper Functions -----------#
 
 def send_password_reset_email(user):
 	token, created = AccessToken.objects.new_or_get(user)
-	reset_link = getattr(settings, 'WEBSITE_URL') + "user/" + token.token
+	if not token.is_valid():
+		token.update()
+
+	reset_link = getattr(settings, 'WEBSITE_URL') + "user/password-reset/" + token.token
 
 	mail = Mail()
 	mail.from_email = Email('royaleaccounts@gmail.com')
@@ -209,8 +201,29 @@ def send_verification_email(user):
 	return response.status_code
 
 
+def change_password_helper(req, user):
+	change_password_form = PasswordChangeForm(req.POST or None)
 
+	if req.method == "POST":
+		if change_password_form.is_valid():
+			old_password = change_password_form.cleaned_data.get('old_password')
+			if user.check_password(old_password):
+				new_password = change_password_form.cleaned_data.get('new_password1')
+				if new_password != old_password:
+					user.set_password(new_password)
+					user.save()
+					update_session_auth_hash(req, user)
+					messages.success(req, "Password changed successfully.", fail_silently=True)
+				else:
+					messages.error(req, "New password is the same as the old password.", fail_silently=True)
+			else:
+				messages.error(req, "Old password is incorrect.", fail_silently=True)
 
+	context = {
+		"change_password_form": change_password_form,
+	}
+
+	return render(req, "users/change_password.html", context)
 
 
 
