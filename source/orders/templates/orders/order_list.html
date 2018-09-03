@@ -31,11 +31,55 @@
 					<div class="row">
 						<ul class="products thumb-info-list">
     						{% for order in order_list %}
-            					<div class="pricing">
+    							<div class="card">
+									<div class="card-header">
+										<table>
+											<thead>
+												<tr>
+													<th class="product-name">
+														Ordered the 
+													</th>
+													<th class="product-name">
+														Total
+													</th>
+													<th class="">
+														Status
+													</th>
+													<th class="product-remove">
+														Order ID
+													</th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr>
+													<td class="product-name">
+														{{ order.updated }}
+													</td>
+													<td class="product-name">
+														{{ order.currency }}{{ order.total }}
+													</td>
+													<td class="product-name">
+														Paid
+													</td>
+													<td class="product-name">
+														{{ order.order_id }}
+													</td>
+												</tr>
+											</tbody>
+										</table>
+								  	</div>
+									<div class="card-body">
+										<h5 class="card-title">Special title treatment</h5>
+									    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+									    <a href="#" class="btn btn-primary">Go somewhere</a>
+									</div>
+								</div>
+
+            					<!--<div class="pricing">
 									<div class="row">
 										<a href="{{ order.get_absolute_url }}">
 											<div class="col-md-3">
-												<div class="plan-subtitle">{{ order.updated }}</div>
+												<div class="plan-subtitle"></div>
 											</div>
 											<div class="col-md-3">
 												<div class="plan-subtitle">{{ order.order_id }}</div>
@@ -44,14 +88,14 @@
 												<div class="plan-subtitle">{{ order.cart.accounts.count }} accounts</div>
 											</div>
 											<div class="col-md-2">
-												<div class="plan-subtitle">{{ order.currency }}{{ order.total }} <span>total</span></div>
+												<div class="plan-subtitle"> <span>total</span></div>
 											</div>
 											<div class="col-md-2">
 												<div class="plan-subtitle">{{ order.status }}</div>
 											</div>
 										</a>
 									</div>
-								</div>
+								</div>-->
 								<div class="space20"></div>
     						{% endfor %}
     					</ul>

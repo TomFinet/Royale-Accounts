@@ -12,9 +12,9 @@ from billing.models import BillingProfile
 from royaleaccounts.utils import unique_order_id_generator
 
 STATUS_CHOICES = (
-	("C", "Created"),
-	("P", "Paid"),
-	("R", "Refunded"),
+	("Created", "Created"),
+	("Paid", "Paid"),
+	("Refunded", "Refunded"),
 )
 
 
@@ -121,6 +121,7 @@ class Order(models.Model):
 		self.active = False
 		self.save()
 		return self.status
+		
 
 def pre_save_create_order_id(sender, instance, *args, **kwargs):
 	if not instance.order_id:
