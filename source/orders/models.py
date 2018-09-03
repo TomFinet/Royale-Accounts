@@ -32,18 +32,18 @@ class OrderManagerQuerySet(models.query.QuerySet):
 	                    Count("cart__accounts")
 	                                )
 
-	def by_status(self, status="P"):
+	def by_status(self, status="Paid"):
 	    return self.filter(status=status)
 
 	def not_refunded(self):
-	    return self.exclude(status='R')
+	    return self.exclude(status='Refunded')
 
 	def by_request(self, request):
 	    billing_profile, created = BillingProfile.objects.new_or_get(request)
 	    return self.filter(billing_profile=billing_profile)
 
 	def not_created(self):
-	    return self.exclude(status='C')
+	    return self.exclude(status='Created')
 
 
 class OrderManager(models.Manager):
@@ -60,7 +60,7 @@ class OrderManager(models.Manager):
 			billing_profile=billing_profile, 
 			cart=cart_obj, 
 			active=True,
-			status="C").exclude(status="P")
+			status="Created").exclude(status="Paid")
 		if qs.count() == 1:
 			obj = qs.first()
 		else:
@@ -76,7 +76,7 @@ class Order(models.Model):
 	billing_profile = models.ForeignKey(BillingProfile, null=True, blank=True)
 	billing_address = models.ForeignKey(Address, null=True, blank=True)
 	cart = models.ForeignKey(Cart)
-	status = models.CharField(max_length=120, default="C", choices=STATUS_CHOICES)
+	status = models.CharField(max_length=120, default="Created", choices=STATUS_CHOICES)
 	total = models.DecimalField(decimal_places=2, max_digits=20, default=0.00)
 	active = models.BooleanField(default=True)
 	timestamp = models.DateTimeField(auto_now_add=True)
@@ -117,11 +117,11 @@ class Order(models.Model):
 		return True
 
 	def mark_paid(self):
-		self.status = "P"
+		self.status = "Paid"
 		self.active = False
 		self.save()
 		return self.status
-		
+
 
 def pre_save_create_order_id(sender, instance, *args, **kwargs):
 	if not instance.order_id:
