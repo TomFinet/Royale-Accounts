@@ -35,7 +35,7 @@ class Post(models.Model):
 
 	views = models.IntegerField()
 	read_time = models.SmallIntegerField(default=5)
-	written_the = models.DateTimeField(auto_add_now=True)
+	written_the = models.DateTimeField(auto_now_add=True)
 
 	def __str__(self):
 		return self.title
