@@ -8,7 +8,7 @@ from django.contrib.auth import get_user_model
 
 from users.models import AccessToken
 
-import sendgrid
+from sendgrid import SendGridAPIClient
 from sendgrid.helpers.mail import *
 
 
