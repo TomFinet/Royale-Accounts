@@ -4,7 +4,7 @@ from __future__ import unicode_literals
 from django.views.generic import DetailView
 from django.http import Http404
 
-from .models import Post, PostImage
+from .models import Post
 
 class BlogPostView(DetailView):
 	template_name = 'blogs/post.html'
@@ -12,7 +12,6 @@ class BlogPostView(DetailView):
 
 	def get_context_data(self, *args, **kwargs):
 		context = super(BlogPostView, self).get_context_data(*args, **kwargs)
-		context['images'] = PostImage.objects.filter(post=context['post'])
 		return context
 
 	def get_object(self, *args, **kwargs):
@@ -27,4 +26,5 @@ class BlogPostView(DetailView):
 			instance = qs.first()
 		except:
 			raise Http404("Hmmm.")
+		instance.add_view()
 		return instance

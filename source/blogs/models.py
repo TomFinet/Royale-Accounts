@@ -29,9 +29,13 @@ class Post(models.Model):
 
 	title = models.CharField(max_length=255)
 	title_img = models.ImageField(upload_to=image_upload_path)
-	read_time = models.SmallIntegerField()
+	author = models.CharField(max_length=25, default="Rob Rangal")
 	description = models.CharField(max_length=500, blank=True, null=True)
 	content = models.TextField()
+
+	views = models.IntegerField()
+	read_time = models.SmallIntegerField(default=5)
+	written_the = models.DateTimeField(auto_add_now=True)
 
 	def __str__(self):
 		return self.title
@@ -42,6 +46,13 @@ class Post(models.Model):
 	def get_slug_title(self):
 		return self.title.replace(' ', '-')
 
+	def add_view(self):
+		self.views += 1
+		self.save()
+
+	def first_letter(self):
+		return self.content[0]
+
 # Assigns a slug to a Post object, if its slug field is emtpy, before saving.
 def account_pre_save_receiver(sender, instance, *args, **kwargs):
 	if not instance.slug:
@@ -50,12 +61,9 @@ def account_pre_save_receiver(sender, instance, *args, **kwargs):
 pre_save.connect(account_pre_save_receiver, sender=Post)
 
 
-class PostImage(models.Model):
-	post = models.ForeignKey(Post)
-	image = models.ImageField(upload_to=image_upload_path)
-	order = models.SmallIntegerField()
 
-	def __str__(self):
-		return self.image.url
+
+
+
 
 
