@@ -18,7 +18,7 @@ ARENA_CHOICES = (
 	("GS", "Goblin Stadium"),
 	("BP", "Bone Pit"),
 	("BB" ,"Barbarian Bowl"),
-	("PP", "P.E.K.K.A's Playhouse"),
+	("PP", "PEKKAs Playhouse"),
 	("SV", "Spell Valley"), 
 	("BW", "Builder's Workshop"), 
 	("RA", "Royal Arena"),
@@ -227,7 +227,6 @@ class Account(models.Model):
 	challenge_max_wins = models.SmallIntegerField()
 	challenge_cards_won = models.IntegerField()	
 	
-	# card deck
 	deck = models.ManyToManyField(DeckCard, blank=True)
 	tags = models.ManyToManyField(Tag, blank=True)
 
@@ -299,7 +298,7 @@ class Account(models.Model):
 # Assigns a slug to a model object if its slug field is emtpy, before saving.
 def account_pre_save_receiver(sender, instance, *args, **kwargs):
 	if not instance.slug:
-		instance.slug = unique_slug_generator(instance)
+		instance.slug = unique_slug_generator(instance, 0)
 
 pre_save.connect(account_pre_save_receiver, sender=Account)
 

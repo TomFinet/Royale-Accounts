@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     'orders',
     'emails',
     'tags',
+    'blogs',
 ]
 
 AUTH_USER_MODEL = 'users.User'

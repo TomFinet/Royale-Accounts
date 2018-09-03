@@ -18,6 +18,7 @@ urlpatterns = [
     url(r'^cart/', include('cart.urls', namespace="cart")),
     url(r'^billing/', include('billing.urls', namespace="billing")),
     url(r'^orders/', include('orders.urls', namespace="orders")),
+    url(r'^blog/', include('blogs.urls', namespace="blogs")),
 
     url(r'^admin/', admin.site.urls),
 ]

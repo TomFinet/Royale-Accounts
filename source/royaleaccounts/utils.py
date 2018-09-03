@@ -14,14 +14,21 @@ def unique_order_id_generator(instance, new_slug=None):
 		return unique_order_id_generator(instance)
 	return new_order_id
 
-def unique_slug_generator(instance, new_slug=None):
+def unique_slug_generator(instance, new_slug=None, _from=-1):
     if new_slug is not None:
         slug = new_slug
     else:
-        slug = '{arena}-level-{king_tower}'.format(
-            arena=instance.get_slug_arena().lower(), 
-            king_tower=instance.king_tower
+        if _from == 0:
+            slug = '{arena}-level-{king_tower}'.format(
+                arena=instance.get_slug_arena().lower(), 
+                king_tower=instance.king_tower
+            )
+        elif _from == 1:
+            slug = '{title}'.format(
+            title=instance.get_slug_title().lower(), 
         )
+        else:
+            slug = None
 
     Klass = instance.__class__
     qs_exists = Klass.objects.filter(slug=slug).exists()
@@ -32,3 +39,4 @@ def unique_slug_generator(instance, new_slug=None):
                 )
         return unique_slug_generator(instance, new_slug=new_slug)
     return slug
+    
