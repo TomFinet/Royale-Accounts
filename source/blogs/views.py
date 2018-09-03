@@ -25,6 +25,6 @@ class BlogPostView(DetailView):
 			qs = Post.objects.filter(slug=slug)
 			instance = qs.first()
 		except:
-			raise Http404("Hmmm.")
+			raise Http404()
 		instance.add_view()
 		return instance

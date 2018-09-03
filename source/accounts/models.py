@@ -272,7 +272,6 @@ class Account(models.Model):
 
 
 	def save(self, force_insert=False, force_update=False):
-		super(Account, self).save(force_insert, force_update)
 		if self.id is not None:
 			previous = Account.objects.get(id=self.id)
 			if self.img_sml and self.img_sml != previous.img_sml:
@@ -287,6 +286,7 @@ class Account(models.Model):
 				image = Image.open(self.img_feature.path)
 				image = image.resize((252, 357), Image.ANTIALIAS)
 				image.save(self.img_feature.path)
+		super(Account, self).save(force_insert, force_update)
 
                 
 	@property

@@ -50,8 +50,14 @@ class Post(models.Model):
 		self.views += 1
 		self.save()
 
-	def first_letter(self):
-		return self.content[0]
+	def save(self, force_insert=False, force_update=False):
+		if self.id is not None:
+			previous = Post.objects.get(id=self.id)
+			if self.title_img and self.title_img != previous.title_img:
+				image = Image.open(self.img_sml.path)
+				image = image.resize((690, 310), Image.ANTIALIAS)
+				image.save(self.img_sml.path)
+		super(Post, self).save(force_insert, force_update)
 
 # Assigns a slug to a Post object, if its slug field is emtpy, before saving.
 def account_pre_save_receiver(sender, instance, *args, **kwargs):
