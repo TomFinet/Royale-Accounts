@@ -29,10 +29,12 @@ class OrderDetailView(DetailView):
 	def get_context_data(self, *args, **kwargs):
 		context = super(OrderDetailView, self).get_context_data(*args, **kwargs)
 
+		order = Order.objects.filter(order_id=context['order']).first()
+
 		billing_address = Address.objects.filter(
-			billing_profile=context['order'].billing_profile,
-			billing_address=context['order'].billing_address
-		)
+			billing_profile=order.billing_profile,
+			billing_address=order.billing_address,
+		).first()
 
 		context['billing_address'] = billing_address
 
