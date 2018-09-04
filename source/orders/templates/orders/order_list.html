@@ -96,6 +96,31 @@
 						<div class="space20"></div>
 						{% endfor %}
 					</ul>
+					{% if is_paginated %}
+					<div class="row page-nav">
+						<div class="col-md-12 no-padding">
+							<div class="col-md-6">
+								<ul>
+								{% if page_obj.has_previous %}
+									<li><a href="?page=1">1</a></li>
+									<li><a href="?page={{ page_obj.previous_page_number }}"><i class="fa fa-chevron-left"></i></a></li>
+            					{% endif %}
+
+								<li class="active"><a href="#">{{ page_obj.number }}</a></li>
+
+            					{% if page_obj.has_next %}
+                					<li><a href="?page={{ page_obj.next_page_number }}"><i class="fa fa-chevron-right"></i></a></li>
+            					{% endif %}
+									
+								</ul>
+							</div>
+
+							<div class="col-md-6">
+								<p>Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</p>
+							</div>
+						</div>
+					</div>
+					{% endif %}
 				</div>
 			</div>
 			{% else %}

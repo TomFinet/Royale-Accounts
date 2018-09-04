@@ -14,6 +14,7 @@ from .models import Order
 
 class OrderListView(ListView):
 	template_name = 'orders/order_list.html'
+	paginate_by = 3
 	context_object_name = 'order_list'
 
 	def get_queryset(self):
