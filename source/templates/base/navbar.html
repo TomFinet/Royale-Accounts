@@ -3,6 +3,7 @@
 {% url 'home' as home_url %}
 {% url 'accounts:list' as accounts_url %}
 {% url 'cart:home' as cart_url %}
+{% url 'orders:list' as orders_url %}
 {% url 'users:logout' as logout_url %}
 {% url 'users:login' as login_url %}
 {% url 'users:register' as register_url %}
@@ -25,10 +26,7 @@
           </li>
           {% if request.user.is_authenticated %}
             <li class='has-sub'>
-              <a href='#'><span>Profile</span></a>
-              <ul>
-                <li><a href="{% url 'orders:list' %}"><span>Orders</span></a></li>
-              </ul>
+              <a href='{{ orders_url }}'><span>Orders</span></a>
             </li>
             <li><a href='{{ logout_url }}'><span>Logout</span></a></li>
           {% else %}
