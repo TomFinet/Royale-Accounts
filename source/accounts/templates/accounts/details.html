@@ -274,17 +274,19 @@
 					</div>
 				</div>
 				<!-- Sidebar -->
-			<aside class="col-md-3">
-				<div class="space60"></div>
-				<div class="side-widget">
-					<h5>Tags</h5>
-					<ul class="tags">
-						{% for tag in account.tags.all %}
-							<li><a href="#">{{ tag.name }}</a></li>
-						{% endfor %}
-					</ul>
-				</div>
-			</aside>
+				{% if account.tags.exists %}
+				<aside class="col-md-3">
+					<div class="space60"></div>
+					<div class="side-widget">
+						<h5>Tags</h5>
+						<ul class="tags">
+							{% for tag in account.tags.all %}
+								<li><a href="#">{{ tag.name }}</a></li>
+							{% endfor %}
+						</ul>
+					</div>
+				</aside>
+				{% endif %}
 			</div>
 		</div>
 	</div>

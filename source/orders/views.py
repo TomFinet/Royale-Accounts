@@ -18,7 +18,7 @@ class OrderListView(ListView):
 	context_object_name = 'order_list'
 
 	def get_queryset(self):
-		return Order.objects.by_request(self.request)
+		return Order.objects.by_request(self.request).by_status()
 
 
 class OrderDetailView(DetailView):
