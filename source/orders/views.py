@@ -11,6 +11,7 @@ from django.http import Http404
 
 from billing.models import BillingProfile
 from .models import Order
+from addresses.models import Address
 
 class OrderListView(ListView):
 	template_name = 'orders/order_list.html'
@@ -24,6 +25,18 @@ class OrderListView(ListView):
 class OrderDetailView(DetailView):
 	template_name = 'orders/order_detail.html'
 	context_object_name = 'order'
+
+	def get_context_data(self, *args, **kwargs):
+		context = super(OrderDetailView, self).get_context_data(*args, **kwargs)
+
+		billing_address = Address.objects.filter(
+			billing_profile=context['order'].billing_profile,
+			billing_address=context['order'].billing_address
+		)
+
+		context['billing_address'] = billing_address
+
+		return context
 
 	def get_object(self):
 		qs = Order.objects.by_request(
