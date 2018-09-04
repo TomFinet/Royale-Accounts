@@ -28,70 +28,72 @@
 			{% if order_list %}
 			<div class="row">
 				<div class="col-md-12">
-
-					<div style="position: relative;
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-    -webkit-flex-direction: column;
-    -ms-flex-direction: column;
-    flex-direction: column;
-    background-color: #fff;
-    border: 1px solid rgba(0, 0, 0, 0.125);
-    border-radius: 0.25rem;">
-  						<div style="padding: 0.75rem 1.25rem;
-    margin-bottom: 0;
-    background-color: #f7f7f9;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.125);">
-    						Featured
-  						</div>
-  						<div class="card-body">
-    						<h5 style="margin-bottom: 0.75rem;">Special title treatment</h5>
-    						<p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-    						<a href="#" class="btn btn-primary">Go somewhere</a>
-  						</div>
-					</div>
-
 					<ul class="products thumb-info-list">
-						<table class="shop_table cart">
-							<thead>
-								<tr>
-									<th class="product-thumbnail">
-										Order ID
-									</th>
-									<th class="product-name">
-										Ordered the
-									</th>
-									<th class="">
-										Total
-									</th>
-									<th class="product-remove">
-										Status
-									</th>
-								</tr>
-							</thead>
-							<tbody class="cart-body">
-								{% for order in order_list %}
-								<tr class="cart_table_item">
-									<td class="product-thumbnail">
-										<a href="{{ order.get_absolute_url }}">{{ order.order_id }}</a>
-									</td>
-									<td class="product-name">
+						{% for order in order_list %}
+						<div style="position: relative;
+									display: -webkit-box;
+									display: -webkit-flex;
+									display: -ms-flexbox;
+									display: flex;
+									-webkit-box-orient: vertical;
+									-webkit-box-direction: normal;
+									-webkit-flex-direction: column;
+									-ms-flex-direction: column;
+									flex-direction: column;
+									background-color: #fff;
+									border: 1px solid rgba(0, 0, 0, 0.125);
+									border-radius: 0.25rem;">
+	  						
+	  						<div style="padding: 0.75rem 1.25rem;
+	  									margin-bottom: 0;
+	  									background-color: #f7f7f9;
+	  									border-bottom: 1px solid rgba(0, 0, 0, 0.125);">
+
+	    						<div class="row">
+									<div class="col-md-3">
+										<strong>Ordered the</strong>
+									</div>
+									<div class="col-md-3">
+										<strong>Total</strong>
+									</div>
+									<div class="col-md-3">
+										<strong>Status</strong>
+									</div>
+									<div class="col-md-2 col-md-offset-1">
+										<strong>Order ID</strong>
+									</div>
+								</div>
+								<div class="space10"></div>
+								<div class="row">
+									<div class="col-md-3">
 										{{ order.updated }}
-									</td>
-									<td class="product-price">
+									</div>
+									<div class="col-md-3">
 										{{ order.currency }}{{ order.total }}
-									</td>
-									<td class="product-remove">
-										Paid
-									</td>
-								</tr>
-								{% endfor %}
-							</tbody>
-						</table>		
+									</div>
+									<div class="col-md-3">
+										{{ order.status }}
+									</div>
+									<div class="col-md-2 col-md-offset-1">
+										{{ order.order_id }}
+									</div>
+								</div>
+	  						</div>
+	  						<div style="padding:16px">
+	  							{% for account in order.cart.accounts.all %}
+	  								{% if account.img_sml %}
+	  								<img height="100" width="100" src="{{ account.img_sml.url }}">
+	  								{% else %}
+	  								<img src="//placehold.it/100x100">
+	  								{% endif %}
+		    						<h5 style="margin-bottom: 0.75rem;">{{ account.title }}</h5>
+		    						<p class="card-text">{{ account.description }}</p>
+		    						<a href="#" class="btn btn-primary btn-orange">Reveal Game Account Details</a>
+		    						<div class="space20"></div>
+	    						{% endfor %}
+	  						</div>
+						</div>
+						{% endfor %}
 						<div class="space20"></div>
 					</ul>
 				</div>

@@ -21,7 +21,11 @@
       <div id="carousel">
         {% if featured_qs %}
           {% for account in featured_qs %}
-            <a href="{{ account.get_absolute_url }}"><img width="252" height="357" src="{{ account.img_feature.url }}" id="item-{{ forloop.counter }}" alt="img"/></a>
+            {% if account.img_feature %}
+              <a href="{{ account.get_absolute_url }}"><img width="252" height="357" src="{{ account.img_feature.url }}" id="item-{{ forloop.counter }}" alt="img"/></a>
+            {% else %}
+              <a href="{{ account.get_absolute_url }}"><img width="252" height="357" src="//placehold.it/252x357" id="item-{{ forloop.counter }}" alt="img"/></a>
+            {% endif %}
           {% endfor %}
         {% else %}
           <a href="#"><img src="//placehold.it/252x357" id="item-1" alt="img" /></a>
