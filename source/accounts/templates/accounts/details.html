@@ -20,7 +20,7 @@
 		<!-- Shop Content -->
 		<div role="main" class="main shop">
 			<div class="row">
-				<div class="col-md-12">
+				<div class="col-md-9">
 					<div class="row">
 						<div class="col-md-6">
 							<div id="product-single-item" class="owl-carousel">
@@ -42,15 +42,6 @@
 								<p class="taller">{{ account.description }}</p>
 								<div class="space50"></div>
 								{% include 'accounts/snippets/update_cart.html' with account=account cart=cart %}
-								<div class="space20"></div>
-								<div class="product_meta">
-									<h5>Tags</h5>
-									<ul class="tags">
-										{% for tag in account.tags.all %}
-										<li><a href="#">{{ tag.name }}</a></li>
-										{% endfor %}
-									</ul>
-								</div>
 							</div>
 						</div>
 					</div>
@@ -278,6 +269,18 @@
 						</div>
 					</div>
 				</div>
+				<!-- Sidebar -->
+			<aside class="col-md-3">
+				<div class="space60"></div>
+				<div class="side-widget">
+					<h5>Tags</h5>
+					<ul class="tags">
+						{% for tag in account.tags.all %}
+							<li><a href="#">{{ tag.name }}</a></li>
+						{% endfor %}
+					</ul>
+				</div>
+			</aside>
 			</div>
 		</div>
 	</div>
