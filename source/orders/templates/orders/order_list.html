@@ -29,58 +29,43 @@
 			<div class="row">
 				<div class="col-md-12">
 					<ul class="products thumb-info-list">
-						{% for order in order_list %}
-							<div class="card">
-								<div class="card-header">
-									<table>
-										<thead>
-											<tr>
-												<th class="product-name">
-													Ordered the 
-												</th>
-												<th class="product-name">&nbsp;</th>
-												<th class="product-name">
-													Total
-												</th>
-												<th class="product-name">&nbsp;</th>
-												<th class="">
-													Status
-												</th>
-												<th class="product-name">&nbsp;</th>
-												<th class="product-remove">
-													Order ID
-												</th>
-											</tr>
-										</thead>
-										<tbody>
-											<tr>
-												<td class="product-name">
-													{{ order.updated }}
-												</td>
-												<td class="product-name"></td>
-												<td class="product-name">
-													{{ order.currency }}{{ order.total }}
-												</td>
-												<td class="product-name"></td>
-												<td class="product-name">
-													Paid
-												</td>
-												<td class="product-name"></td>
-												<td class="product-name">
-													{{ order.order_id }}
-												</td>
-											</tr>
-										</tbody>
-									</table>
-							  	</div>
-								<div class="card-body">
-									<h5 class="card-title">Special title treatment</h5>
-								    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-								    <a href="#" class="btn btn-primary">Go somewhere</a>
-								</div>
-							</div>
-							<div class="space20"></div>
-						{% endfor %}
+						<table class="shop_table cart">
+							<thead>
+								<tr>
+									<th class="product-thumbnail">
+										Order ID
+									</th>
+									<th class="product-name">
+										Ordered the
+									</th>
+									<th class="">
+										Total
+									</th>
+									<th class="product-remove">
+										Status
+									</th>
+								</tr>
+							</thead>
+							<tbody class="cart-body">
+								{% for order in order_list %}
+								<tr class="cart_table_item">
+									<td class="product-thumbnail">
+										{{ order.order_id }}
+									</td>
+									<td class="product-name">
+										{{ order.updated }}
+									</td>
+									<td class="product-price">
+										{{ order.currency }}{{ order.total }}
+									</td>
+									<td class="product-remove">
+										Paid
+									</td>
+								</tr>
+								{% endfor %}
+							</tbody>
+						</table>		
+						<div class="space20"></div>
 					</ul>
 				</div>
 			</div>

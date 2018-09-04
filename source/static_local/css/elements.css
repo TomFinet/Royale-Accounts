@@ -108,29 +108,23 @@ position:relative;
 }
 
 .panel-body {
-background:#e96546;
-color:#fff;
 padding:0px 20px 15px;
 border:none !important;
 }
 
 
 .panel-heading .accordion-toggle {
-    background: #e96546;
     padding: 12px 20px;
 display: table;
 width: 100%;
 border:1px solid #e96546;
-color:#fff;
 }
 
 .panel-heading .accordion-toggle.collapsed {
-    background: #fff;
     padding: 12px 15px;
 	display: table;
 	width: 100%;
 	border:0;
-	color:#444;
 }
 
 .panel-group .panel + .panel {
