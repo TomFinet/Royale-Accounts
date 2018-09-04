@@ -5,6 +5,10 @@
 
 {% block title %}{{ account.get_arena_readable }}{% endblock %}
 
+{% block meta %}
+<meta name="description" content="Royale Accounts - {{ account.get_arena_readable }}">
+{% endblock %}
+
 {% block content %}
 <body id="pages">
 <div class="body">

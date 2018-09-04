@@ -3,6 +3,12 @@
 
 {% url 'billing:payment_method_view' as payment_method_url %}
 
+{% block title %}Billing Address - Royale Accounts{% endblock %}
+
+{% block meta %}
+<meta name="description" content="Royale Accounts - {{ account.get_arena_readable }}">
+{% endblock %}
+
 {% block content %}
 
 <body id="pages">
