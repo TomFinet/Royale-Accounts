@@ -189,6 +189,7 @@ def checkout_payment(request):
 						conversion_rate = request.session.get("rate", 1)
 						accounts = serialize_accounts(qs, conversion_rate)
 
+						order_obj.currency = currency
 						order_obj.conversion_rate = conversion_rate
 						order_obj.updated = timezone.now()
 						order_obj.save()
