@@ -5,6 +5,7 @@ royaleaccounts/settings/local.py
 *.sublime-project
 fasttracktojquery/
 
+deploy.sh/
 
 # Django related 
 
