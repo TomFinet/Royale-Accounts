@@ -4,7 +4,7 @@
 {% block title %}Past Orders - Royale Accounts{% endblock %}
 
 {% block meta %}
-<meta name="description" content="Royale Accounts - View your past orders and get the Clash Royale account details for payed orders">
+<meta name="description" content="Royale Accounts - View paid order details and Clash Royale account access details.">
 {% endblock %}
 
 {% block content %}
@@ -19,8 +19,52 @@
 
 	<div class="space40"></div>
 
-	
-	
+	<!-- Main content -->
+	<div class="page-wrap container">
+		<div class="row">
+			<div class="col-md-12">
+				<h3>Order {{ order.order_id }}</h3>
+			</div>
+		</div>
+
+		<!-- Shop Content -->
+		<div role="main" class="main shop">
+			<div class="row">
+				<div class="col-md-12">
+					<ul class="products thumb-info-list">
+						<div style="position: relative;
+									display: -webkit-box;
+									display: -webkit-flex;
+									display: -ms-flexbox;
+									display: flex;
+									-webkit-box-orient: vertical;
+									-webkit-box-direction: normal;
+									-webkit-flex-direction: column;
+									-ms-flex-direction: column;
+									flex-direction: column;
+									background-color: #fff;
+									border: 1px solid rgba(0, 0, 0, 0.125);
+									border-radius: 0.25rem;">
+	  						
+	  						<div style="padding:16px">
+	  							{% for account in order.cart.accounts.all %}
+	  								{% if account.img_sml %}
+	  								<img height="100" width="100" src="{{ account.img_sml.url }}">
+	  								{% else %}
+	  								<img src="//placehold.it/100x100">
+	  								{% endif %}
+		    						<h5 style="margin-bottom: 0.75rem;">{{ account.title }}</h5>
+		    						<p class="card-text">{{ account.description }}</p>
+		    						<div class="space20"></div>
+	    						{% endfor %}
+	  						</div>
+						</div>
+						<div class="space20"></div>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
 </body>
 
