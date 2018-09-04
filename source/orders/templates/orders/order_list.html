@@ -50,7 +50,7 @@
 								{% for order in order_list %}
 								<tr class="cart_table_item">
 									<td class="product-thumbnail">
-										{{ order.order_id }}
+										<a href="{{ order.get_absolute_url }}">{{ order.order_id }}</a>
 									</td>
 									<td class="product-name">
 										{{ order.updated }}
