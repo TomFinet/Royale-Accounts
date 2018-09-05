@@ -84,7 +84,7 @@ def register_page(request):
 	if register_form.is_valid():
 		register_form.save()
 		# send email verification email
-		status_code = send_verification_email(user)
+		status_code = send_verification_email(request.user)
 		messages.success(request, """Your account has been created successfully. 
 			Verify your account by clicking the link in the email sent to you""", fail_silently=True)
 		return redirect("users:login")
