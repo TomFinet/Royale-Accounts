@@ -175,6 +175,9 @@ def change_password_helper(req, user, token=None):
 			else:
 				messages.error(req, "Old password is incorrect.", fail_silently=True)
 
+	if token == "None":
+		token = None
+
 	context = {
 		"change_password_form": change_password_form,
 		"token": token,
