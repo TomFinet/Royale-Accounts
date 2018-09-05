@@ -4,11 +4,12 @@
 {% include 'billing/snippets/card_brand.html' with card=card %}
 
 {% if card.exp_month > 9 %}
-	<p>Expires {{ card.exp_month }}/{{ card.exp_year }}</p>
+	Expires {{ card.exp_month }}/{{ card.exp_year }}
 {% else %}
-	<p>Expires 0{{ card.exp_month }}/{{ card.exp_year }}</p>
+	Expires 0{{ card.exp_month }}/{{ card.exp_year }}
 {% endif %}
 {% if is_not_review_stage %}
+	<br>
 	{% include 'billing/snippets/remembered_cards.html' with next_url=checkout_review_url card=card %}
 {% endif %}
 <div class="space30"></div>
