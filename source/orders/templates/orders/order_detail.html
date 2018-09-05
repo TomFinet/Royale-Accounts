@@ -95,19 +95,19 @@
 									border-radius: 0.25rem;">
 	  						
 	  						<div style="padding:16px">
-  								<div class="col-md-12">
-  									<table>
-	  									{% for account in order.cart.accounts.all %}
-	  									<tr>
-	  										<td>
-	  											<a href="{{ account.get_absolute_url }}">
+								<table>
+									{% for account in order.cart.accounts.all %}
+									<tr>
+										<div class="col-md-12">
+											<td>
+												<a href="{{ account.get_absolute_url }}">
 					  								{% if account.img_sml %}
 					  								<img height="100" width="100" src="{{ account.img_sml.url }}">
 					  								{% else %}
 					  								<img src="//placehold.it/100x100">
-					  								{% endif %}
-				    							</a>
-				    						</td>
+				  								{% endif %}
+			    								</a>
+			    							</td>
 			    							<td style="padding-left:16px;">
 			    								<a href="{{ account.get_absolute_url }}">
 			    									<h5 style="margin-bottom: 0.75rem;">{{ account.title }}</h5>
@@ -116,10 +116,10 @@
 			    							</td>
 			    							<h5 class="pull-right">Reveal account access details <i class="fa fa-chevron-down"></i></h5>
 			    							<div class="space20"></div>
-	  									</tr>
-	  									{% endfor %}
-	  								</table>
-  								</div>		
+	    								</div>
+									</tr>
+									{% endfor %}
+								</table>	
   							</div>
 						</div>
 						<div class="space20"></div>
