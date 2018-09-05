@@ -62,8 +62,8 @@
 	  								</div>
 	  								<div class="col-md-3 col-md-offset-1">
 	  									<h4>Totals</h4>
-	  									Cart total: {{ order.cart.total }}<br>
-	  									Order total: {{ order.total }}
+	  									Cart total: {{ order.currency }} {{ order.cart.total }}<br>
+	  									Order total: {{ order.currency }} {{ order.total }}
 	  								</div>
 	  							</div>
 	  						</div>
@@ -90,18 +90,28 @@
 									border-radius: 0.25rem;">
 	  						
 	  						<div style="padding:16px">
-	  							{% for account in order.cart.accounts.all %}
-	  								<a href="{{ account.get_absolute_url }}">
-		  								{% if account.img_sml %}
-		  								<img height="100" width="100" src="{{ account.img_sml.url }}">
-		  								{% else %}
-		  								<img src="//placehold.it/100x100">
-		  								{% endif %}
-			    						<h5 style="margin-bottom: 0.75rem;">{{ account.title }}</h5>
-		    						</a>
-		    						<p class="card-text">{{ account.description }}</p>
-		    						<div class="space20"></div>
-	    						{% endfor %}
+	  							<table>
+  									{% for account in order.cart.accounts.all %}
+  									<tr>
+  										<td>
+  											<a href="{{ account.get_absolute_url }}">
+				  								{% if account.img_sml %}
+				  								<img height="100" width="100" src="{{ account.img_sml.url }}">
+				  								{% else %}
+				  								<img src="//placehold.it/100x100">
+				  								{% endif %}
+			    							</a>
+			    						</td>
+		    							<td style="padding-left:16px;">
+		    								<a href="{{ account.get_absolute_url }}">
+		    									<h5 style="margin-bottom: 0.75rem;">{{ account.title }}</h5>
+		    								</a>
+		    								<p class="card-text">{{ account.description }}</p>	
+		    							</td>
+		    							<div class="space20"></div>
+  									</tr>
+  									{% endfor %}
+  								</table>
 	  						</div>
 						</div>
 						<div class="space20"></div>
