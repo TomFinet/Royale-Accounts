@@ -75,6 +75,7 @@
 					<div class="space20"></div>
 				</div>
 			</div>
+			{% for account in order.cart.accounts.all %}
 			<div class="row">
 				<div class="col-md-12">
 					<ul class="products thumb-info-list">
@@ -94,7 +95,6 @@
 	  						
 	  						<div style="padding:16px">
 								<table>
-									{% for account in order.cart.accounts.all %}
 									<div class="row">
 										<tr>
 											<td class="col-md-2">
@@ -119,7 +119,6 @@
 			    							<div class="space20"></div>
 										</tr>
 									</div>
-									{% endfor %}
 								</table>	
   							</div>
 						</div>
@@ -127,6 +126,7 @@
 					</ul>
 				</div>
 			</div>
+			{% endfor %}
 		</div>
 	</div>
 </div>
