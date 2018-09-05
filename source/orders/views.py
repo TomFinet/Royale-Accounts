@@ -40,7 +40,7 @@ class OrderDetailView(DetailView):
 
 		payment_card = Card.objects.filter(
 			billing_profile=order.billing_profile,
-			payment_card_stripe_id=order.payment_card_stripe_id,
+			stripe_id=order.payment_card_stripe_id,
 		).first()
 
 		context['payment_card'] = payment_card
