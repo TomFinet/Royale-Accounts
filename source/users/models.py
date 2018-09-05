@@ -127,7 +127,7 @@ class AccessToken(models.Model):
 		return super(AccessToken, self).save(*args, **kwargs)
 
 	def update(self):
-		self.token = str(uuid4())
+		self.token = unique_token_generator()
 		self.timestamp = datetime.now()
 		self.used = False
 		self.save()
