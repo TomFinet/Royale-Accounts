@@ -69,7 +69,7 @@ def send_password_reset_email(user=None):
 
 		from_email = Email("royaleaccounts@gmail.com")
 		subject = "Royale Accounts Password Reset"
-		to_email = Email("tom.finet@learning.ecolint.ch")
+		to_email = Email(user.email)
 		content = Content("text/html", """It seems you have forgotten your password. Just click the link to reset your password:
 			<a href='""" + reset_link + """'><h4>Reset your Royale Accounts password</h4></a>"""
 		)

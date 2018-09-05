@@ -9,7 +9,7 @@ from django.views.generic import View, ListView, DetailView
 from django.shortcuts import render
 from django.http import Http404
 
-from billing.models import BillingProfile
+from billing.models import BillingProfile, Card
 from .models import Order
 from addresses.models import Address
 
@@ -38,6 +38,13 @@ class OrderDetailView(DetailView):
 
 		context['billing_address'] = billing_address
 
+		payment_card = Card.objects.filter(
+			billing_profile=order.billing_profile,
+			payment_card_stripe_id=order.payment_card_stripe_id,
+		).first()
+
+		context['payment_card'] = payment_card
+
 		return context
 
 	def get_object(self):
@@ -49,3 +56,6 @@ class OrderDetailView(DetailView):
 		if qs.count() == 1:
 		    return qs.first()
 		raise Http404
+
+
+

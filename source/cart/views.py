@@ -191,6 +191,7 @@ def checkout_payment(request):
 
 						order_obj.currency = currency
 						order_obj.conversion_rate = conversion_rate
+						order_obj.payment_card_stripe_id = stripe_id
 						order_obj.updated = timezone.now()
 						order_obj.save()
 

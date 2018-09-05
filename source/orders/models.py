@@ -8,7 +8,7 @@ from django.urls import reverse
 
 from addresses.models import Address
 from cart.models import Cart
-from billing.models import BillingProfile
+from billing.models import BillingProfile, Card
 from royaleaccounts.utils import unique_order_id_generator
 
 STATUS_CHOICES = (
@@ -83,6 +83,7 @@ class Order(models.Model):
 	updated = models.DateTimeField(auto_now=True)
 	currency = models.CharField(choices=getattr(settings, "CURRENCY_CHOICES"), max_length=5)
 	conversion_rate = models.DecimalField(decimal_places=2, max_digits=20, default=1.00)
+	payment_card_stripe_id = models.CharField(max_length=120)
 
 	objects = OrderManager()
 
