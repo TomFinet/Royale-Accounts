@@ -25,56 +25,54 @@
 		<div role="main" class="main shop">
 			<div class="row">
 				<div class="col-md-12">
-					<ul class="products thumb-info-list">
-						<div style="position: relative;
-									display: -webkit-box;
-									display: -webkit-flex;
-									display: -ms-flexbox;
-									display: flex;
-									-webkit-box-orient: vertical;
-									-webkit-box-direction: normal;
-									-webkit-flex-direction: column;
-									-ms-flex-direction: column;
-									flex-direction: column;
-									background-color: #fff;
-									border: 1px solid rgba(0, 0, 0, 0.125);
-									border-radius: 0.25rem;">
-	  						
-	  						<div style="padding:16px">
-	  							<div class="row">
-	  								<div class="col-md-4">
-	  									<h4>Billing Address</h4>
-	  									{{ billing_address.billing_first_name }} {{ billing_address.billing_last_name }}<br>
-	  									{{ billing_address.billing_address }}<br>
-	  									{{ billing_address.billing_city }}, {{ billing_address.billing_country }}
-	  								</div>
-	  								<div class="col-md-4">
-	  									<h4>Payment Method</h4>
-	  									{% if payment_card.brand == "Visa" %}
-										<img width="30" height="30" src="{% static 'images/visa.png' %}"> **** {{ payment_card.last4 }}<br>
-										{% elif payment_card.brand == "Mastercard" %}
-										<img width="30" height="30" src="{% static 'images/mastercard.png' %}"> **** {{ payment_card.last4 }}<br>
-										{% elif payment_card.brand == "American Express" %}
-										<img width="30" height="30" src="{% static 'images/american-express.png' %}"> **** {{ payment_card.last4 }}<br>
-										{% else %}
-											<i class="fa fa-credit-card"></i> **** {{ payment_card.last4 }}<br>
-										{% endif %}
-										{% if card.exp_month > 9 %}
-											Expires {{ payment_card.exp_month }}/{{ payment_card.exp_year }}
-										{% else %}
-											Expires 0{{ payment_card.exp_month }}/{{ payment_card.exp_year }}
-										{% endif %}
-	  								</div>
-	  								<div class="col-md-3 col-md-offset-1">
-	  									<h4>Totals</h4>
-	  									<strong>Cart total:</strong> {{ order.currency }} {{ order.cart.total }}<br>
-	  									<strong>Order total:</strong> {{ order.currency }} {{ order.total }}
-	  								</div>
-	  							</div>
-	  						</div>
-						</div>
-						<div class="space20"></div>
-					</ul>
+					<div style="position: relative;
+								display: -webkit-box;
+								display: -webkit-flex;
+								display: -ms-flexbox;
+								display: flex;
+								-webkit-box-orient: vertical;
+								-webkit-box-direction: normal;
+								-webkit-flex-direction: column;
+								-ms-flex-direction: column;
+								flex-direction: column;
+								background-color: #fff;
+								border: 1px solid rgba(0, 0, 0, 0.125);
+								border-radius: 0.25rem;">
+  						
+  						<div style="padding:16px">
+  							<div class="row">
+  								<div class="col-md-4">
+  									<h4>Billing Address</h4>
+  									{{ billing_address.billing_first_name }} {{ billing_address.billing_last_name }}<br>
+  									{{ billing_address.billing_address }}<br>
+  									{{ billing_address.billing_city }}, {{ billing_address.billing_country }}
+  								</div>
+  								<div class="col-md-4">
+  									<h4>Payment Method</h4>
+  									{% if payment_card.brand == "Visa" %}
+									<img width="30" height="30" src="{% static 'images/visa.png' %}"> **** {{ payment_card.last4 }}<br>
+									{% elif payment_card.brand == "Mastercard" %}
+									<img width="30" height="30" src="{% static 'images/mastercard.png' %}"> **** {{ payment_card.last4 }}<br>
+									{% elif payment_card.brand == "American Express" %}
+									<img width="30" height="30" src="{% static 'images/american-express.png' %}"> **** {{ payment_card.last4 }}<br>
+									{% else %}
+										<i class="fa fa-credit-card"></i> **** {{ payment_card.last4 }}<br>
+									{% endif %}
+									{% if card.exp_month > 9 %}
+										Expires {{ payment_card.exp_month }}/{{ payment_card.exp_year }}
+									{% else %}
+										Expires 0{{ payment_card.exp_month }}/{{ payment_card.exp_year }}
+									{% endif %}
+  								</div>
+  								<div class="col-md-3 col-md-offset-1">
+  									<h4>Totals</h4>
+  									<strong>Cart total:</strong> {{ order.currency }} {{ order.cart.total }}<br>
+  									<strong>Order total:</strong> {{ order.currency }} {{ order.total }}
+  								</div>
+  							</div>
+  						</div>
+					</div>
+					<div class="space20"></div>
 				</div>
 			</div>
 			<div class="row">
