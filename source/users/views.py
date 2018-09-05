@@ -133,7 +133,7 @@ def email_resend_view(request):
 def reset_password_view(request, token):
 	user = None
 	if token:
-		access_token = AccessToken.objects.get_from_token(token)
+		access_token = AccessToken.objects.get_from_token(token).first()
 		if access_token:
 			if access_token.is_valid():
 				user = access_token.user
