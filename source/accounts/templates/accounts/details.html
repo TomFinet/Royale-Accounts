@@ -30,7 +30,7 @@
 							<div id="product-single-item" class="owl-carousel">
 								{% for image in images %}
 									<div class="item">
-										<img alt="img" width="600" height="600" class="img-responsive img-rounded" src="{{ image.image.url }}">
+										<img alt="{{ image.description }}" width="600" height="600" class="img-responsive img-rounded" src="{{ image.image.url }}">
 									</div>
 								{% endfor %}
 							</div>

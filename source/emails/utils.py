@@ -29,8 +29,14 @@ def send_order_confirmation_email(to_email=None, order_id=None, accounts=None):
 
 		from_email = Email("royaleaccounts@gmail.com")
 		subject = "Royale Accounts Order Confirmation"
-		to_email = Email("tom.finet@learning.ecolint.ch")
-		content = Content("text/plain", "Confirming your order.")
+		to_email = Email(to_email)
+		content = Content("text/plain", """<h4>Thank you so much for placing your order with Royale Accounts.</h4> 
+			You can view your order by clicking this link: <a href='https://www.royale-accounts.com/orders/"""
+			+ order_id + """'><h4>your order</h4></a>.
+			Once again thank you so much for placing your order with us.
+			Happy Clashing,
+			The Royale Accounts Team."""
+		)
 		mail = Mail(from_email, subject, to_email, content)
 			
 		response = sg.client.mail.send.post(request_body=mail.get())
@@ -45,7 +51,7 @@ def send_password_reset_email(user=None):
 		if not token.is_valid():
 			token.update()
 
-		reset_link = getattr(settings, 'WEBSITE_URL') + "user/password-reset/" + token.token
+		reset_link = "www.royale-accounts.com/user/password-reset/" + token.token
 
 		'''mail = Mail()
 		mail.from_email = Email('royaleaccounts@gmail.com')
@@ -64,7 +70,9 @@ def send_password_reset_email(user=None):
 		from_email = Email("royaleaccounts@gmail.com")
 		subject = "Royale Accounts Password Reset"
 		to_email = Email("tom.finet@learning.ecolint.ch")
-		content = Content("text/plain", reset_link)
+		content = Content("text/plain", """It seems you have forgotten your password. Just click the link to reset your password:
+			<a href='""" + reset_link + """'><h4>Reset your Royale Accounts password</h4></a> """
+		)
 		mail = Mail(from_email, subject, to_email, content)
 			
 		response = sg.client.mail.send.post(request_body=mail.get())

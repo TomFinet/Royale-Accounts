@@ -306,6 +306,7 @@ pre_save.connect(account_pre_save_receiver, sender=Account)
 
 class AccountImage(models.Model):
 	image = models.ImageField(upload_to=image_upload_path, null=True, blank=True)
+	description = models.CharField(max_length=100)
 	account = models.ForeignKey(Account)
 
 	def __str__(self):
