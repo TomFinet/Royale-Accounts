@@ -32,9 +32,9 @@ def send_order_confirmation_email(to_email=None, order_id=None, accounts=None):
 		to_email = Email(to_email)
 		content = Content("text/html", """<h4>Thank you so much for placing your order with Royale Accounts.</h4> 
 			You can view your order by clicking this link: <a href='https://www.royale-accounts.com/orders/"""
-			+ order_id + """'><h4>your order</h4></a>.
-			Once again thank you so much for placing your order with us.
-			Happy Clashing,
+			+ order_id + """'><h4>your order</h4></a>
+			Once again thank you so much for placing your order with us.<br>
+			Happy Clashing,<br>
 			The Royale Accounts Team."""
 		)
 		mail = Mail(from_email, subject, to_email, content)
@@ -71,7 +71,7 @@ def send_password_reset_email(user=None):
 		subject = "Royale Accounts Password Reset"
 		to_email = Email("tom.finet@learning.ecolint.ch")
 		content = Content("text/html", """It seems you have forgotten your password. Just click the link to reset your password:
-			<a href='""" + reset_link + """'><h4>Reset your Royale Accounts password</h4></a> """
+			<a href='""" + reset_link + """'><h4>Reset your Royale Accounts password</h4></a>"""
 		)
 		mail = Mail(from_email, subject, to_email, content)
 			
