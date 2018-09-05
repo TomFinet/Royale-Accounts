@@ -1,9 +1,8 @@
 {% load static %}
 {% url 'cart:checkout_review' as checkout_review_url %}
 
-{% include 'billing/snippets/card_brand.html' with brand=card.brand %}
+{% include 'billing/snippets/card_brand.html' with card=card %}
 
-<p>Ending in {{ card.last4 }}</p>
 {% if card.exp_month > 9 %}
 	<p>Expires {{ card.exp_month }}/{{ card.exp_year }}</p>
 {% else %}

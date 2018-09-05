@@ -49,15 +49,7 @@
   								</div>
   								<div class="col-md-4">
   									<h4>Payment Method</h4>
-  									{% if payment_card.brand == "Visa" %}
-									<img width="30" height="30" src="{% static 'images/visa.png' %}"> **** {{ payment_card.last4 }}<br>
-									{% elif payment_card.brand == "Mastercard" %}
-									<img width="30" height="30" src="{% static 'images/mastercard.png' %}"> **** {{ payment_card.last4 }}<br>
-									{% elif payment_card.brand == "American Express" %}
-									<img width="30" height="30" src="{% static 'images/american-express.png' %}"> **** {{ payment_card.last4 }}<br>
-									{% else %}
-										<i class="fa fa-credit-card"></i> **** {{ payment_card.last4 }}<br>
-									{% endif %}
+  									{% include 'billing/snippets/card_brand.html' with card=payment_card %}
 									{% if card.exp_month > 9 %}
 										Expires {{ payment_card.exp_month }}/{{ payment_card.exp_year }}
 									{% else %}

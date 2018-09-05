@@ -1,11 +1,11 @@
 {% load static %}
 
-{% if brand == "Visa" %}
-	<h4><img width="30" height="30" src="{% static 'images/visa.png' %}"> {{ brand }}</h4>
-{% elif brand == "Mastercard" %}
-	<h4><img width="30" height="30" src="{% static 'images/mastercard.png' %}"> {{ brand }}</h4>
-{% elif brand == "American Express" %}
-	<h4><img width="30" height="30" src="{% static 'images/american-express.png' %}"> {{ brand }}</h4>
+{% if card.brand == "Visa" %}
+	<img width="30" height="30" src="{% static 'images/visa.png' %}"> **** {{ card.last4 }}<br>
+{% elif card.brand == "Mastercard" %}
+	<img width="30" height="30" src="{% static 'images/mastercard.png' %}"> **** {{ card.last4 }}
+{% elif card.brand == "American Express" %}
+	<img width="30" height="30" src="{% static 'images/american-express.png' %}"> **** {{ card.last4 }}
 {% else %}
-	<h4><i class="fa fa-credit-card"></i> {{ brand }}</h4>
+	<i class="fa fa-credit-card"></i> **** {{ card.last4 }}
 {% endif %}

@@ -107,8 +107,8 @@
 						{% for address in address_qs %}
 						<div class="col-md-4">
 							<h4>{{ address.billing_first_name }} {{ address.billing_last_name }}</h4>
-							<p>{{ address.billing_address }}</p>
-							<p>{{ address.billing_city }}, {{ address.billing_country }}</p>
+							{{ address.billing_address }}<br>
+							{{ address.billing_city }}, {{ address.billing_country }}<br>
 							{% include 'addresses/snippets/remembered_addresses.html' with next_url=payment_method_url address=address %}
 						</div>
 						{% endfor %}
