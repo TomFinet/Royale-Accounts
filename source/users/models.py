@@ -132,7 +132,6 @@ class AccessToken(models.Model):
 		self.used = False
 		self.save()
 
-	@property
 	def is_valid(self):
 		if (datetime.now() - timedelta(hours=1)) > self.timestamp.now() and not used: 
 			return True
