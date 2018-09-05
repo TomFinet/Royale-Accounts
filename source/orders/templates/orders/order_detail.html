@@ -104,12 +104,12 @@
 		    								<p class="card-text pull-left">{{ account.description }}</p>	
 		    							</td>
 		    							<td class="col-md-3">
-		    								<a style="color:#e96546;" class="pull-right" href="#">Account access details <i class="fa fa-chevron-down"></i></a>
+		    								<a class="toggle-access-details btn btn-primary btn-lg btn-orange pull-right" href="#">Account access details <i class="fa fa-chevron-down"></i></a>
 		    							</td>
 									</tr>
 								</div>
 							</table>
-							<div class="hidden">
+							<div class="access-details hidden">
 								<div class="space20"></div>
 								<div class="divider"></div>
 								<div class="space20"></div>
@@ -144,6 +144,9 @@
 
 {% endblock %}
 
+{% block js %}
+<script src="{% static 'js/toggle_access_details.js' %}"></script>
+{% endblock %}
 
 
 
