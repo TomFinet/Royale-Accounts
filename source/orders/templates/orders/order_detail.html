@@ -52,12 +52,12 @@
 	  									<h4>Payment Method</h4>
 	  									{% if payment_card.brand == "Visa" %}
 										<img width="30" height="30" src="{% static 'images/visa.png' %}"> **** {{ payment_card.last4 }}
-										{% elif payment_card.bran == "Mastercard" %}
+										{% elif payment_card.brand == "Mastercard" %}
 										<img width="30" height="30" src="{% static 'images/mastercard.png' %}"> **** {{ payment_card.last4 }}
-										{% elif payment_card.bran == "American Express" %}
+										{% elif payment_card.brand == "American Express" %}
 										<img width="30" height="30" src="{% static 'images/american-express.png' %}"> **** {{ payment_card.last4 }}
 										{% else %}
-											{{ brand }} **** {{ payment_card.last4 }}
+											<i class="fa fa-credit-card"></i> **** {{ payment_card.last4 }}
 										{% endif %}
 	  								</div>
 	  								<div class="col-md-3 col-md-offset-1">
