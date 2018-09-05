@@ -58,17 +58,20 @@
 										<h4>Ordered the</h4>
 										{{ order.updated }}
 									</div>
-									<div class="col-md-3">
+									<div class="col-md-2">
 										<h4>Total</h4>
 										{{ order.currency }} {{ order.total }}
 									</div>
-									<div class="col-md-3">
+									<div class="col-md-2">
 										<h4>Status</h4>
 										{{ order.status }}
 									</div>
 									<div class="col-md-2 col-md-offset-1">
 										<h4>Order ID</h4>
 										{{ order.order_id }}
+									</div>
+									<div class="col-md-2">
+										<a href="{{ order.get_absolute_url }}">Order Details <i class="fa fa-chevron-right"></a>
 									</div>
 								</div>
 	  						</div>
