@@ -112,7 +112,7 @@ class AccessTokenManager(models.Manager):
 # Used to store tokens for one time links for password reset and account validation
 class AccessToken(models.Model):
 	user = models.OneToOneField(User)
-	token = models.CharField(max_length=255)
+	token = models.CharField(max_length=50)
 	timestamp = models.DateTimeField(auto_now_add=True)
 	used = models.BooleanField(default=False)
 

@@ -141,17 +141,23 @@ def reset_password_view(request, token):
 
 	if not user:
 		return render(request, "users/invalid_token.html", {})
-	return change_password_helper(request, user, False)
+	return change_password_helper(request, user, token)
 		
 
-@login_required
-def change_password_view(request):
-	user = request.user
-	return change_password_helper(request, user)
+def change_password_view(request, token):
+	if request.user.is_authenticated():
+		return change_password_helper(request, user)
+	
+	user_token = AccessToken.objects.get_from_token(token)
+	if user_token.token == token:
+		return change_password_helper(request, user, token)
+
+	return redirect("users:login")
+
 
 #---------- Helper Functions -----------#
 
-def change_password_helper(req, user, logged_in=True):
+def change_password_helper(req, user, token=None):
 	change_password_form = PasswordChangeForm(req.POST or None)
 
 	if req.method == "POST":
@@ -171,7 +177,7 @@ def change_password_helper(req, user, logged_in=True):
 
 	context = {
 		"change_password_form": change_password_form,
-		"logged_in": logged_in,
+		"token": token,
 	}
 
 	return render(req, "users/change_password.html", context)
