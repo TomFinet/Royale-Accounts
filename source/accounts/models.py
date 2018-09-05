@@ -311,7 +311,7 @@ class AccountImage(models.Model):
 
 	def __str__(self):
 		return "Arena: {arena}, K.T: {king_tower}".format(
-			arena=self.account.arena, king_tower=self.account.king_tower
+			arena=self.account.arena, king_tower=self.king_tower
 		)
 
 	def save(self, force_insert=False, force_update=False):
