@@ -5,6 +5,6 @@ from .views import (
 )
 
 urlpatterns = [
-    url(r'^list/$', OrderListView.as_view(), name="list"),
+    url(r'^$', OrderListView.as_view(), name="list"),
     url(r'^(?P<order_id>[0-9A-Za-z]+)/$', OrderDetailView.as_view(), name="detail"),
 ]
