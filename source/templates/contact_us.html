@@ -25,16 +25,12 @@
 			<div class="space50"></div>
 			<h3>Contact Us</h3>
 			<div class="space30"></div>
-			<div class="col-md-12 no-padding">
-				<p>Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi.</p>
-				<div class="space20"></div>
-			</div>
 			<div class="col-md-12 no-padding columns">
 				<div class="row">
 					<div class="col-md-9">
 						<h4>Leave a Message</h4>
 						<div class="space30"></div>
-						<form class="contact-form" id="contactForm" action="php/contact.php" method="post">
+						<form class="contact-form" id="contactForm" action="{% static 'php/contact.php' %}" method="post">
 							<div class="row">
 								<div class="col-md-6">
 									<input type="text" name="senderName" id="senderName" placeholder="Name*" required="required" />
