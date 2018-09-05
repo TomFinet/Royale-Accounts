@@ -150,7 +150,7 @@ def change_password_view(request):
 def change_password_token_view(request, token):
 	user_token = AccessToken.objects.get_from_token(token)
 	if user_token.token == token:
-		return change_password_helper(request, request.user, token)
+		return change_password_helper(request, user_token.user, token)
 
 	return redirect("users:login")
 
@@ -158,34 +158,42 @@ def change_password_token_view(request, token):
 #---------- Helper Functions -----------#
 
 def change_password_helper(req, user, token=None):
-	change_password_form = PasswordChangeForm(req.POST or None)
+	form = None
+	if token:
+		form = PasswordChangeForm(req.POST or None)
+	else:
+		form = PasswordChangeTokenForm(req.POST or None)
 
 	if req.method == "POST":
-		if change_password_form.is_valid():
-			old_password = change_password_form.cleaned_data.get('old_password')
-			if user.check_password(old_password):
-				new_password = change_password_form.cleaned_data.get('new_password1')
-				if new_password != old_password:
-					user.set_password(new_password)
-					user.save()
-					update_session_auth_hash(req, user)
-					messages.success(req, "Password changed successfully.", fail_silently=True)
-				else:
-					messages.error(req, "New password is the same as the old password.", fail_silently=True)
+		if form.is_valid():
+			new_password = change_password_form.cleaned_data.get('new_password1')
+
+			if token:
+				save_new_password(req, user, new_password)
 			else:
-				messages.error(req, "Old password is incorrect.", fail_silently=True)
+				old_password = change_password_form.cleaned_data.get('old_password')
+				if user.check_password(old_password):
+					if new_password != old_password:
+						save_new_password(req, user, new_password)
+					else:
+						messages.error(req, "New password is the same as the old password.", fail_silently=True)
+				else:
+					messages.error(req, "Old password is incorrect.", fail_silently=True)
+
 
 	context = {
-		"change_password_form": change_password_form,
+		"change_password_form": form,
 		"token": token,
 	}
 
 	return render(req, "users/change_password.html", context)
 
 
-
-
-
-
+def save_new_password(req, user, new_password):
+	user.set_password(new_password)
+	user.save()
+	update_session_auth_hash(req, user)
+	messages.success(req, "Password changed successfully.", fail_silently=True)
+		
 
 

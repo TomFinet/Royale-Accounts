@@ -71,6 +71,20 @@ class PasswordChangeForm(forms.Form):
         return self.cleaned_data
 
 
+class PasswordChangeTokenForm(forms.Form):
+    new_password1 = forms.CharField(label="New Password", 
+        widget=forms.PasswordInput(attrs={'class': 'form-control'}))
+    new_password2 = forms.CharField(label="Re-enter New Password", 
+        widget=forms.PasswordInput(attrs={'class': 'form-control'}))
+
+    def clean_new_password2(self):
+        # Check that the two password entries match
+        password1 = self.cleaned_data.get("new_password1")
+        password2 = self.cleaned_data.get("new_password2")
+        if password1 and password2 and password1 != password2:
+            raise forms.ValidationError("New passwords don't match")
+        return self.cleaned_data
+
 class UserAdminCreationForm(forms.ModelForm):
     """A form for creating new users. Includes all the required
     fields, plus a repeated password."""
