@@ -45,7 +45,9 @@
 								<div class="space20"></div>
 								<p class="taller">{{ account.description }}</p>
 								<div class="space50"></div>
-								{% include 'accounts/snippets/update_cart.html' with account=account cart=cart %}
+								{% if not account.sold %}
+									{% include 'accounts/snippets/update_cart.html' with account=account cart=cart %}
+								{% endif %}
 							</div>
 						</div>
 					</div>
