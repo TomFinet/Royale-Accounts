@@ -42,14 +42,14 @@
 	  						
 	  						<div style="padding:16px">
 	  							<div class="row">
-	  								<div class="col-md-3">
+	  								<div class="col-md-4">
 	  									<h4>Billing Address</h4>
 	  									{{ billing_address.billing_first_name }} {{ billing_address.billing_last_name }}<br>
 	  									{{ billing_address.billing_address }}<br>
 	  									{{ billing_address.billing_city }}, {{ billing_address.billing_country }}
 	  								</div>
-	  								<div class="col-md-3">
-	  									<h4>Billing Address</h4>
+	  								<div class="col-md-4">
+	  									<h4>Payment Method</h4>
 	  									{% if payment_card.brand == "Visa" %}
 										<img width="30" height="30" src="{% static 'images/visa.png' %}"> **** {{ payment_card.last4 }}
 										{% elif payment_card.bran == "Mastercard" %}
@@ -60,8 +60,10 @@
 											{{ brand }} **** {{ payment_card.last4 }}
 										{% endif %}
 	  								</div>
-	  								<div class="col-md-3 col-md-offset-3">
-	  									
+	  								<div class="col-md-2 col-md-offset-2">
+	  									<h4>Totals</h4>
+	  									Cart total: {{ order.cart.total }}<br>
+	  									Order total: {{ order.total }}
 	  								</div>
 	  							</div>
 	  						</div>
