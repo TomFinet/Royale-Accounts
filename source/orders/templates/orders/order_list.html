@@ -80,15 +80,24 @@
   								<table>
   									{% for account in order.cart.accounts.all %}
   									<tr>
-  										<a href="{{ account.get_absolute_url }}">
-			  								{% if account.img_sml %}
-			  								<img height="100" width="100" src="{{ account.img_sml.url }}">
-			  								{% else %}
-			  								<img src="//placehold.it/100x100">
-			  								{% endif %}
-				    						<h5 style="margin-bottom: 0.75rem;">{{ account.title }}</h5>
-		    							</a>
-		    							<p class="card-text">{{ account.description }}</p>
+  										<td>
+  											<a href="{{ account.get_absolute_url }}">
+				  								{% if account.img_sml %}
+				  								<img height="100" width="100" src="{{ account.img_sml.url }}">
+				  								{% else %}
+				  								<img src="//placehold.it/100x100">
+				  								{% endif %}
+			    							</a>
+			    						</td>
+		    							<td>
+		    								<a href="{{ account.get_absolute_url }}">
+		    									<h5 style="margin-bottom: 0.75rem;">{{ account.title }}</h5>
+		    								</a>
+		    							</td>
+			    						<td>
+			    							<p class="card-text">{{ account.description }}</p>
+			    						</td>
+		    							
 		    							<div class="space20"></div>
   									</tr>
   									{% endfor %}
