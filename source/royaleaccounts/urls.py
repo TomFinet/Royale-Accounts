@@ -8,7 +8,7 @@ from .views import home_view, contact_view, FaqView, TermsOfUseView, currency_co
 
 urlpatterns = [
 	url(r'^$', home_view, name="home"),
-    url(r'^contact-us/$', contact_view, name="contact_us")
+    url(r'^contact-us/$', contact_view, name="contact_us"),
     url(r'^faq/$', FaqView.as_view(), name="faq"),
     url(r'^terms-of-use/$', TermsOfUseView.as_view(), name="terms_of_use"),
     url(r'^currency/convert/$', currency_convert_view, name="currency_convert_view"),
