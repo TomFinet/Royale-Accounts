@@ -150,7 +150,7 @@ def change_password_view(request):
 def change_password_token_view(request, token):
 	user_token = AccessToken.objects.get_from_token(token)
 	if user_token.token == token:
-		return change_password_helper(request, user, token)
+		return change_password_helper(request, request.user, token)
 
 	return redirect("users:login")
 
