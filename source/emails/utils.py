@@ -45,7 +45,7 @@ def send_password_reset_email(user=None):
 
 		reset_link = getattr(settings, 'WEBSITE_URL') + "user/password-reset/" + token.token
 
-		mail = Mail()
+		'''mail = Mail()
 		mail.from_email = Email('royaleaccounts@gmail.com')
 		mail.subject = "Royale Accounts Password Reset"
 		mail.template_id = 'd-ca2e73e4409d4c94822bc282ec3fd29b'
@@ -56,6 +56,15 @@ def send_password_reset_email(user=None):
 		}
 		mail.add_personalization(p)
 
+		response = sg.client.mail.send.post(request_body=mail.get())
+		status_code = response.status_code'''
+
+		from_email = Email("royaleaccounts@gmail.com")
+		subject = "Royale Accounts Password Reset"
+		to_email = Email("tom.finet@learning.ecolint.ch")
+		content = Content("text/plain", reset_link)
+		mail = Mail(from_email, subject, to_email, content)
+			
 		response = sg.client.mail.send.post(request_body=mail.get())
 		status_code = response.status_code
 
