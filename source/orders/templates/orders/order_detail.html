@@ -79,72 +79,70 @@
 			{% for account in order.cart.accounts.all %}
 			<div class="row">
 				<div class="col-md-12">
-					<ul class="products thumb-info-list">
-						<div style="position: relative;
-									display: -webkit-box;
-									display: -webkit-flex;
-									display: -ms-flexbox;
-									display: flex;
-									-webkit-box-orient: vertical;
-									-webkit-box-direction: normal;
-									-webkit-flex-direction: column;
-									-ms-flex-direction: column;
-									flex-direction: column;
-									background-color: #fff;
-									border: 1px solid rgba(0, 0, 0, 0.125);
-									border-radius: 0.25rem;">
-	  						
-	  						<div style="padding:16px">
-	  							
-								<table>
-									<div class="row">
-										<tr>
-											<td class="col-md-2">
-												<a href="{{ account.get_absolute_url }}">
-					  								{% if account.img_sml %}
-					  								<img height="100" width="100" src="{{ account.img_sml.url }}">
-					  								{% else %}
-					  								<img src="//placehold.it/100x100">
-				  								{% endif %}
-			    								</a>
-			    							</td>
-			    							<td class="col-md-6">
-			    								<a class="pull-left" href="{{ account.get_absolute_url }}">
-			    									<h5 style="margin-bottom: 0.75rem;">{{ account.title }}</h5>
-			    								</a>
-			    								<p class="card-text pull-left">{{ account.description }}</p>	
-			    							</td>
-			    							<td class="col-md-3">
-			    								<a style="color:#e96546;" class="pull-right" href="#">Account access details <i class="fa fa-chevron-down"></i></a>
-			    							</td>
-										</tr>
-										<tr style="margin-top:64px;">
-											<td>
-												<h4>Access Details</h4>
-											</td>
-										</tr>
-										<tr>
-											<td class="col-md-3">
-												<h5>Supercell Account Email</h5>
-			    							</td>
-			    							<td class="col-md-9">
-		    									<p class="pull-left" style="margin-bottom: 0.75rem;">{{ account.supercell_account_email }}</p>
-			    							</td>
-			    						</tr>
-			    						<tr>
-			    							<td class="col-md-3">
-			    								<h5>Supercell Account Password</h5>
-			    							</td>
-			    							<td class="col-md-9">
-			    								<p class="pull-left" style="margin-bottom: 0.75rem;">{{ account.supercell_account_email }}</p>
-			    							</td>
-										</tr>
-									</div>
-								</table>
-  							</div>
+					<div style="position: relative;
+								display: -webkit-box;
+								display: -webkit-flex;
+								display: -ms-flexbox;
+								display: flex;
+								-webkit-box-orient: vertical;
+								-webkit-box-direction: normal;
+								-webkit-flex-direction: column;
+								-ms-flex-direction: column;
+								flex-direction: column;
+								background-color: #fff;
+								border: 1px solid rgba(0, 0, 0, 0.125);
+								border-radius: 0.25rem;">
+  						
+  						<div style="padding:16px">
+							<table>
+								<div class="row">
+									<tr>
+										<td class="col-md-2">
+											<a href="{{ account.get_absolute_url }}">
+				  								{% if account.img_sml %}
+				  								<img height="100" width="100" src="{{ account.img_sml.url }}">
+				  								{% else %}
+				  								<img src="//placehold.it/100x100">
+			  								{% endif %}
+		    								</a>
+		    							</td>
+		    							<td class="col-md-6">
+		    								<a class="pull-left" href="{{ account.get_absolute_url }}">
+		    									<h5 style="margin-bottom: 0.75rem;">{{ account.title }}</h5>
+		    								</a>
+		    								<p class="card-text pull-left">{{ account.description }}</p>	
+		    							</td>
+		    							<td class="col-md-3">
+		    								<a style="color:#e96546;" class="pull-right" href="#">Account access details <i class="fa fa-chevron-down"></i></a>
+		    							</td>
+									</tr>
+								</div>
+							</table>
+							<table>
+								<tr>
+									<td>
+										<h4>Access Details</h4>
+									</td>
+								</tr>
+								<tr>
+									<td class="col-md-3">
+										<h5>Supercell Account Email</h5>
+	    							</td>
+	    							<td class="col-md-9">
+    									<p class="pull-left" style="margin-bottom: 0.75rem;">{{ account.supercell_account_email }}</p>
+	    							</td>
+	    						</tr>
+	    						<tr>
+	    							<td class="col-md-3">
+	    								<h5>Supercell Account Password</h5>
+	    							</td>
+	    							<td class="col-md-9">
+	    								<p class="pull-left" style="margin-bottom: 0.75rem;">{{ account.supercell_account_email }}</p>
+	    							</td>
+								</tr>
+							</table>
 						</div>
-						<div class="space20"></div>
-					</ul>
+					</div>
 				</div>
 			</div>
 			{% endfor %}
