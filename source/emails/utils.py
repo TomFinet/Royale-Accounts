@@ -10,10 +10,10 @@ User = get_user_model()
 def send_order_confirmation_email(to_email=None, order_id=None, accounts=None):
 	status_code = None
 	if to_email and order_id and accounts:
-		mail = Mail()
+		'''mail = Mail()
 		mail.from_email = Email('royaleaccounts@gmail.com')
 		mail.subject = "Royale Accounts Order Confirmation"
-		mail.template_id = 'd-5327c993cb174d08b0aaa7e23d81f3d3'
+		#mail.template_id = 'd-5327c993cb174d08b0aaa7e23d81f3d3'
 		p = Personalization()
 		p.add_to(Email(to_email))
 		p.dynamic_template_data = {
@@ -22,6 +22,15 @@ def send_order_confirmation_email(to_email=None, order_id=None, accounts=None):
 		}
 		mail.add_personalization(p)
 
+		response = sg.client.mail.send.post(request_body=mail.get())
+		status_code = response.status_code'''
+
+		from_email = Email("royaleaccounts@gmail.com")
+		subject = "Royale Accounts Order Confirmation"
+		to_email = Email(to_email)
+		content = Content("text/plain", "Confirming your order.")
+		mail = Mail(from_email, subject, to_email, content)
+			
 		response = sg.client.mail.send.post(request_body=mail.get())
 		status_code = response.status_code
 

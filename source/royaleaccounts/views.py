@@ -29,6 +29,9 @@ class FaqView(TemplateView):
 	template_name = 'faq.html'
 
 
+class TermsOfUseView(TemplateView):
+	template_name = 'terms_of_use.html'
+
 # add cache expiry
 def currency_convert_view(request):
 	if request.is_ajax():

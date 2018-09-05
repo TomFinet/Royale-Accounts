@@ -4,12 +4,12 @@ from django.conf.urls.static import static
 
 from django.contrib import admin
 
-from .views import home_view, FaqView, currency_convert_view
+from .views import home_view, FaqView, TermsOfUseView, currency_convert_view
 
 urlpatterns = [
 	url(r'^$', home_view, name="home"),
     url(r'^faq/$', FaqView.as_view(), name="faq"),
-    
+    url(r'^terms-of-use/$', TermsOfUseView.as_view(), name="terms_of_use"),
     url(r'^currency/convert/$', currency_convert_view, name="currency_convert_view"),
 
 	url(r'^address/', include('addresses.urls', namespace="addresses")),
