@@ -107,7 +107,7 @@ class AccessTokenManager(models.Manager):
 		qs = self.get_queryset().filter(token=token)
 		if qs.count() == 1:
 			access_token = qs.first()
-		return token
+		return access_token
 
 # Used to store tokens for one time links for password reset and account validation
 class AccessToken(models.Model):
