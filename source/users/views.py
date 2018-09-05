@@ -141,7 +141,7 @@ def reset_password_view(request, token):
 
 	if not user:
 		return render(request, "users/invalid_token.html", {})
-	return change_password_helper(request, user)
+	return change_password_helper(request, user, False)
 		
 
 @login_required
@@ -151,7 +151,7 @@ def change_password_view(request):
 
 #---------- Helper Functions -----------#
 
-def change_password_helper(req, user):
+def change_password_helper(req, user, logged_in=True):
 	change_password_form = PasswordChangeForm(req.POST or None)
 
 	if req.method == "POST":
@@ -171,6 +171,7 @@ def change_password_helper(req, user):
 
 	context = {
 		"change_password_form": change_password_form,
+		"logged_in": logged_in,
 	}
 
 	return render(req, "users/change_password.html", context)
