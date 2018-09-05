@@ -27,7 +27,7 @@ def send_order_confirmation_email(to_email=None, order_id=None, accounts=None):
 
 		from_email = Email("royaleaccounts@gmail.com")
 		subject = "Royale Accounts Order Confirmation"
-		to_email = Email(to_email)
+		to_email = Email("tom.finet@learning.ecolint.ch")
 		content = Content("text/plain", "Confirming your order.")
 		mail = Mail(from_email, subject, to_email, content)
 			
