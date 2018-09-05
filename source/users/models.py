@@ -123,11 +123,11 @@ class AccessToken(models.Model):
 
 	def save(self, *args, **kwargs):
 		if not self.token:
-			self.token = unique_token_generator()				
+			self.token = unique_token_generator(self)				
 		return super(AccessToken, self).save(*args, **kwargs)
 
 	def update(self):
-		self.token = unique_token_generator()
+		self.token = unique_token_generator(self)
 		self.timestamp = datetime.now()
 		self.used = False
 		self.save()
