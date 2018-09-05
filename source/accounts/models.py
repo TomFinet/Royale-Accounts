@@ -292,7 +292,7 @@ class Account(models.Model):
                 
 	@property
 	def title(self):
-		return 'Level {king_tower} in {arena}'.format(device=self.king_tower, 
+		return 'Level {king_tower} in {arena}'.format(king_tower=self.king_tower, 
 			arena=self.get_arena_readable())
 
 
