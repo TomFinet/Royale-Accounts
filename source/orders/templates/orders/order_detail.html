@@ -97,8 +97,8 @@
 	  						<div style="padding:16px">
 								<table>
 									{% for account in order.cart.accounts.all %}
-									<tr>
-										<div class="col-md-12">
+									<div class="col-md-12">
+										<tr>
 											<td>
 												<a href="{{ account.get_absolute_url }}">
 					  								{% if account.img_sml %}
@@ -116,8 +116,8 @@
 			    							</td>
 			    							<h5 class="pull-right">Reveal account access details <i class="fa fa-chevron-down"></i></h5>
 			    							<div class="space20"></div>
-	    								</div>
-									</tr>
+										</tr>
+									</div>
 									{% endfor %}
 								</table>	
   							</div>
