@@ -4,6 +4,8 @@
 {% url 'users:login' as login_url %}
 {% url 'users:register' as register_url %}
 {% url 'terms_of_use' as terms_url %}
+{% url 'users:change_password' as password_change_url %}
+{% url 'contact_us' as contact_url %}
 
 <!-- Footer -->
 <footer>
@@ -17,7 +19,7 @@
 			<ul class="link-list">
 				<li><a href="{{ faq_url }}">&rarr; FAQ</a></li>
 				<li><a href="{{ register_url }}">&rarr; Register</a></li>
-				<li><a href="{% url 'users:change_password' %}">&rarr; Change Password</a></li>
+				<li><a href="{{ password_change_url }}">&rarr; Change Password</a></li>
 			</ul>
 		</div>
 		<div class="col-md-2 footer-widget">
@@ -30,7 +32,7 @@
 		<div class="col-md-2 footer-widget">
 			<h6>Contact</h6>
 			<ul class="link-list">
-				<li><a href="{{ accounts_url }}">&rarr; Email Us</a></li>
+				<li><a href="{{ contact_url }}">&rarr; Email Us</a></li>
 			</ul>
 		</div>
 		<div class="col-md-4 footer-widget">
