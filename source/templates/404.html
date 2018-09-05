@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block title %}Page Not Found - Royale Accounts{% endblock %}
 
@@ -27,15 +28,13 @@
 			<h1>Woops, you're lost. Some ideas:</h1>
 			
 	        <div class="space30"></div>
-	        	<button class="btn btn-primary btn-lg btn-green uppercase" type="button">Contact Us</button>
-	        	<button class="btn btn-primary btn-lg btn-green uppercase" type="button">See Our Work</button>
+        	<a class="btn btn-primary btn-lg btn-green uppercase" href="{% url 'contact_us' %}">Contact Us</a>
+        	<a class="btn btn-primary btn-lg btn-green uppercase" href="{% url 'accounts:list' %}">Browse Accounts</a>
 	        <div class="space30"></div>
 		</div>	
-
-		</div>
-		</div>
-
 	</div>
-	<!-- Main content -->
+
+</div>
+</body>
 
 {% endblock %}

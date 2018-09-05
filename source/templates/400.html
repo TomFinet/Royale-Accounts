@@ -1,1 +1,40 @@
-400.html
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Page Not Found - Royale Accounts{% endblock %}
+
+{% block meta %}
+<meta name="description" content="Royale Accounts - Bad Request">
+{% endblock %}
+
+{% block content %}
+
+<body id="pages">
+<div class="body">
+	<div class="top-wrap">
+		<div class="overlay-bg"></div>
+		{% include 'base/navbar.html' %}
+	</div>
+
+	<div class="space30"></div>
+
+	<!-- Main content -->
+	<div class="page-wrap container wrap-404">
+		<h3>400</h3>
+		<div class="space30"></div>
+		<div class="col-md-12 no-padding columns mb0">
+	    	<i class="icon-confused icon-404"></i>
+	        
+			<h1>Woops, looks like there has been a bad request. Try reloading the page.</h1>
+			
+	        <div class="space30"></div>
+        	<a class="btn btn-primary btn-lg btn-green uppercase" href="{% url 'contact_us' %}">Contact Us</a>
+        	<a class="btn btn-primary btn-lg btn-green uppercase" href="{% url 'accounts:list' %}">Browse Accounts</a>
+	        <div class="space30"></div>
+		</div>	
+	</div>
+
+</div>
+</body>
+
+{% endblock %}

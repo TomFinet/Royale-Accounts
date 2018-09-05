@@ -1,10 +1,10 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %}Permission Denied - Royale Accounts{% endblock %}
+{% block title %}Server Error - Royale Accounts{% endblock %}
 
 {% block meta %}
-<meta name="description" content="Royale Accounts - Forbidden">
+<meta name="description" content="Royale Accounts - Server Error">
 {% endblock %}
 
 {% block content %}
@@ -20,12 +20,12 @@
 
 	<!-- Main content -->
 	<div class="page-wrap container wrap-404">
-		<h3>403</h3>
+		<h3>500</h3>
 		<div class="space30"></div>
 		<div class="col-md-12 no-padding columns mb0">
 	    	<i class="icon-confused icon-404"></i>
 	        
-			<h1>Woops, looks like you do not have permission to view this page. Some ideas:</h1>
+			<h1>Woops, there has been an error our end. We'll try and fix it pronto. Some ideas:</h1>
 			
 	        <div class="space30"></div>
         	<a class="btn btn-primary btn-lg btn-green uppercase" href="{% url 'contact_us' %}">Contact Us</a>
