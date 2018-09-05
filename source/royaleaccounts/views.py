@@ -25,6 +25,10 @@ def home_view(request):
 	return render(request, 'index.html', {"featured_qs": featured_qs})
 
 
+def contact_view(request):
+	return render(request, 'contact_us.html', {})
+
+
 class FaqView(TemplateView):
 	template_name = 'faq.html'
 

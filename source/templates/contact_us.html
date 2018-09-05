@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Contact Us - Royale Accounts{% endblock %}
+
+{% block meta %}
+<meta name="description" content="Royale Accounts - Contact us about Clash Royale related questions or problems you may be having for your account.">
+{% endblock %}
+
+{% block content %}
+
+<body id="pages">
+
+<div class="body">
+	<div class="top-wrap">
+		<div class="overlay-bg"></div>
+		{% include 'base/navbar.html' %}
+	</div>
+
+	<div class="space40"></div>
+
+	<!-- Main content -->
+	<div class="page-wrap container contact-wrap">
+		<div class="container">
+			<div class="space50"></div>
+			<h3>Contact Us</h3>
+			<div class="space30"></div>
+			<div class="col-md-12 no-padding">
+				<p>Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi.</p>
+				<div class="space20"></div>
+			</div>
+			<div class="col-md-12 no-padding columns">
+				<div class="row">
+					<div class="col-md-9">
+						<h4>Leave a Message</h4>
+						<div class="space30"></div>
+						<form class="contact-form" id="contactForm" action="php/contact.php" method="post">
+							<div class="row">
+								<div class="col-md-6">
+									<input type="text" name="senderName" id="senderName" placeholder="Name*" required="required" />
+									<input type="email" name="senderEmail" id="senderEmail" placeholder="Email Address*" required="required" />
+									<input type="text" name="subject" id="subject" placeholder="Subject*" required="required" />
+								</div>
+								<div class="col-md-6"></div>
+							</div>
+							<textarea name="message" id="message" rows="7" placeholder="Message" required="required"></textarea>
+							<button type="submit" id="sendMessage" name="sendMessage" class="btn btn-primary btn-sm btn-orange uppercase pull-right" >Send Message</button><br>
+						</form>
+						<div id="successMessage" class="successmessage"><p><span class="success-ico"></span> Thanks for sending your message! We'll get back to you shortly.</p></div>
+						<div id="failureMessage" class="errormessage"><p><span class="error-ico"></span> There was a problem sending your message. Please try again.</p></div>
+						<div id="incompleteMessage" class="statusMessage"><p>Please complete all the fields in the form before sending.</p></div>
+					</div>
+					<aside class="col-md-3">
+						<div class="side-widget contact-info">
+							<h4>Contact Info</h4>
+							<h5>Office Address:</h5>
+							<p>Design Headquarters<br>456 W57th Street<br>NYC, New York 06415</p>
+							
+							<h5>Telephone:</h5>
+							<p>1.800.555.1234</p>
+							
+							<h5>Fax:</h5>
+							<p>1.800.555.1235</p>
+							
+							<h5>Email:</h5>
+							<p>Support@chemsitry.com</p>
+						</div>
+					</aside>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+</body>
+
+{% endblock %}

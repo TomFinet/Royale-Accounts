@@ -7,6 +7,7 @@
 {% url 'users:logout' as logout_url %}
 {% url 'users:login' as login_url %}
 {% url 'users:register' as register_url %}
+{% url 'contact_us' as contact_url %}
 
 <!-- Header -->
 <header>
@@ -25,11 +26,17 @@
           <li><a href='{{ accounts_url }}'><span>Accounts</span></a></li>
           </li>
           {% if request.user.is_authenticated %}
-            <li class='has-sub'>
+            <li>
               <a href='{{ orders_url }}'><span>Orders</span></a>
+            </li>
+            <li>
+              <a href="{{ contact_url }}"><span>Contact Us</span></a>
             </li>
             <li><a href='{{ logout_url }}'><span>Logout</span></a></li>
           {% else %}
+            <li>
+              <a href="{{ contact_url }}"><span>Contact Us</span></a>
+            </li>
             <li><a href='{{ login_url }}'><span>Login</span></a></li>
           {% endif %}
           <li class="last"><a href='{{ cart_url }}'><span class="navbar-cart-count">{{ request.session.cart_items_count }}</span> <i class="fa fa-shopping-cart" aria-hidden="true"></i></a></li>
