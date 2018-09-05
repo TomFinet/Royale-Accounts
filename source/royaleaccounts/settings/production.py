@@ -68,7 +68,7 @@ STRIPE_PUB_KEY = "pk_test_BTw6TKSRbgvSOdQzBtLzh4Qh"
 
 SENDGRID_API_KEY = os.environ.get('SENDGRID_API_KEY')
 
-WEBSITE_URL = "//royale-accounts/"
+WEBSITE_URL = "//royale-accounts.com/"
 
 CURRENCY_CHOICES = (
     ("USD", "USD"),
