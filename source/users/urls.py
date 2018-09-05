@@ -9,6 +9,7 @@ from .views import (
 	email_resend_view,
 	reset_password_view,
 	change_password_view,
+	change_password_token_view,
 )
 
 
@@ -22,5 +23,7 @@ urlpatterns = [
 	url(r'^password-reset/resend/$', email_resend_view, name="password_reset_resend_email"),
 	url(r'^password-reset/(?P<token>[\w-]+)/$', 
 		reset_password_view, name='password_reset'),
-	url(r'^change-password/(?P<token>[\w-]+)/$', change_password_view, name="change_password"),
+
+	url(r'^change-password/$', change_password_view, name="change_password"),
+	url(r'^change-password/(?P<token>[\w-]+)/$', change_password_token_view, name="change_password_token"),
 ]

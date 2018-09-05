@@ -143,11 +143,11 @@ def reset_password_view(request, token):
 		return render(request, "users/invalid_token.html", {})
 	return change_password_helper(request, user, token)
 		
+@login_required
+def change_password_view(request):
+	return change_password_helper(request, request.user)
 
-def change_password_view(request, token):
-	if request.user.is_authenticated():
-		return change_password_helper(request, user)
-	
+def change_password_token_view(request, token):
 	user_token = AccessToken.objects.get_from_token(token)
 	if user_token.token == token:
 		return change_password_helper(request, user, token)
@@ -174,9 +174,6 @@ def change_password_helper(req, user, token=None):
 					messages.error(req, "New password is the same as the old password.", fail_silently=True)
 			else:
 				messages.error(req, "Old password is incorrect.", fail_silently=True)
-
-	if token == "None":
-		token = None
 
 	context = {
 		"change_password_form": change_password_form,
