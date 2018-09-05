@@ -60,9 +60,9 @@
 											<i class="fa fa-credit-card"></i> **** {{ payment_card.last4 }}<br>
 										{% endif %}
 										{% if card.exp_month > 9 %}
-											<p>Expires {{ payment_card.exp_month }}/{{ payment_card.exp_year }}</p>
+											Expires {{ payment_card.exp_month }}/{{ payment_card.exp_year }}
 										{% else %}
-											<p>Expires 0{{ payment_card.exp_month }}/{{ payment_card.exp_year }}</p>
+											Expires 0{{ payment_card.exp_month }}/{{ payment_card.exp_year }}
 										{% endif %}
 	  								</div>
 	  								<div class="col-md-3 col-md-offset-1">
