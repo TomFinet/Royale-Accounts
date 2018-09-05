@@ -14,6 +14,15 @@ def unique_order_id_generator(instance, new_slug=None):
 		return unique_order_id_generator(instance)
 	return new_order_id
 
+def unique_token_generator(instance):
+    new_token = random_string_generator()
+
+    Klass = instance.__class__
+    qs_exists = Klass.objects.filter(token=new_token).exists()
+    if qs_exists:
+        return unique_token_generator(instance)
+    return new_token
+
 def unique_slug_generator(instance, _from=-1, new_slug=None):
     if new_slug is not None:
         slug = new_slug

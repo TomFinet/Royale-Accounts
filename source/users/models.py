@@ -8,6 +8,9 @@ from django.contrib.auth.models import (
 from uuid import uuid4
 from datetime import datetime, timedelta
 
+from royaleaccounts.utils import unique_token_generator
+
+
 class UserManager(BaseUserManager):
 	def create_user(self, email, password=None, 
 		is_active=True, is_staff=False, is_admin=False):
@@ -120,7 +123,7 @@ class AccessToken(models.Model):
 
 	def save(self, *args, **kwargs):
 		if not self.token:
-			self.token = str(uuid4())
+			self.token = unique_token_generator()				
 		return super(AccessToken, self).save(*args, **kwargs)
 
 	def update(self):
