@@ -240,11 +240,13 @@ def checkout_error_view(request):
 	return redirect("cart:home")
 
 def checkout_complete_view(request):
-	cart_obj, cart_created = Cart.objects.new_or_get(request)
-	billing_profile, billing_profile_created = BillingProfile.objects.new_or_get(request)
-	order, order_created = Order.objects.new_or_get(billing_profile, cart_obj)
-	if order.status == "Paid":
-		return render(request, "cart/checkout_done.html", {"order": order})
+	order_id = request.session.get("order_id", None)
+	if order_id:
+		order, order_created = Order.objects.filter(order_id=order_id).first()
+		del request.session['order_id']
+		if order.status == "Paid":
+			return render(request, "cart/checkout_done.html", {"order": order})
+		return redirect("cart:home")
 	return redirect("home")
 
 

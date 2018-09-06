@@ -31,10 +31,16 @@ class OrderDetailView(DetailView):
 
 		order = Order.objects.filter(order_id=context['order']).first()
 
-		billing_address = Address.objects.filter(
-			billing_profile=order.billing_profile,
-			billing_address=order.billing_address,
-		).first()
+		billing_address = None
+		try:
+			billing_address = Address.objects.get(id=order.billing_address.id)
+		except Address.DoesNotExist:
+			raise Http404("Billing address not found.")
+		except Address.MultipleObjectsReturned:
+			qs = Address.objects.filter(id=order.billing_address.id)
+			billing_address = qs.first()
+		except:
+			raise Http404("Hmmm.")
 
 		context['billing_address'] = billing_address
 
