@@ -242,7 +242,7 @@ def checkout_error_view(request):
 def checkout_complete_view(request):
 	order_id = request.session.get("order_id", None)
 	if order_id:
-		order, order_created = Order.objects.filter(order_id=order_id).first()
+		order = Order.objects.filter(order_id=order_id).first()
 		del request.session['order_id']
 		if order.status == "Paid":
 			return render(request, "cart/checkout_done.html", {"order": order})
