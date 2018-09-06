@@ -6,7 +6,6 @@ from .views import (
 	register_page,
 	guest_register_view,
 	email_form_page,
-	email_resend_view,
 	reset_password_view,
 	change_password_view,
 	change_password_token_view,
@@ -20,7 +19,6 @@ urlpatterns = [
 	url(r'^register-guest/', guest_register_view, name="guest_register"),
 
 	url(r'^password-reset-email/$', email_form_page, name="password_reset_email"),
-	url(r'^password-reset/resend/$', email_resend_view, name="password_reset_resend_email"),
 	url(r'^password-reset/(?P<token>[\w-]+)/$', 
 		reset_password_view, name='password_reset'),
 

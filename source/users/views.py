@@ -108,27 +108,6 @@ def email_form_page(request):
 
 	return render(request, "users/password_reset.html", {"email_form": email_form})
 
-def email_resend_view(request):
-	if request.method == "POST":
-		user_id = request.POST.get("user_id")
-		if user_id:
-			user = User.objects.get(id=user_id)
-			if user:
-				# send email with link
-				status_code = send_password_reset_email(user)
-				# check for errors
-				if status_code == 202:
-					count += 1
-					return render(request, "users/password_reset.html", {"email_sent": True, "user_id": user.id})
-				messages.error(request, 'Failed to send email. Please try again', fail_silently=True)
-
-	email_form = EmailForm(request.POST or None)
-	context = {
-		"email_sent": False,
-		"email_form": email_form,
-	}		
-	return render(request, "users/password_reset.html", context)
-
 def reset_password_view(request, token):
 	user = None
 	if token:

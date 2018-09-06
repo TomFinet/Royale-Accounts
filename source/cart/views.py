@@ -212,9 +212,12 @@ def checkout_payment(request):
 							accounts
 						)
 
+						messages.success(request, "Order paid successfully.")
+
 						if status_code != 202:
-							# add error message to display about email failing in cart success page.
-							pass
+							messages.error(request, "Failed to send confirmation email.")
+						else:
+							messages.success(request, "Confirmation email sent successfully.")
 						return redirect("cart:success")
 						
 					else:

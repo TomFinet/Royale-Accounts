@@ -27,12 +27,12 @@ def send_order_confirmation_email(to_email=None, order_id=None, accounts=None):
 		response = sg.client.mail.send.post(request_body=mail.get())
 		status_code = response.status_code'''
 
-		from_email = Email("royaleaccounts@gmail.com")
+		from_email = Email("support.royale-accounts@gmail.com")
 		subject = "Royale Accounts Order Confirmation"
 		to_email = Email(to_email)
 		content = Content("text/html", """<h4>Thank you so much for placing your order with Royale Accounts.</h4> 
 			You can view your order by clicking this link: <a href='https://www.royale-accounts.com/orders/"""
-			+ order_id + """'><h4>your order</h4></a>
+			+ order_id + """'><h4>Your Order</h4></a>
 			Once again thank you so much for placing your order with us.<br>
 			Happy Clashing,<br>
 			The Royale Accounts Team."""
@@ -67,7 +67,7 @@ def send_password_reset_email(user=None):
 		response = sg.client.mail.send.post(request_body=mail.get())
 		status_code = response.status_code'''
 
-		from_email = Email("royaleaccounts@gmail.com")
+		from_email = Email("support.royale-accounts@gmail.com")
 		subject = "Royale Accounts Password Reset"
 		to_email = Email(user.email)
 		content = Content("text/html", """It seems you have forgotten your password. Just click the link to reset your password:
@@ -88,7 +88,7 @@ def send_verification_email(user=None):
 		verification_link = getattr(settings, 'WEBSITE_URL') + "user/v/" + token.token
 
 		mail = Mail()
-		mail.from_email = Email('royaleaccounts@gmail.com')
+		mail.from_email = Email('support.royale-accounts@gmail.com')
 		mail.subject = "Verify your account with Royale Accounts"
 		mail.template_id = 'd-ca2e73e4409d4c94822bc282ec3fd29b'
 		p = Personalization()
