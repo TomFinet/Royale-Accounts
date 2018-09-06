@@ -23,21 +23,22 @@
 	<div class="page-wrap container shop-form-wrap">
 		<div class="row">
 			<div class="col-md-12">
-				<h4>Order has been placed successfully!</h4>
-				<p>Your account details are on their way!</p>
+				{% if messages %}
+			    <ul style="list-style-type: none;" class="messages">
+			        {% for message in messages %}
+			        <li class="alert alert-{{ message.tags }}">{{ message }}</li>
+			        {% endfor %}
+			    </ul>
+			    {% endif %}
+				<h3>Order has been placed successfully!</h3>
+				<h5>Your account details are on their way!</h5>
 			</div>
 		</div>
 		<!-- Shop Content -->
 		<div role="main" class="main shop">
 			<div class="row">
 				<div class="col-md-12">
-					{% if messages %}
-				    <ul class="messages">
-				        {% for message in messages %}
-				        <li class="alert alert-{{ message.tags }}">{{ message }}</li>
-				        {% endfor %}
-				    </ul>
-				    {% endif %}
+					
 
 
 				</div>
