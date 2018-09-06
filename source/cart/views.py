@@ -195,6 +195,8 @@ def checkout_payment(request):
 						order_obj.updated = timezone.now()
 						order_obj.save()
 
+						request.session["order_id"] = order_obj.order_id
+
 						for account in qs:
 							account.sold = True
 							account.save()
@@ -234,12 +236,17 @@ def checkout_payment(request):
 
 def checkout_error_view(request):
 	if request.session.get('from_payment', False):
+		del request.session['order_id']
 		del request.session['from_payment']
 		return render(request, "cart/error.html", {})
 	return redirect("cart:home")
 
 def checkout_complete_view(request):
-	return render(request, "cart/checkout_done.html", {})
+	qs = Order.objects.filter(order_id=request.session.get("order_id", None))
+	order = None
+	if qs.count() == 1:
+		order = qs.first()
+	return render(request, "cart/checkout_done.html", {"order": order})
 
 
 #------ Helper Functions -------#
