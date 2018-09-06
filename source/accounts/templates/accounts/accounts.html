@@ -28,6 +28,9 @@
 		</div>
 		<!-- Shop Content -->
 		<div role="main" class="main shop">
+			{% for message in messages %}
+	        <li class="alert alert-{{ message.tags }}">{% if message.tags == "danger" %}<i class="fa fa-times"></i> {% elif message.tag == "success" %}<i class="fa fa-check"></i> {% endif %}{{ message }}</li>
+	        {% endfor %}
 			{% if account_list %}
 			<div class="row">
 				<div class="col-md-12">

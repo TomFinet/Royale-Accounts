@@ -54,7 +54,8 @@ class OrderDetailView(DetailView):
 		return context
 
 	def get_object(self):
-		del self.request.session['order_id']
+		if self.request.session.get("order_id", None):
+			del self.request.session['order_id']
 		qs = Order.objects.by_request(
 		            self.request
 		        ).filter(
