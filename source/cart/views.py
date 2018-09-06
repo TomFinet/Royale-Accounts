@@ -214,8 +214,6 @@ def checkout_payment(request):
 							accounts
 						)
 
-						messages.success(request, "Order paid successfully.")
-
 						if status_code != 202:
 							messages.error(request, "Failed to send confirmation email.")
 						else:
@@ -242,11 +240,12 @@ def checkout_error_view(request):
 	return redirect("cart:home")
 
 def checkout_complete_view(request):
-	qs = Order.objects.filter(order_id=request.session.get("order_id", None))
-	order = None
-	if qs.count() == 1:
-		order = qs.first()
-	return render(request, "cart/checkout_done.html", {"order": order})
+	cart_obj, cart_created = Cart.objects.new_or_get(request)
+	billing_profile, billing_profile_created = BillingProfile.objects.new_or_get(request)
+	order, order_created = Order.objects.new_or_get(billing_profile, cart_obj)
+	if order.status == "Paid":
+		return render(request, "cart/checkout_done.html", {"order": order})
+	return redirect("home")
 
 
 #------ Helper Functions -------#
