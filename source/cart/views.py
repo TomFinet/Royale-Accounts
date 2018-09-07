@@ -73,7 +73,6 @@ def cart_update(request):
 				"added": added,
 				"cartItemCount": cart_obj.accounts.count()
 			}
-			messages.success(request, "Account has been added to your cart!")
 			return JsonResponse(json_data)
 
 	return redirect("cart:home")
