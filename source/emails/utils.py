@@ -5,6 +5,16 @@ from users.models import AccessToken
 from .models import Email
 
 
+def send_contact_us_email(sender=None, name=None, subject=None, message=None):
+	status_code = None
+	if sender and name and subject and message:
+		to = "support@royale-accounts.com"
+		email = Email.objects.create(to=to, sender=sender, subject=subject, content=message)
+		status_code = email.send()
+
+	return status_code
+
+
 User = get_user_model()
 def send_order_confirmation_email(to_email=None, order_id=None, accounts=None):
 	status_code = None
@@ -38,6 +48,7 @@ def send_password_reset_email(user=None):
 			<a href='""" + reset_link + """'><h4>Reset your Royale Accounts password</h4></a>"""
 			
 		email = Email.objects.create(to=user.email, sender=from_, subject=subject, content=content)
+		print(email)
 		status_code = email.send()
 
 	return status_code

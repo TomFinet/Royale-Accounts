@@ -1,4 +1,5 @@
 from django.contrib.auth import authenticate, login, get_user_model
+from django.contrib import messages
 from django.http import HttpResponse, JsonResponse
 from django.utils.http import is_safe_url
 from django.shortcuts import render, redirect
@@ -8,6 +9,10 @@ from django.core.cache import cache
 
 from cart.models import Cart
 from accounts.models import Account
+
+from .forms import ContactForm
+
+from emails.utils import send_contact_us_email
 
 import requests
 from decimal import *
@@ -26,7 +31,21 @@ def home_view(request):
 
 
 def contact_view(request):
-	return render(request, 'contact_us.html', {})
+	form = ContactForm(request.POST or None)
+
+	if form.is_valid():
+		name = form.cleaned_data.get('name')
+		sender = form.cleaned_data.get('email')
+		subject = form.cleaned_data.get('subject')
+		message = form.cleaned_data.get('message')
+		status_code = send_contact_us_email(sender, name, subject, message)
+
+		if status_code != 202:
+			messages.error(request, "Failed to send email. Try sending it through your email account if this problem persists.")
+		else:
+			messages.success(request, "Message sent successfully, expect a reply within 48 hours.")
+
+	return render(request, 'contact_us.html', {"form": form})
 
 
 class FaqView(TemplateView):
