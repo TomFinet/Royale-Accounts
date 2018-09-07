@@ -68,7 +68,7 @@ STRIPE_PUB_KEY = "pk_test_BTw6TKSRbgvSOdQzBtLzh4Qh"
 
 SENDGRID_API_KEY = os.environ.get('SENDGRID_API_KEY')
 
-WEBSITE_URL = "//royale-accounts.com/"
+WEBSITE_URL = "https://www.royale-accounts.com/"
 
 CURRENCY_CHOICES = (
     ("USD", "USD"),
@@ -172,7 +172,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
-from royaleaccounts.aws.conf import *
+#from royaleaccounts.aws.conf import *
 
 # Let's Encrypt ssl/tls https
 CORS_REPLACE_HTTPS_REFERER      = True

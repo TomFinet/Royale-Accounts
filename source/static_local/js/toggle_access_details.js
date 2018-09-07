@@ -1,13 +1,15 @@
 jQuery(document).ready(function ($) {
 
-	var accessDetailLink = $(".toggle-access-details")
+	var accessDetailButton = $(".toggle-access-details")
 	var accessDetails = $(".access-details")
 
-	accessDetailLink.click(function(){
-    	if (accessDetails.style.display === "none") {
-        	x.style.display = "block";
+	accessDetailButton.click(function(){
+    	if (accessDetails.hasClass('hidden')) {
+        	accessDetails.removeClass('hidden')
+        	$('.fa-chevron-down').removeClass("fa-chevron-down").addClass("fa-chevron-up")
     	} else {
-        	x.style.display = "none";
+        	accessDetails.addClass('hidden')
+        	$(".fa-chevron-up").removeClass("fa-chevron-up").addClass("fa-chevron-down")
     	}
 	});
 
