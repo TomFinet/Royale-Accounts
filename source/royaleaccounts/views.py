@@ -33,7 +33,7 @@ def home_view(request):
 def contact_view(request):
 	form = ContactForm(request.POST or None)
 
-	if form.is_valid():
+	if form.is_valid() and request.method == "POST":
 		name = form.cleaned_data.get('name')
 		sender = form.cleaned_data.get('email')
 		subject = form.cleaned_data.get('subject')
