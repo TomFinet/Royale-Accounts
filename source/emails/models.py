@@ -6,6 +6,7 @@ from django.conf import settings
 
 from sendgrid import SendGridAPIClient
 from sendgrid.helpers.mail import *
+from sendgrid.helpers.mail import Email as Emaill
 
 sg = SendGridAPIClient(apikey=getattr(settings, 'SENDGRID_API_KEY'))
 
@@ -20,11 +21,11 @@ class Email(models.Model):
 
 	def send(self):
 		if self.to and self.sender and self.subject and self.content:
-			to_email = Email(self.to)
-			from_email = Email(self.sender)
+			to_email = Emaill(self.to)
+			from_email = Emaill(self.sender)
 			content = Content("text/html", self.content)
 			mail = Mail(from_email, self.subject, to_email, content)
-			mail.personalizations[0].add_to(Email(self.to))
+			mail.personalizations[0].add_to(Emaill(self.to))
 			response = sg.client.mail.send.post(request_body=mail.get())
 			return response.status_code
 		return 600 # incomplete information, cannot send email.
