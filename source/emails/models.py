@@ -18,16 +18,16 @@ class Email(models.Model):
 	def __str__(self):
 		return '{to}: {subject}'.format(to=self.to, subject=self.subject)
 
-	def build(to, from_, subject, content):
-		to_email = Email(to)
-		from_email = Email(from_)
-		content_email = Content("text/html", content)
-		mail = Mail(from_email, subject, to_email, content_email)
+	def build(self):
+		to_email = Email(self.to)
+		from_email = Email(self.sender)
+		content_email = Content("text/html", self.content)
+		mail = Mail(from_email, self.subject, to_email, content_email)
 		return mail.get()
 
 	def send(self):
 		if self.to and self.sender and self.subject and self.content:
-			email = self.build(self.to, self.sender, self.subject, self.content)
+			email = self.build()
 			response = sg.client.mail.send.post(request_body=email)
 			return response.status_code
 		return 600 # incomplete information, cannot send email.
