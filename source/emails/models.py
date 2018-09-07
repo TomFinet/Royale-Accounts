@@ -25,7 +25,6 @@ class Email(models.Model):
 			from_email = Emaill(self.sender)
 			content = Content("text/html", self.content)
 			mail = Mail(from_email, self.subject, to_email, content)
-			mail.personalizations[0].add_to(Emaill(self.to))
 			response = sg.client.mail.send.post(request_body=mail.get())
 			return response.status_code
 		return 600 # incomplete information, cannot send email.
