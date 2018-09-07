@@ -22,6 +22,13 @@
 	<!-- Main content -->
 	<div class="page-wrap container contact-wrap">
 		<div class="container">
+			{% if messages %}
+	    	<ul style="list-style-type: none;" class="messages">
+		        {% for message in messages %}
+		        <li class="alert alert-{{ message.tags }}">{% if message.tags == "danger" %}<i class="fa fa-times"></i> {% elif message.tag == "success" %}<i class="fa fa-check"></i> {% endif %}{{ message }}</li>
+		        {% endfor %}
+		    </ul>
+	    {% endif %}
 			<div class="space50"></div>
 			<h3>Contact Us</h3>
 			<div class="space30"></div>
