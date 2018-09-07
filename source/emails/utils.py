@@ -1,4 +1,5 @@
 from django.contrib.auth import get_user_model
+from django.conf import settings
 
 from users.models import AccessToken
 from .models import Email
