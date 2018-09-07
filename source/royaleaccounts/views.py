@@ -44,7 +44,7 @@ def contact_view(request):
 			messages.error(request, "Failed to send email. Try sending it through your email account if this problem persists.")
 		else:
 			messages.success(request, "Message sent successfully, expect a reply within 48 hours.")
-			form = ContactForm()
+			form = ContactForm(None)
 
 	return render(request, 'contact_us.html', {"form": form})
 
