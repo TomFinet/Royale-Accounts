@@ -3,8 +3,6 @@ from __future__ import unicode_literals
 
 from django.shortcuts import render
 
-
-from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import View, ListView, DetailView
 from django.shortcuts import render
 from django.http import Http404, HttpResponseForbidden
@@ -15,7 +13,7 @@ from .models import Order
 from addresses.models import Address
 from users.models import AccessToken
 
-class OrderListView(LoginRequiredMixin, ListView):
+class OrderListView(ListView):
 	template_name = 'orders/order_list.html'
 	paginate_by = 3
 	context_object_name = 'order_list'
@@ -32,9 +30,7 @@ class OrderDetailView(DetailView):
 		context = super(OrderDetailView, self).get_context_data(*args, **kwargs)
 
 		order = Order.objects.filter(order_id=context['order']).first()
-		
 		billing_address = Address.objects.get(id=order.billing_address.id)
-
 		context['billing_address'] = billing_address
 
 		payment_card = Card.objects.filter(
