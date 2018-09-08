@@ -34,7 +34,7 @@ class OrderDetailView(DetailView):
 		order = Order.objects.filter(order_id=context['order']).first()
 	
 		if self.request.user != order.billing_profile.user:
-			return HttpResponseForbidden()
+			raise HttpResponseForbidden()
 
 		billing_address = None
 		try:
