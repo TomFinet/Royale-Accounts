@@ -15,7 +15,7 @@ from .models import Order
 from addresses.models import Address
 from users.models import AccessToken
 
-class OrderListView(ListView, LoginRequiredMixin):
+class OrderListView(LoginRequiredMixin, ListView):
 	template_name = 'orders/order_list.html'
 	paginate_by = 3
 	context_object_name = 'order_list'
