@@ -7,7 +7,8 @@ from django.shortcuts import render
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import View, ListView, DetailView
 from django.shortcuts import render
-from django.http import Http404
+from django.http import Http404, HttpResponseForbidden
+
 
 from billing.models import BillingProfile, Card
 from .models import Order
@@ -30,6 +31,12 @@ class OrderDetailView(DetailView):
 		context = super(OrderDetailView, self).get_context_data(*args, **kwargs)
 
 		order = Order.objects.filter(order_id=context['order']).first()
+
+		user = self.request.user
+		billing_user = order.user
+
+		if user != billing_user:
+			return HttpResponseForbidden()
 
 		billing_address = None
 		try:

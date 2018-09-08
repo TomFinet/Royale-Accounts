@@ -34,8 +34,9 @@
 	    	<i class="fa fa-unlock"></i>
 	        	<h4>Your account access details have been unlocked and are available.</h4>
 	        <div class="space30"></div>
-        	<a class="btn btn-primary btn-lg btn-green uppercase" href="{{ order.get_absolute_url }}">Account Access Details</a>
-        	<a class="btn btn-primary btn-lg btn-green uppercase" href="{% url 'orders:list' %}">View All Your Orders</a>
+        	
+	        {% include 'orders/snippets/order_list_item.html' with order=order %}
+        	
 	        <div class="space30"></div>
 		</div>	
 	</div>

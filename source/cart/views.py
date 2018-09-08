@@ -210,7 +210,7 @@ def checkout_payment(request):
 
 						status_code = send_order_confirmation_email(
 							billing_profile.email, 
-							order_obj.order_id, 
+							order_obj.order_id,
 							accounts
 						)
 

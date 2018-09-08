@@ -19,11 +19,11 @@ User = get_user_model()
 def send_order_confirmation_email(to_email=None, order_id=None, accounts=None):
 	status_code = None
 	if to_email and order_id and accounts:
+		order_link = "https://www.royale-accounts.com/orders/" + order_id
 		from_ = "order@royale-accounts.com"
 		subject = "Royale Accounts Order Confirmation"
 		content = """<h4>Thank you so much for placing your order with Royale Accounts.</h4> 
-		You can view your order by clicking this link: <a href='https://www.royale-accounts.com/orders/""" 
-		+ order_id + """'><h4>Your Order</h4></a>
+		You can view your order by clicking this link: <a href=""" + order_link + """><h4>Your Order</h4></a>
 		Once again thank you so much for placing your order with us.<br>
 		Happy Clashing,<br>
 		The Royale Accounts Team."""

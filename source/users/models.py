@@ -78,7 +78,7 @@ class User(AbstractBaseUser):
 
 
 class GuestEmail(models.Model):
-	email = models.EmailField()
+	email = models.EmailField(unique=True)
 	timestamp = models.DateTimeField(auto_now_add=True)
 	update = models.DateTimeField(auto_now=True)
 	active = models.BooleanField(default=True)
