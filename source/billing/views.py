@@ -24,8 +24,10 @@ def payment_method_view(request):
 	if is_safe_url(next_, request.get_host()):
 		next_url = next_
 
-	card_qs = billing_profile.get_cards()
-
+	card_qs = None
+	if request.user.is_authenticated():
+		card_qs = billing_profile.get_cards()
+		
 	context = { 
 		"next_url": next_url,
 		"publish_key": STRIPE_PUB_KEY,

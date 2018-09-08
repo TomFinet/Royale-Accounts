@@ -13,6 +13,7 @@ from django.http import Http404, HttpResponseForbidden
 from billing.models import BillingProfile, Card
 from .models import Order
 from addresses.models import Address
+from users.models import AccessToken
 
 class OrderListView(ListView):
 	template_name = 'orders/order_list.html'
@@ -31,11 +32,8 @@ class OrderDetailView(DetailView):
 		context = super(OrderDetailView, self).get_context_data(*args, **kwargs)
 
 		order = Order.objects.filter(order_id=context['order']).first()
-
-		user = self.request.user
-		billing_user = order.billing_profile.user
-
-		if user != billing_user:
+	
+		if self.request.user != order.billing_profile.user:
 			return HttpResponseForbidden()
 
 		billing_address = None
@@ -71,6 +69,8 @@ class OrderDetailView(DetailView):
 		if qs.count() == 1:
 		    return qs.first()
 		raise Http404
+
+
 
 
 

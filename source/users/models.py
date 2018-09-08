@@ -77,14 +77,32 @@ class User(AbstractBaseUser):
 		return True
 
 
+class GuestEmailManager(models.Manager):
+
+	def new_or_update(self, email):
+		qs = self.get_queryset().filter(email=email)
+		guest_email = None
+		if qs.count() == 1:
+			guest_email = qs.first()
+			guest_email.update()
+		else:
+			guest_email = self.model.objects.create(email=email)
+		return guest_email
+
 class GuestEmail(models.Model):
 	email = models.EmailField(unique=True)
 	timestamp = models.DateTimeField(auto_now_add=True)
 	update = models.DateTimeField(auto_now=True)
 	active = models.BooleanField(default=True)
 
+	objects = GuestEmailManager()
+
 	def __str__(self):
 		return self.email
+
+	def update(self):
+		self.update = datetime.now()
+		self.save()
 
 
 class AccessTokenManager(models.Manager):
