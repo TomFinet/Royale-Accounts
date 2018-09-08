@@ -19,7 +19,11 @@ class OrderListView(ListView):
 	context_object_name = 'order_list'
 
 	def get_queryset(self):
-		return Order.objects.by_request(self.request).by_status()
+		qs = Order.objects.by_request(self.request).by_status()
+		
+		if self.request.user.is_authenticated():
+			return qs
+		raise Http404()
 
 
 class OrderDetailView(DetailView):
