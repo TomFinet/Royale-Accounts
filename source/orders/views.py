@@ -58,6 +58,7 @@ class OrderDetailView(DetailView):
 			if user.is_authenticated():
 				if user != order.billing_profile.user:
 					raise HttpResponseForbidden()
+			return order
 		raise Http404()
 
 
