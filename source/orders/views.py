@@ -32,20 +32,8 @@ class OrderDetailView(DetailView):
 		context = super(OrderDetailView, self).get_context_data(*args, **kwargs)
 
 		order = Order.objects.filter(order_id=context['order']).first()
-	
-		if self.request.user != order.billing_profile.user:
-			raise HttpResponseForbidden()
-
-		billing_address = None
-		try:
-			billing_address = Address.objects.get(id=order.billing_address.id)
-		except Address.DoesNotExist:
-			raise Http404("Billing address not found.")
-		except Address.MultipleObjectsReturned:
-			qs = Address.objects.filter(id=order.billing_address.id)
-			billing_address = qs.first()
-		except:
-			raise Http404("Hmmm.")
+		
+		billing_address = Address.objects.get(id=order.billing_address.id)
 
 		context['billing_address'] = billing_address
 
@@ -61,14 +49,20 @@ class OrderDetailView(DetailView):
 	def get_object(self):
 		if self.request.session.get("order_id", None):
 			del self.request.session['order_id']
+		
 		qs = Order.objects.by_request(
 		            self.request
 		        ).filter(
 		            order_id = self.kwargs.get('order_id')
 		        )
+
 		if qs.count() == 1:
-		    return qs.first()
-		raise Http404
+			order = qs.first()
+			user = self.request.user
+			if user.is_authenticated():
+				if user != order.billing_profile.user:
+					raise HttpResponseForbidden()
+		raise Http404()
 
 
 
