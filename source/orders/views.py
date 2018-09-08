@@ -33,7 +33,7 @@ class OrderDetailView(DetailView):
 		order = Order.objects.filter(order_id=context['order']).first()
 
 		user = self.request.user
-		billing_user = order.user
+		billing_user = order.billing_profile.user
 
 		if user != billing_user:
 			return HttpResponseForbidden()
