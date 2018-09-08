@@ -84,7 +84,7 @@ class GuestEmailManager(models.Manager):
 		guest_email = None
 		if qs.count() == 1:
 			guest_email = qs.first()
-			guest_email.update()
+			guest_email.save()
 		else:
 			guest_email = self.model.objects.create(email=email)
 		return guest_email
@@ -99,11 +99,6 @@ class GuestEmail(models.Model):
 
 	def __str__(self):
 		return self.email
-
-	def update(self):
-		self.update = datetime.now()
-		self.save()
-
 
 class AccessTokenManager(models.Manager):
 
