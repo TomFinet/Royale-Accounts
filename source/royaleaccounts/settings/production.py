@@ -64,7 +64,7 @@ CURRENCY_ACCESS_KEY = os.environ.get('CURRENCY_ACCESS_KEY')
 CURRENCY_BASE_URL = "https://www.amdoren.com/api/currency.php"
 
 STRIPE_SECRET_KEY = os.environ.get('STRIPE_SECRET_KEY')
-STRIPE_PUB_KEY = "pk_test_BTw6TKSRbgvSOdQzBtLzh4Qh"
+STRIPE_PUB_KEY = "pk_live_6Vl8KkBbhprY3U9mMgUxJzv4"
 
 SENDGRID_API_KEY = os.environ.get('SENDGRID_API_KEY')
 
