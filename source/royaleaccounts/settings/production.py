@@ -172,7 +172,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
-#from royaleaccounts.aws.conf import *
+from royaleaccounts.aws.conf import *
 
 # Let's Encrypt ssl/tls https
 CORS_REPLACE_HTTPS_REFERER      = True
