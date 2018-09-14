@@ -15,7 +15,7 @@ urlpatterns = [
 
 	url(r'^address/', include('addresses.urls', namespace="addresses")),
     url(r'^user/', include('users.urls', namespace="users")),
-    url(r'^accounts/', include('accounts.urls', namespace="accounts")),
+    url(r'^clash-royale-accounts-shop/', include('accounts.urls', namespace="accounts")),
     url(r'^cart/', include('cart.urls', namespace="cart")),
     url(r'^billing/', include('billing.urls', namespace="billing")),
     url(r'^orders/', include('orders.urls', namespace="orders")),
