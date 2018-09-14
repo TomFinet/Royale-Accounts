@@ -19,7 +19,9 @@
 			<ul class="link-list">
 				<li><a href="{{ faq_url }}">&rarr; FAQ</a></li>
 				<li><a href="{{ register_url }}">&rarr; Register</a></li>
+				{% if request.user.is_authenticated %}
 				<li><a href="{{ password_change_url }}">&rarr; Change Password</a></li>
+				{% endif %}
 			</ul>
 		</div>
 		<div class="col-md-2 footer-widget">
