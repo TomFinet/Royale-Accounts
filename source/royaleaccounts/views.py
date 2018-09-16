@@ -21,6 +21,7 @@ CURRENCY_BASE_URL = getattr(settings, "CURRENCY_BASE_URL", None)
 CURRENCY_ACCESS_KEY = getattr(settings, "CURRENCY_ACCESS_KEY", None)
 
 def home_view(request):
+	# IMPROVEMENT: Don't create cart every time the page is loaded.
 	cart_obj, new_obj = Cart.objects.new_or_get(request)
 	request.session["cart_items_count"] = cart_obj.accounts.count()
 
