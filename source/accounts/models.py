@@ -179,7 +179,6 @@ class DeckCard(models.Model):
 			if n[0] == name:
 				return n[1]
 		return name
-	 
 
 	def __str__(self):
 		return "{name} level {level}".format(name=self.friendly_name, level=self.level)
