@@ -171,7 +171,7 @@ class DeckCardManager(models.Manager):
 	def create_all_cards(self):
 		for c in CARD_CHOICES:
 			for i in range(13):
-				self.model.objects.create(name=[0], level=i+1)
+				self.model.objects.create(name=c[0], level=i+1)
 
 
 class DeckCard(models.Model):
