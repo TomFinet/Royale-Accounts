@@ -209,6 +209,7 @@ class Account(models.Model):
 	gems = models.IntegerField()
 	arena = models.CharField(max_length=2, choices=ARENA_CHOICES)
 	trophies = models.SmallIntegerField()
+	recommended_decks_link = models.CharField(max_length=250, null=True, blank=True)
 
 	wins = models.IntegerField()
 	three_crown_wins = models.IntegerField()
