@@ -17,21 +17,23 @@
    {% include 'base/navbar.html' %}
 
     {% if featured_qs %}
-    <!-- Slider -->
-    <div class="slider-content container">
-      <div id="carousel">
-          {% for account in featured_qs %}
-            {% if account.img %}
-              <a href="{{ account.get_absolute_url }}"><img width="270" height="275" src="{{ account.img.url }}" id="item-{{ forloop.counter }}" alt="Featured Clash Royale account"/></a>
-            {% endif %}
-          {% endfor %}
+      <!-- Slider -->
+      <div class="slider-content container">
+        <div id="carousel">
+            {% for account in featured_qs %}
+              {% if account.img %}
+                <a href="{{ account.get_absolute_url }}"><img width="270" height="275" src="{{ account.img.url }}" id="item-{{ forloop.counter }}" alt="Featured Clash Royale account"/></a>
+              {% endif %}
+            {% endfor %}
+        </div>
+        <div class="scroll-btns">
+          <a href="#" id="s-prev">Prev</a> | <a href="#" id="s-next">Next</a>
+        </div>
       </div>
-      <div class="scroll-btns">
-        <a href="#" id="s-prev">Prev</a> | <a href="#" id="s-next">Next</a>
-      </div>
-    </div>
-    <!-- Slider -->
-    <div class="space20"></div>
+      <!-- Slider -->
+      <div class="space20"></div>
+    {% else %}
+      <div class="space60"></div>
     {% endif %}
 
     <!-- Welcome Content -->
