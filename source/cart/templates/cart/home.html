@@ -57,8 +57,8 @@
 											<tr class="cart_table_item">
 												<td class="product-thumbnail">
 													<a href="{{ account.get_absolute_url }}">
-														{% if account.img_sml %}
-															<img width="100" height="100" alt="img" src="{{ account.img_sml.url }}">
+														{% if account.img %}
+															<img width="100" height="100" alt="img" src="{{ account.img.url }}">
 														{% else %}
 															<img width="100" height="100" alt="img" class="img-responsive" src="//placehold.it/100x100">
 														{% endif %}
