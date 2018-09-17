@@ -53,6 +53,7 @@ INSTALLED_APPS = [
     'emails',
     'tags',
     'blogs',
+    'jobs',
 ]
 
 AUTH_USER_MODEL = 'users.User'

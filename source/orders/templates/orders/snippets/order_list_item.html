@@ -46,8 +46,8 @@
 				<tr>
 					<td>
 						<a href="{{ account.get_absolute_url }}">
-							{% if account.img_sml %}
-							<img height="100" width="100" src="{{ account.img_sml.url }}">
+							{% if account.img %}
+							<img height="100" width="100" src="{{ account.img.url }}">
 							{% else %}
 							<img src="//placehold.it/100x100">
 							{% endif %}

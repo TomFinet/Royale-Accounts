@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Job Openings - Royale Accounts{% endblock %}
+
+{% block meta %}
+<meta name="description" content="Royale Accounts - All job openings for Royale Accounts">
+{% endblock %}
+
+{% block content %}
+
+<body id="pages">
+
+<div class="body">
+	<div class="top-wrap">
+		<div class="overlay-bg"></div>
+		{% include 'base/navbar.html' %}
+	</div>
+
+	<div class="space40"></div>
+
+	<!-- Main content -->
+	<div class="page-wrap container">
+		<div class="row">
+			<div class="col-md-12">
+				<h3>Job Openings</h3>
+			</div>
+		</div>
+
+		<!-- Shop Content -->
+		<div role="main" class="main shop">
+			{% if job_list %}
+			<div class="row">
+				<div class="col-md-12">
+					<ul class="products thumb-info-list">
+						{% for job in job_list %}
+						{% include 'jobs/snippets/job_list_item.html' with job=job %}
+						{% endfor %}
+					</ul>
+					{% if is_paginated %}
+					<div class="row page-nav">
+						<div class="col-md-12 no-padding">
+							<div class="col-md-6">
+								<ul>
+								{% if page_obj.has_previous %}
+									<li><a href="?page=1">1</a></li>
+									<li><a href="?page={{ page_obj.previous_page_number }}"><i class="fa fa-chevron-left"></i></a></li>
+            					{% endif %}
+
+								<li class="active"><a href="#">{{ page_obj.number }}</a></li>
+
+            					{% if page_obj.has_next %}
+                					<li><a href="?page={{ page_obj.next_page_number }}"><i class="fa fa-chevron-right"></i></a></li>
+            					{% endif %}
+									
+								</ul>
+							</div>
+
+							<div class="col-md-6">
+								<p>Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</p>
+							</div>
+						</div>
+					</div>
+					{% endif %}
+				</div>
+			</div>
+			{% else %}
+			<div class="row">
+				<div class="col-md-12">
+					<div class="space20"></div>
+					<h4>No job openings right now. Please check again later.</h4>
+				</div>
+			</div>
+			{% endif %}
+		</div>
+	</div>
+</div>
+</body>
+
+{% endblock %}
+
+
+
+
+

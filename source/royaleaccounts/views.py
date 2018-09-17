@@ -115,7 +115,6 @@ def currency_convert_view(request):
 			
 	return redirect("home")
 
-	
 
 
 

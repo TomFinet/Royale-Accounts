@@ -20,6 +20,7 @@ urlpatterns = [
     url(r'^billing/', include('billing.urls', namespace="billing")),
     url(r'^orders/', include('orders.urls', namespace="orders")),
     url(r'^blog/', include('blogs.urls', namespace="blogs")),
+    url(r'^jobs/', include('jobs.urls', namespace="jobs")),
 
     url(r'^admin/', admin.site.urls),
 ]
