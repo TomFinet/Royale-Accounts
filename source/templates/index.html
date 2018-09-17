@@ -22,9 +22,9 @@
         {% if featured_qs %}
           {% for account in featured_qs %}
             {% if account.img %}
-              <a href="{{ account.get_absolute_url }}"><img width="252" height="357" src="{{ account.img.url }}" id="item-{{ forloop.counter }}" alt="Featured Clash Royale account"/></a>
+              <a href="{{ account.get_absolute_url }}"><img width="270" height="275" src="{{ account.img.url }}" id="item-{{ forloop.counter }}" alt="Featured Clash Royale account"/></a>
             {% else %}
-              <a href="{{ account.get_absolute_url }}"><img width="252" height="357" src="//placehold.it/252x357" id="item-{{ forloop.counter }}" alt="Featured Clash Royale account"/></a>
+              <a href="{{ account.get_absolute_url }}"><img width="270" height="275" src="//placehold.it/252x357" id="item-{{ forloop.counter }}" alt="Featured Clash Royale account"/></a>
             {% endif %}
           {% endfor %}
         {% else %}
