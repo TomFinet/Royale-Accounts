@@ -45,7 +45,7 @@
 								<div class="space20"></div>
 								<p class="taller">{{ account.description }}</p>
 								<div class="space20"></div>
-								<a href="{{ account.recommended_decks_link }}" class="taller">Recommended decks for this account.</a>
+								<a href="{{ account.recommended_decks_link }}" class="taller" target="_blank">Recommended decks for this account.</a>
 								<div class="space50"></div>
 								{% if not account.sold %}
 									{% include 'accounts/snippets/update_cart.html' with account=account cart=cart %}

@@ -193,9 +193,7 @@ class Account(models.Model):
 	device = models.CharField(max_length=7, choices=DEVICE_CHOICES)
 	sold = models.BooleanField(default=False)
 	description = models.CharField(max_length=300)
-	img_med = models.ImageField(upload_to=main_image_upload_path, null=True, blank=True)
-	img_sml = models.ImageField(upload_to=main_image_upload_path, null=True, blank=True)
-	img_feature = models.ImageField(upload_to=main_image_upload_path, null=True, blank=True)
+	img = models.ImageField(upload_to=main_image_upload_path, null=True, blank=True)
 
 	# account access info
 	supercell_account_email = models.EmailField(max_length=255)
