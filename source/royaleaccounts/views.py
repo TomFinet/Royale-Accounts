@@ -28,8 +28,6 @@ def home_view(request):
 	# get account images
 	featured_qs = Account.objects.filter(sold=False)
 
-	DeckCard.objects.create_all_cards()
-
 	return render(request, 'index.html', {"featured_qs": featured_qs})
 
 
