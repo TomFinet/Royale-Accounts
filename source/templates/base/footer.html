@@ -15,9 +15,9 @@
 			{% include 'snippets/currency_form.html' with currency_form=currency_form next_url=request.build.uri %}
 		</div>
 		<div class="col-md-2 footer-widget">
-			<h6>Quick Links</h6>
+			<h6>Useful Actions</h6>
 			<ul class="link-list">
-				<li><a href="{{ faq_url }}">&rarr; FAQ</a></li>
+				<li><a href="//www.royale-accounts.com/blog/setup-your-royale-account/">&rarr; Account Setup Guide</a></li>
 				<li><a href="{{ register_url }}">&rarr; Register</a></li>
 				{% if request.user.is_authenticated %}
 				<li><a href="{{ password_change_url }}">&rarr; Change Password</a></li>
@@ -25,9 +25,9 @@
 			</ul>
 		</div>
 		<div class="col-md-2 footer-widget">
-			<h6>Blogroll</h6>
+			<h6>Quick Links</h6>
 			<ul class="link-list">
-				<li><a href="//www.royale-accounts.com/blog/setup-your-royale-account/">&rarr; Account Setup Guide</a></li>
+				<li><a href="{{ faq_url }}">&rarr; FAQ</a></li>
 				<li><a href="{{ terms_url }}">&rarr; Terms of Use</a></li>
 			</ul>
 		</div>
