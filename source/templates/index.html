@@ -16,34 +16,23 @@
 
    {% include 'base/navbar.html' %}
 
-    <!-- Slider1 -->
+    {% if featured_qs %}
+    <!-- Slider -->
     <div class="slider-content container">
       <div id="carousel">
-        {% if featured_qs %}
           {% for account in featured_qs %}
             {% if account.img %}
               <a href="{{ account.get_absolute_url }}"><img width="270" height="275" src="{{ account.img.url }}" id="item-{{ forloop.counter }}" alt="Featured Clash Royale account"/></a>
-            {% else %}
-              <a href="{{ account.get_absolute_url }}"><img width="270" height="275" src="//placehold.it/252x357" id="item-{{ forloop.counter }}" alt="Featured Clash Royale account"/></a>
             {% endif %}
           {% endfor %}
-        {% else %}
-          <a href="#"><img src="//placehold.it/252x357" id="item-1" alt="img" /></a>
-          <a href="#"><img src="//placehold.it/252x357" id="item-2" alt="img" /></a>
-          <a href="#"><img src="//placehold.it/252x357" id="item-3" alt="img" /></a>
-          <a href="#"><img src="//placehold.it/252x357" id="item-4" alt="img" /></a>
-          <a href="#"><img src="//placehold.it/252x357" id="item-5" alt="img" /></a>
-          <a href="#"><img src="//placehold.it/252x357" id="item-6" alt="img" /></a>
-          <a href="#"><img src="//placehold.it/252x357" id="item-7" alt="img" /></a>
-        {% endif %}
       </div>
       <div class="scroll-btns">
         <a href="#" id="s-prev">Prev</a> | <a href="#" id="s-next">Next</a>
       </div>
     </div>
-    <!-- Slider1 -->
-
+    <!-- Slider -->
     <div class="space20"></div>
+    {% endif %}
 
     <!-- Welcome Content -->
     <div class="container welcome">
