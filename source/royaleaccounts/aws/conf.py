@@ -5,10 +5,8 @@ import os
 AWS_USERNAME = "royaleaccounts-user"
 AWS_GROUP_NAME = "royaleaccounts-group"
 
-AWS_ACCESS_KEY_ID = "AKIAJXQ2X25SQSIAO7YA"
-#os.environ.get("AWS_ACCESS_KEY_ID")
-AWS_SECRET_ACCESS_KEY = "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"
-#os.environ.get("AWS_SECRET_ACCESS_KEY")
+AWS_ACCESS_KEY_ID = os.environ.get("AWS_ACCESS_KEY_ID")
+AWS_SECRET_ACCESS_KEY = os.environ.get("AWS_SECRET_ACCESS_KEY")
 
 AWS_FILE_EXPIRE = 200
 AWS_PRELOAD_METADATA = True
