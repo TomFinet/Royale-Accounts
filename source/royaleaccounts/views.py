@@ -8,7 +8,7 @@ from django.views.generic import TemplateView
 from django.core.cache import cache
 
 from cart.models import Cart
-from accounts.models import Account
+from accounts.models import Account, DeckCard
 
 from .forms import ContactForm
 
@@ -27,6 +27,8 @@ def home_view(request):
 
 	# get account images
 	featured_qs = Account.objects.filter(sold=False)
+
+	DeckCard.objects.create_all_cards()
 
 	return render(request, 'index.html', {"featured_qs": featured_qs})
 
@@ -114,6 +116,17 @@ def currency_convert_view(request):
 			})
 			
 	return redirect("home")
+
+
+
+
+
+
+
+
+
+
+
 
 
 

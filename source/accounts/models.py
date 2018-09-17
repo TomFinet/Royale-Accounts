@@ -167,10 +167,18 @@ def main_image_upload_path(instance, filename):
 		final_filename=final_filename
 	 )
 
+class DeckCardManager(models.Manager):
+	def create_all_cards(self):
+		for c in CARD_CHOICES:
+			for i in range(13):
+				self.model.objects.create(name=[0], level=i+1)
+
 
 class DeckCard(models.Model):
 	name = models.CharField(max_length=2, choices=CARD_CHOICES)
 	level = models.SmallIntegerField()
+
+	objects = DeckCardManager()
 
 	@property
 	def friendly_name(self):
