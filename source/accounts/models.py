@@ -208,6 +208,7 @@ class Account(models.Model):
 	arena = models.CharField(max_length=2, choices=ARENA_CHOICES)
 	trophies = models.SmallIntegerField()
 	recommended_decks_link = models.CharField(max_length=250, null=True, blank=True)
+	player_tag = models.CharField(max_length=100, null=True, blank=True)
 
 	wins = models.IntegerField()
 	three_crown_wins = models.IntegerField()
@@ -265,6 +266,10 @@ class Account(models.Model):
 			if r[0] == rank:
 				return r[1]
 		return rank
+
+	@property
+	def player_tag_cards_link(self):
+		return "//spy.deckshop.pro/player/{player_tag}/cards".format(player_tag=self.player_tag)
 
 	def price(self, conversion_rate):
 		return Decimal(Decimal(self.usd_price) * Decimal(conversion_rate)
