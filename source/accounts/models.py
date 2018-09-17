@@ -272,24 +272,6 @@ class Account(models.Model):
 		return Decimal(Decimal(self.usd_price) * Decimal(conversion_rate)
 			).quantize(Decimal('.01'), rounding=ROUND_UP)
 
-
-	def save(self, force_insert=False, force_update=False):
-		if self.id is not None:
-			previous = Account.objects.get(id=self.id)
-			if self.img_sml and self.img_sml != previous.img_sml:
-				image = Image.open(self.img_sml.path)
-				image = image.resize((100, 100), Image.ANTIALIAS)
-				image.save(self.img_sml.path)
-			if self.img_med and self.img_med != previous.img_med:
-				image = Image.open(self.img_med.path)
-				image = image.resize((600, 600), Image.ANTIALIAS)
-				image.save(self.img_med.path)
-			if self.img_feature and self.img_feature != previous.img_feature:
-				image = Image.open(self.img_feature.path)
-				image = image.resize((252, 357), Image.ANTIALIAS)
-				image.save(self.img_feature.path)
-		super(Account, self).save(force_insert, force_update)
-
                 
 	@property
 	def title(self):
@@ -314,16 +296,6 @@ class AccountImage(models.Model):
 		return "Arena: {arena}, K.T: {king_tower}".format(
 			arena=self.account.arena, king_tower=self.account.king_tower
 		)
-
-	def save(self, force_insert=False, force_update=False):
-		super(AccountImage, self).save(force_insert, force_update)
-		if self.id is not None:
-			previous = AccountImage.objects.get(id=self.id)
-			if self.image and self.image != previous.image:
-				image = Image.open(self.image.path)
-				image = image.resize((600, 600), Image.ANTIALIAS)
-				image.save(self.image.path)
-
 
 
 
