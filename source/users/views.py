@@ -9,7 +9,7 @@ from django.utils.http import is_safe_url
 from django.contrib import messages
 from django.conf import settings
 
-from .forms import LoginForm, RegisterForm, GuestForm, EmailForm, PasswordChangeForm
+from .forms import LoginForm, RegisterForm, GuestForm, EmailForm, PasswordChangeForm, PasswordChangeTokenForm
 from .models import GuestEmail, AccessToken
 from cart.models import Cart
 
