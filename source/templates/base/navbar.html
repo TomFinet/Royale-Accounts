@@ -1,6 +1,5 @@
 {% load static %}
 
-{% url 'home' as home_url %}
 {% url 'accounts:list' as accounts_url %}
 {% url 'cart:home' as cart_url %}
 {% url 'orders:list' as orders_url %}
@@ -20,9 +19,6 @@
       <!-- Nav Menu -->
       <div id='cssmenu'>
         <ul>
-          <li class='active'>
-            <a href='{{ home_url }}'><span>Home</span></a>
-          </li>
           <li><a href='{{ accounts_url }}'><span>Accounts Shop</span></a></li>
           </li>
           {% if request.user.is_authenticated %}
