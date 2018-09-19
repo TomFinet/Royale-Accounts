@@ -138,6 +138,7 @@ CARD_CHOICES = (
 )
 
 CLAN_RANK_CHOICES = (
+	("N", "None"),
 	("M", "Member"),
 	("E", "Elder"),
 	("C", "Co-Leader"),
