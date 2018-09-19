@@ -192,6 +192,7 @@ class Account(models.Model):
 
 	device = models.CharField(max_length=7, choices=DEVICE_CHOICES)
 	sold = models.BooleanField(default=False)
+	title = models.CharField(max_length=50)
 	description = models.CharField(max_length=300)
 	img = models.ImageField(upload_to=main_image_upload_path, null=True, blank=True)
 
@@ -274,12 +275,6 @@ class Account(models.Model):
 	def price(self, conversion_rate):
 		return Decimal(Decimal(self.usd_price) * Decimal(conversion_rate)
 			).quantize(Decimal('.01'), rounding=ROUND_UP)
-
-                
-	@property
-	def title(self):
-		return 'Level {king_tower} in {arena}'.format(king_tower=self.king_tower, 
-			arena=self.get_arena_readable())
 
 
 # Assigns a slug to a model object if its slug field is emtpy, before saving.
