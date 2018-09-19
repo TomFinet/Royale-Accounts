@@ -192,7 +192,6 @@ class Account(models.Model):
 
 	device = models.CharField(max_length=7, choices=DEVICE_CHOICES)
 	sold = models.BooleanField(default=False)
-	title = models.CharField(max_length=24)
 	description = models.CharField(max_length=300)
 	img = models.ImageField(upload_to=main_image_upload_path, null=True, blank=True)
 
@@ -271,6 +270,13 @@ class Account(models.Model):
 	@property
 	def player_tag_cards_link(self):
 		return "//spy.deckshop.pro/player/{player_tag}/cards".format(player_tag=self.player_tag)
+
+	@property
+	def title(self):
+		return "{arena} level {king_tower}".format(
+			arena=self.get_arena_readable(), king_tower=self.king_tower
+		)
+	
 
 	def price(self, conversion_rate):
 		return Decimal(Decimal(self.usd_price) * Decimal(conversion_rate)
