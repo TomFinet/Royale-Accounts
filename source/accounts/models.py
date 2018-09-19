@@ -192,7 +192,7 @@ class Account(models.Model):
 
 	device = models.CharField(max_length=7, choices=DEVICE_CHOICES)
 	sold = models.BooleanField(default=False)
-	title = models.CharField(max_length=50)
+	title = models.CharField(max_length=24)
 	description = models.CharField(max_length=300)
 	img = models.ImageField(upload_to=main_image_upload_path, null=True, blank=True)
 
