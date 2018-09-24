@@ -8,7 +8,7 @@ from django.views.generic import TemplateView
 from django.core.cache import cache
 
 from cart.models import Cart
-from accounts.models import Account, DeckCard
+from accounts.models import Account
 
 from .forms import ContactForm
 

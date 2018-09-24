@@ -46,7 +46,7 @@ DEVICE_CHOICES = (
 	("B", "Android Or iOS"),
 )
 
-CARD_CHOICES = (
+"""CARD_CHOICES = (
 	("W", "Witch"),
 	("SG", "Spear Goblins"),
 	("BO", "Bomber"),
@@ -136,7 +136,7 @@ CARD_CHOICES = (
 	("GN", "Giant Snowball"),
 	("TL", "The Log"),
 	("MR", "Mirror"),
-)
+)"""
 
 CLAN_RANK_CHOICES = (
 	("N", "None"),
@@ -170,7 +170,7 @@ def main_image_upload_path(instance, filename):
 	 )
 
 
-class DeckCard(models.Model):
+"""class DeckCard(models.Model):
 	name = models.CharField(max_length=2, choices=CARD_CHOICES)
 	level = models.SmallIntegerField()
 
@@ -183,7 +183,7 @@ class DeckCard(models.Model):
 		return name
 
 	def __str__(self):
-		return "{name} level {level}".format(name=self.friendly_name, level=self.level)
+		return "{name} level {level}".format(name=self.friendly_name, level=self.level)"""
 
 
 class Account(models.Model):
@@ -229,7 +229,7 @@ class Account(models.Model):
 	challenge_max_wins = models.SmallIntegerField()
 	challenge_cards_won = models.IntegerField()	
 	
-	deck = models.ManyToManyField(DeckCard, blank=True)
+	#deck = models.ManyToManyField(DeckCard, blank=True)
 	tags = models.ManyToManyField(Tag, blank=True)
 
 	def __str__(self):
