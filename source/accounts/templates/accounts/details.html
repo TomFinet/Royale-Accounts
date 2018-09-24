@@ -58,7 +58,7 @@
 							<div class="tabs tabs-product">
 								<ul class="nav nav-tabs">
 									<li class="active"><a href="#productDescription" data-toggle="tab">Account Stats</a></li>
-									<li><a href="#productInfo" data-toggle="tab">Card Deck</a></li>
+									<li><a target="_blank" href="{{ account.player_tag_cards_link }}" data-toggle="tab">Card Deck</a></li>
 								</ul>
 								<div class="tab-content">
 									<div class="tab-pane active" id="productDescription">
@@ -244,36 +244,6 @@
 														{{ account.challenge_cards_won }}
 													</td>
 												</tr>
-											</tbody>
-										</table>
-									</div>
-									<div class="tab-pane" id="productInfo">
-										<div class="space10"></div>
-
-										<p>For more card stats visit <a target="_blank" style="color:#000" href="{{ account.player_tag_cards_link }}">here.</a></p>
-
-										<div class="space10"></div>
-
-										<table class="table push-top">
-											<tbody>
-												<tr>
-													<th>
-														Card Name
-													</th>
-													<td>
-														Level
-													</td>
-												</tr>
-												{% for card in account.deck.all %}
-												<tr>
-													<th>
-														{{ card.friendly_name }}
-													</th>
-													<td>
-														{{ card.level }}
-													</td>
-												</tr>
-												{% endfor %}
 											</tbody>
 										</table>
 									</div>

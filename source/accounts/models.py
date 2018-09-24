@@ -5,7 +5,6 @@ from django.db import models
 from django.db.models.signals import pre_save, post_save
 from django.urls import reverse
 
-
 from royaleaccounts.utils import unique_slug_generator
 from tags.models import Tag
 
@@ -13,6 +12,8 @@ import os
 import PIL
 from PIL import Image
 from decimal import *
+
+import requests
 
 
 ARENA_CHOICES = (
@@ -276,7 +277,6 @@ class Account(models.Model):
 		return "{arena} level {king_tower}".format(
 			arena=self.get_arena_readable(), king_tower=self.king_tower
 		)
-	
 
 	def price(self, conversion_rate):
 		return Decimal(Decimal(self.usd_price) * Decimal(conversion_rate)

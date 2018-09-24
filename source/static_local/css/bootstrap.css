@@ -3637,9 +3637,9 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 }
 .tab-content > .active {
   display: block;
-  background:#e96546;
-  color:#fff;
-padding:15px 23px;
+  background:#fff;
+  color:#444;
+  padding:15px 23px;
 }
 .nav-tabs .dropdown-menu {
   margin-top: -1px;
