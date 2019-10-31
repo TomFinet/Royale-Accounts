@@ -12,7 +12,7 @@ gunicorn==19.9.0
 heroku==0.1.4
 idna==2.7
 jmespath==0.9.3
-Pillow==5.1.0
+Pillow==6.2.0
 psycopg2-binary==2.7.5
 python-dateutil==2.7.3
 python-http-client==3.1.0
